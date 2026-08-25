@@ -6,7 +6,7 @@
 
 **Tech Stack:**
 - **Backend/CMS:** PayloadCMS (TypeScript-native, self-hosted, built on Next.js)
-- **Frontend:** Next.js 14+ (App Router)
+- **Frontend:** Next.js 16 (App Router)
 - **Database:** PostgreSQL (via PayloadCMS's database adapter)
 - **Styling:** Tailwind CSS + shadcn/ui
 - **Payments:** Stripe Checkout (one-time), PayPal Standard

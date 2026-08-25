@@ -1,15 +1,15 @@
 # Progress Tracker
 
 > **Last Updated:** 2026-08-25
-> **Last Action:** All 8 story-points.md files created and reviewed
+> **Last Action:** Feature 02 doc created (Authentication & User Management)
 
 ---
 
 ## Current State
 
 - **Active Project:** Project 1 — PayMe
-- **Current Phase:** Phase 2 — Feature Documentation (NOT STARTED)
-- **Current Feature:** None yet — waiting to start feature-01
+- **Current Phase:** Phase 2 — Feature Documentation
+- **Current Feature:** Feature 02 — Authentication & User Management (doc written, awaiting approval)
 - **Blocked:** No
 
 ---
@@ -33,8 +33,8 @@
 
 | # | Feature (Epic) | Doc | Implementation | Status |
 |---|---------------|-----|----------------|--------|
-| 01 | Project Setup & PayloadCMS Configuration | ⬜ Not started | ⬜ Not started | ⬜ Pending |
-| 02 | Authentication & User Management | ⬜ Not started | ⬜ Not started | ⬜ Pending |
+| 01 | Project Setup & PayloadCMS Configuration | ✅ Approved | ✅ Complete | ✅ Done |
+| 02 | Authentication & User Management | 📝 Written — awaiting approval | ⬜ Not started | 🔄 In Progress |
 | 03 | Database Schema & Data Layer | ⬜ Not started | ⬜ Not started | ⬜ Pending |
 | 04 | Dashboard & Analytics | ⬜ Not started | ⬜ Not started | ⬜ Pending |
 | 05 | Invoice Management (CRUD) | ⬜ Not started | ⬜ Not started | ⬜ Pending |
@@ -58,7 +58,7 @@ Feature tracking tables will be added when each project becomes active.
 
 ## Next Action
 
-**Claude should:** Create `feature-01-project-setup.md` for Project 1 (PayMe) — detailed doc covering Epic 1 from story-points.md (Project Setup & PayloadCMS Configuration). Wait for user approval before implementation.
+**Waiting on:** User to review and approve `feature-02-authentication.md`. Once approved, Claude should proceed to Phase 3 (Implementation) for Feature 02.
 
 ---
 
@@ -67,3 +67,6 @@ Feature tracking tables will be added when each project becomes active.
 | Date | Session | What Was Done |
 |------|---------|---------------|
 | 2026-08-25 | Session 1 | Planned all 8 projects, created story-points.md for all 8 projects, created CLAUDE.md and progress.md |
+| 2026-08-25 | Session 2 | Created feature-01-project-setup.md for Project 1 (PayMe) — covers PayloadCMS + Next.js init, PostgreSQL setup, env validation with Zod, folder structure, Tailwind + shadcn/ui, admin branding, and nav groups |
+| 2026-08-25 | Session 3 | Implemented Feature 01: fixed tsconfig baseUrl deprecation, installed Zod 4 + Tailwind v4 + shadcn/ui (17 components), created env validation, admin branding (Logo/Icon), collection nav groups, folder scaffolding, .env.example, replaced default page with Tailwind-based homepage |
+| 2026-08-25 | Session 3 | Created feature-02-authentication.md — covers Users collection extension, auth config, registration, login, email verification, password reset, route protection, auth provider/hook, profile settings, business details, account security. Google OAuth deferred. |
