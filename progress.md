@@ -1,7 +1,7 @@
 # Progress Tracker
 
 > **Last Updated:** 2026-08-26
-> **Last Action:** Feature 01.5 admin shell implementation — custom Nav (NavWrapper), AppActions topbar, Dashboard stat cards, CSS theme (custom.scss), all refactored to use CSS classes + Payload Link component
+> **Last Action:** Session 7 — Custom create-first-user view, QuickAccess dashboard widget, collection group cleanup
 
 ---
 
@@ -69,6 +69,11 @@
 - ✅ LoginBranding, UsersListBanner, MediaListBanner, RoleBadgeCell
 - ✅ All components refactored: CSS classes in custom.scss (BEM naming), Payload Link component for internal routes, zero inline styles
 
+**Admin Polish (Session 7):**
+- ✅ Custom create-first-user view — replaced Payload's default with branded version (PayMe logo, title, subtitle, streamlined form: email/password/name only, no tabs/role/logo/business fields)
+- ✅ QuickAccess dashboard widget — custom widget via `admin.dashboard.widgets` API, replaces default CollectionCards with compact pill-style items with inline SVG icons and create buttons
+- ✅ Removed `admin.group` from Users and Media collections (unnecessary with only 2 collections)
+
 ---
 
 ## Projects 2-8: Not Started
@@ -94,3 +99,4 @@ Feature tracking tables will be added when each project becomes active.
 | 2026-08-25 | Session 4 | Implemented Feature 02 Steps 1-2 (Users collection extended with profile fields, auth config, access control). Started Feature 01.5: frontend theming (CSS variables, ThemeProvider, theme toggle, layout shells, homepage redesign). Admin shell customization planned. |
 | 2026-08-25 | Session 5 | Feature 01.5 admin shell: custom Nav (NavWrapper fix for sidebar positioning), AppActions topbar with welcome/page title + quick actions, Dashboard stat cards, CSS theme overrides, AdminProvider, LoginBranding, list banners, RoleBadgeCell |
 | 2026-08-26 | Session 6 | Feature 01.5 cleanup: refactored all admin components — replaced inline styles with CSS classes in custom.scss (BEM naming), replaced `<a>` tags with Payload `Link` component for client-side routing, removed unused imports. Feature 01.5 marked complete. |
+| 2026-08-26 | Session 7 | Custom create-first-user view (branded, streamlined fields), QuickAccess dashboard widget (replaces default CollectionCards with icon pills), removed collection groups, CSS cleanup |

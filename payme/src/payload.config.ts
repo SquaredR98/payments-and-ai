@@ -28,6 +28,24 @@ export default buildConfig({
       providers: ['/admin/components/AdminProvider#AdminProvider'],
       beforeDashboard: ['/admin/components/Dashboard#AdminDashboard'],
       beforeLogin: ['/admin/components/LoginBranding#LoginBranding'],
+      views: {
+        createFirstUser: {
+          Component: '/admin/components/CreateFirstUser#CreateFirstUser',
+        },
+      },
+    },
+    dashboard: {
+      widgets: [
+        {
+          slug: 'quick-access',
+          Component: '/admin/components/QuickAccess#QuickAccess',
+          minWidth: 'full',
+          maxWidth: 'full',
+        },
+      ],
+      defaultLayout: [
+        { widgetSlug: 'quick-access', width: 'full' as const },
+      ],
     },
     meta: {
       titleSuffix: ' — PayMe Admin',

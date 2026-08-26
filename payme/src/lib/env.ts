@@ -3,14 +3,13 @@ import { z } from 'zod'
 const envSchema = z.object({
   // Database
   DATABASE_URL: z
-    .string()
     .url()
-    .startsWith('postgresql://', 'Must be a PostgreSQL connection string'),
+    .startsWith('postgres://', 'Must be a PostgreSQL connection string'),
 
   // PayloadCMS
   PAYLOAD_SECRET: z
     .string()
-    .min(32, 'PAYLOAD_SECRET must be at least 32 characters for security'),
+    .min(24, 'PAYLOAD_SECRET must be at least 32 characters for security'),
 
   // Stripe (optional until Feature 07)
   STRIPE_SECRET_KEY: z

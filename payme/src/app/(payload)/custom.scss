@@ -177,6 +177,10 @@ html[data-theme='dark'] {
   flex: 1 !important;
 }
 
+.app-header__actions > div {
+  width: 100%;
+}
+
 /* ── Top Bar (AppActions) ──────────────────────────────────── */
 .topbar {
   display: flex;
@@ -199,6 +203,7 @@ html[data-theme='dark'] {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  line-height: 1.5;
 }
 
 .topbar__subtitle {
@@ -466,4 +471,173 @@ html[data-theme='dark'] {
   font-size: 12px;
   color: var(--theme-elevation-400);
   margin: 0;
+}
+
+/* ── Create First User ────────────────────────────────────── */
+.cfu {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  width: 100%;
+}
+
+.cfu__header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.cfu__logo {
+  width: 48px;
+  height: 48px;
+  margin-bottom: 4px;
+}
+
+.cfu__title {
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--theme-elevation-1000);
+  margin: 0;
+}
+
+.cfu__subtitle {
+  font-size: 14px;
+  color: var(--theme-elevation-450);
+  margin: 0;
+  text-align: center;
+}
+
+/* Form container within create-first-user */
+.cfu form {
+  width: 100%;
+  max-width: 500px;
+  background: var(--theme-elevation-50);
+  border: 1px solid var(--theme-border-color);
+  border-radius: 12px;
+  padding: 28px 24px 24px;
+}
+
+/* Override the default submit button style inside the card */
+.cfu form .form-submit {
+  margin-top: 8px;
+}
+
+.cfu form .form-submit .btn {
+  width: 100%;
+  background: #2563eb;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: 0.01em;
+}
+
+.cfu form .form-submit .btn:hover {
+  background: #1d4ed8;
+}
+
+/* Blue focus ring on inputs */
+.cfu form .field-type input:focus,
+.cfu form .field-type textarea:focus {
+  border-color: var(--theme-success-500);
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
+}
+
+/* Tighter field spacing inside the card */
+.cfu form .render-fields {
+  margin-bottom: 0;
+}
+
+.cfu form .field-type {
+  margin-bottom: 16px;
+}
+
+/* ── Hide Default Collection Cards ────────────────────────── */
+/* Payload auto-injects a 'collections' widget. We replace it with
+ * our custom QuickAccess widget, so hide the default entirely. */
+.collections {
+  display: none !important;
+}
+
+/* ── Quick Access Widget (Dashboard) ──────────────────────── */
+.quick-access {
+  margin-top: 4px;
+}
+
+.quick-access__heading {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--theme-elevation-500);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin: 0 0 10px;
+}
+
+.quick-access__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.quick-access__item {
+  display: flex;
+  align-items: center;
+  background: var(--theme-elevation-50);
+  border: 1px solid var(--theme-border-color);
+  border-radius: 8px;
+  color: var(--theme-elevation-800);
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.quick-access__item:hover {
+  background: var(--theme-elevation-100);
+  border-color: var(--theme-elevation-300);
+}
+
+.quick-access__link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  text-decoration: none;
+  color: inherit;
+}
+
+.quick-access__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  background: rgba(37, 99, 235, 0.08);
+  color: #2563eb;
+  flex-shrink: 0;
+}
+
+.quick-access__label {
+  font-size: 13.5px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.quick-access__create {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 4px;
+  color: var(--theme-elevation-400);
+  margin-right: 8px;
+  transition: background 0.15s ease, color 0.15s ease;
+  text-decoration: none;
+}
+
+.quick-access__create:hover {
+  background: var(--theme-elevation-200);
+  color: var(--theme-elevation-700);
 }

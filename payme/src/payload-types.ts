@@ -91,6 +91,7 @@ export interface Config {
   globalsSelect: {};
   locale: null;
   widgets: {
+    'quick-access': QuickAccessWidget;
     collections: CollectionsWidget;
   };
   user: User;
@@ -360,6 +361,16 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
   batch?: T;
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "quick-access_widget".
+ */
+export interface QuickAccessWidget {
+  data?: {
+    [k: string]: unknown;
+  };
+  width: 'full';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
