@@ -1,6 +1,5 @@
 import { RoleBadgeCell as RoleBadgeCell_0d2918d6b2b4d77b67ac0c98ce45e643 } from '../../../admin/components/cells/RoleBadgeCell'
-import { UsersListBanner as UsersListBanner_b340c626b9848411554288e921f9ad78 } from '../../../admin/components/UsersListBanner'
-import { MediaListBanner as MediaListBanner_691c950f5b5e7de0c45ccf1576c0e9d2 } from '../../../admin/components/MediaListBanner'
+import { VerifiedBadgeCell as VerifiedBadgeCell_8a5693cb18402b20d485bf755d2892f8 } from '../../../admin/components/cells/VerifiedBadgeCell'
 import { AdminNav as AdminNav_4e2fd1f2ddee185304cca245e07e098e } from '../../../admin/components/Nav'
 import { default as default_48a75e37b0630d5b8c8066e180c0e6ef } from '../../../admin/graphics/Icon'
 import { default as default_88541c286955dbac4d90fb5ed606381c } from '../../../admin/graphics/Logo'
@@ -15,8 +14,7 @@ import { CollectionCards as CollectionCards_f9c02e79a4aed9a3924487c0cd4cafb1 } f
 /** @type import('payload').ImportMap */
 export const importMap = {
   "/admin/components/cells/RoleBadgeCell#RoleBadgeCell": RoleBadgeCell_0d2918d6b2b4d77b67ac0c98ce45e643,
-  "/admin/components/UsersListBanner#UsersListBanner": UsersListBanner_b340c626b9848411554288e921f9ad78,
-  "/admin/components/MediaListBanner#MediaListBanner": MediaListBanner_691c950f5b5e7de0c45ccf1576c0e9d2,
+  "/admin/components/cells/VerifiedBadgeCell#VerifiedBadgeCell": VerifiedBadgeCell_8a5693cb18402b20d485bf755d2892f8,
   "/admin/components/Nav#AdminNav": AdminNav_4e2fd1f2ddee185304cca245e07e098e,
   "/admin/graphics/Icon#default": default_48a75e37b0630d5b8c8066e180c0e6ef,
   "/admin/graphics/Logo#default": default_88541c286955dbac4d90fb5ed606381c,

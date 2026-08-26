@@ -2,11 +2,7 @@ import type { CollectionConfig } from 'payload'
 
 export const Media: CollectionConfig = {
   slug: 'media',
-  admin: {
-    components: {
-      beforeList: ['/admin/components/MediaListBanner#MediaListBanner'],
-    },
-  },
+  admin: {},
   access: {
     read: () => true,
   },

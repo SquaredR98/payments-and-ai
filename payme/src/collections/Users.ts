@@ -11,9 +11,6 @@ export const Users: CollectionConfig = {
   admin: {
     useAsTitle: 'email',
     defaultColumns: ['email', 'firstName', 'lastName', 'role', '_verified'],
-    components: {
-      beforeList: ['/admin/components/UsersListBanner#UsersListBanner'],
-    },
   },
   access: {
     // Anyone can create an account (registration is public)
@@ -208,6 +205,18 @@ export const Users: CollectionConfig = {
         position: 'sidebar',
         description:
           'Your business logo. Appears on invoices and payment pages. Max 2MB, JPG/PNG only.',
+      },
+    },
+
+    // Override the auto-generated _verified field to add a custom Cell
+    {
+      name: '_verified',
+      type: 'checkbox',
+      admin: {
+        components: {
+          Field: false,
+          Cell: '/admin/components/cells/VerifiedBadgeCell#VerifiedBadgeCell',
+        },
       },
     },
   ],

@@ -29,7 +29,7 @@ function getPageTitle(pathname: string, adminRoute: string): { title: string; de
   // /collections/users
   if (path.match(/^collections\/(\w[\w-]*)$/)) {
     const slug = path.split('/')[1]
-    return { title: slugToLabel(slug) }
+    return { title: slugToLabel(slug), description: collectionDescriptions[slug] }
   }
 
   // /globals/:slug
@@ -44,6 +44,12 @@ function getPageTitle(pathname: string, adminRoute: string): { title: string; de
   }
 
   return { title: 'Admin' }
+}
+
+// Descriptions shown in the topbar for collection list pages
+const collectionDescriptions: Record<string, string> = {
+  users: 'Manage registered users, roles, and account status.',
+  media: 'Upload and manage images, documents, and files.',
 }
 
 function slugToLabel(slug: string, singular = false): string {
