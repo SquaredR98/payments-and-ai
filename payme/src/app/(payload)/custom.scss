@@ -1,0 +1,469 @@
+/* PayMe Admin — Blue-tinted theme via CSS variable overrides.
+ * Overrides Payload's --theme-elevation-* (neutrals) and --theme-success-* (accent).
+ * All built-in components (buttons, inputs, tables, modals) pick up these values automatically.
+ *
+ * Payload's own layout CSS (from prod/styles.css):
+ *   .template-default      → display: grid; grid-template-columns: var(--nav-width) auto
+ *   .nav                   → position: sticky; top: 0; height: 100vh; overflow: hidden
+ *   .template-default__wrap → flex-grow: 1; width: 100%; position: relative
+ *   .app-header            → position: relative; height: var(--app-header-height)
+ *
+ * We override ONLY:
+ *   1. CSS variables (theming) — zero structural changes
+ *   2. Sidebar overflow (hidden → auto) so our custom nav content can scroll
+ *   3. Sidebar border color to use our theme variable
+ *   4. Nav group label styling to align with our custom nav links
+ */
+
+/* ── Light Theme ──────────────────────────────────────────── */
+:root {
+  /* Elevation: blue-tinted neutrals (hue ~220) */
+  --theme-elevation-0:    hsl(220, 30%, 99%);
+  --theme-elevation-50:   hsl(220, 25%, 97%);
+  --theme-elevation-100:  hsl(220, 20%, 95%);
+  --theme-elevation-150:  hsl(220, 18%, 92%);
+  --theme-elevation-200:  hsl(220, 15%, 88%);
+  --theme-elevation-250:  hsl(220, 12%, 83%);
+  --theme-elevation-300:  hsl(220, 10%, 76%);
+  --theme-elevation-350:  hsl(220, 10%, 68%);
+  --theme-elevation-400:  hsl(220, 10%, 60%);
+  --theme-elevation-450:  hsl(220, 10%, 52%);
+  --theme-elevation-500:  hsl(220, 12%, 44%);
+  --theme-elevation-550:  hsl(220, 14%, 38%);
+  --theme-elevation-600:  hsl(220, 16%, 32%);
+  --theme-elevation-650:  hsl(220, 18%, 26%);
+  --theme-elevation-700:  hsl(220, 20%, 22%);
+  --theme-elevation-750:  hsl(220, 22%, 18%);
+  --theme-elevation-800:  hsl(220, 24%, 14%);
+  --theme-elevation-850:  hsl(220, 26%, 11%);
+  --theme-elevation-900:  hsl(220, 28%, 8%);
+  --theme-elevation-950:  hsl(220, 30%, 5%);
+  --theme-elevation-1000: hsl(220, 32%, 3%);
+
+  /* Accent: brand blue #2563eb replaces default green/teal */
+  --theme-success-500: #2563eb;
+  --theme-success-600: #1d4ed8;
+  --theme-success-650: #1e40af;
+
+  /* Borders & inputs */
+  --theme-border-color: hsl(220, 15%, 88%);
+  --theme-input-bg: hsl(220, 20%, 99%);
+}
+
+/* ── Dark Theme ───────────────────────────────────────────── */
+html[data-theme='dark'] {
+  /* Elevation: dark blue-black */
+  --theme-elevation-0:    hsl(222, 30%, 7%);
+  --theme-elevation-50:   hsl(222, 25%, 9%);
+  --theme-elevation-100:  hsl(222, 22%, 12%);
+  --theme-elevation-150:  hsl(222, 20%, 15%);
+  --theme-elevation-200:  hsl(222, 18%, 18%);
+  --theme-elevation-250:  hsl(222, 16%, 22%);
+  --theme-elevation-300:  hsl(222, 14%, 28%);
+  --theme-elevation-350:  hsl(222, 12%, 35%);
+  --theme-elevation-400:  hsl(222, 10%, 42%);
+  --theme-elevation-450:  hsl(222, 8%, 50%);
+  --theme-elevation-500:  hsl(222, 8%, 58%);
+  --theme-elevation-550:  hsl(222, 8%, 65%);
+  --theme-elevation-600:  hsl(222, 8%, 72%);
+  --theme-elevation-650:  hsl(222, 8%, 78%);
+  --theme-elevation-700:  hsl(222, 10%, 82%);
+  --theme-elevation-750:  hsl(222, 12%, 86%);
+  --theme-elevation-800:  hsl(222, 14%, 89%);
+  --theme-elevation-850:  hsl(222, 16%, 92%);
+  --theme-elevation-900:  hsl(222, 18%, 94%);
+  --theme-elevation-950:  hsl(222, 20%, 96%);
+  --theme-elevation-1000: hsl(222, 22%, 98%);
+
+  /* Accent: lighter blue for dark mode contrast */
+  --theme-success-500: #3b82f6;
+  --theme-success-600: #2563eb;
+  --theme-success-650: #1d4ed8;
+
+  /* Borders & inputs */
+  --theme-border-color: hsl(222, 18%, 18%);
+  --theme-input-bg: hsl(222, 25%, 9%);
+}
+
+/* ── Sidebar Tweaks ─────────────────────────────────────────
+ * NavWrapper provides: <aside class="nav"><div class="nav__scroll">
+ * Payload's CSS handles: position: sticky; top: 0; height: 100vh; overflow: hidden
+ * We only override:
+ *   - border color to match our theme
+ *   - .nav__scroll padding to 0 (our NavClient handles its own padding)
+ */
+.nav {
+  border-right-color: var(--theme-border-color) !important;
+}
+
+.nav__scroll {
+  padding: 0 !important;
+}
+
+/* ── Nav Group Labels ───────────────────────────────────────
+ * Payload's default: padding: 0; gap: 10px; align-items: flex-start
+ * Our custom NavLinks use: padding: 7px 12px; margin: 1px 12px (= 24px left edge)
+ * So we match the group toggle padding to align the label text.
+ */
+.nav-group__toggle {
+  padding: 6px 24px !important;
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
+  color: var(--theme-elevation-400) !important;
+}
+
+/* Chevron indicator — size and alignment */
+.nav-group__indicator {
+  width: 16px !important;
+  height: 16px !important;
+  flex-shrink: 0 !important;
+  opacity: 0.5;
+  transition: opacity 0.15s ease;
+}
+
+.nav-group__toggle:hover .nav-group__indicator {
+  opacity: 1;
+}
+
+/* ── AppHeader as Top Bar ─────────────────────────────────────
+ * Payload's default: position: relative; height: var(--app-header-height)
+ * We make it sticky with a bottom border so it acts as a proper top bar
+ * that stays visible as the user scrolls the content area.
+ */
+.app-header {
+  position: sticky !important;
+  top: 0 !important;
+  background: var(--theme-elevation-0) !important;
+  border-bottom: 1px solid var(--theme-border-color);
+  z-index: 10 !important;
+}
+
+/* Remove the default translucent background overlay */
+.app-header__bg {
+  display: none !important;
+}
+
+/* Hide default breadcrumbs — replaced by our AppActions page title */
+.app-header__step-nav-wrapper {
+  display: none !important;
+}
+
+/* Hide Payload's default account icon — we have profile link in sidebar */
+.app-header__account {
+  display: none !important;
+}
+
+/* Let our actions fill the full header width.
+ * Chain: .app-header__wrapper > .app-header__controls-wrapper > .app-header__actions-wrapper > .app-header__actions
+ * All parents need to grow so our content can stretch left-to-right. */
+/* Reduce horizontal padding inside the top bar */
+.app-header__content {
+  padding: 0 2rem;
+}
+
+.app-header__controls-wrapper {
+  flex: 1 !important;
+}
+
+.app-header__actions-wrapper {
+  flex: 1 !important;
+  margin-right: 0 !important;
+}
+
+.app-header__actions {
+  max-width: none !important;
+  flex: 1 !important;
+}
+
+/* ── Top Bar (AppActions) ──────────────────────────────────── */
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+}
+
+.topbar__title-group {
+  flex: 1;
+  min-width: 0;
+}
+
+.topbar__title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--theme-elevation-1000);
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.topbar__subtitle {
+  font-size: 12px;
+  color: var(--theme-elevation-450);
+  margin: 0;
+  line-height: 1.3;
+}
+
+.topbar__actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.topbar__separator {
+  width: 1px;
+  height: 20px;
+  background: var(--theme-border-color);
+  flex-shrink: 0;
+}
+
+.topbar__icon-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  border: 1px solid var(--theme-border-color);
+  background: var(--theme-elevation-50);
+  color: var(--theme-elevation-500);
+  cursor: pointer;
+  text-decoration: none;
+  flex-shrink: 0;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.topbar__icon-btn:hover {
+  background: var(--theme-elevation-100);
+  color: var(--theme-elevation-700);
+}
+
+/* ── Sidebar (NavClient) ───────────────────────────────────── */
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: var(--theme-elevation-0);
+}
+
+.sidebar__header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 20px;
+  height: var(--app-header-height);
+  border-bottom: 1px solid var(--theme-border-color);
+  flex-shrink: 0;
+}
+
+.sidebar__logo {
+  height: 26px;
+  width: 26px;
+}
+
+.sidebar__brand {
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--theme-elevation-1000);
+}
+
+.sidebar__quick-create {
+  padding: 12px 12px 8px;
+}
+
+.sidebar__quick-create-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #fff;
+  background: #2563eb;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  width: 100%;
+}
+
+.sidebar__quick-create-btn:hover {
+  background: #1d4ed8;
+}
+
+.sidebar__collections {
+  flex: 1;
+  overflow-y: auto;
+  padding: 4px 0;
+}
+
+.sidebar__footer {
+  border-top: 1px solid var(--theme-border-color);
+  padding: 10px 16px 14px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.sidebar__icon-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 6px;
+  border: 1px solid var(--theme-border-color);
+  background: var(--theme-elevation-50);
+  color: var(--theme-elevation-500);
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.sidebar__icon-btn:hover {
+  background: var(--theme-elevation-100);
+  color: var(--theme-elevation-700);
+}
+
+.sidebar__spacer {
+  margin-left: auto;
+}
+
+/* ── Nav Links ─────────────────────────────────────────────── */
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 7px 12px;
+  margin: 1px 12px;
+  border-radius: 6px;
+  font-size: 13.5px;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+  position: relative;
+  transition: background 0.15s ease;
+  background: transparent;
+  color: var(--theme-elevation-650);
+}
+
+.nav-link:hover {
+  background: var(--theme-elevation-50);
+}
+
+.nav-link--active {
+  background: rgba(37, 99, 235, 0.08);
+  color: #2563eb;
+}
+
+.nav-link--active:hover {
+  background: rgba(37, 99, 235, 0.12);
+}
+
+.nav-link__indicator {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3px;
+  height: 18px;
+  border-radius: 0 2px 2px 0;
+  background: #2563eb;
+}
+
+.nav-link__icon {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+/* ── Dashboard Stat Cards ──────────────────────────────────── */
+.dashboard {
+  padding: 1rem;
+}
+
+.dashboard__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 16px;
+}
+
+.stat-card {
+  background: var(--theme-elevation-50);
+  border: 1px solid var(--theme-border-color);
+  border-radius: 10px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.stat-card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.stat-card__label {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--theme-elevation-500);
+}
+
+.stat-card__trend {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #16a34a;
+  background: rgba(22, 163, 74, 0.1);
+  padding: 2px 8px;
+  border-radius: 99px;
+}
+
+.stat-card__body {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.stat-card__icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  background: rgba(37, 99, 235, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #2563eb;
+  flex-shrink: 0;
+}
+
+.stat-card__value {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--theme-elevation-1000);
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+.stat-card__description {
+  font-size: 13px;
+  color: var(--theme-elevation-650);
+  margin: 0 0 2px;
+  font-weight: 500;
+}
+
+.stat-card__subtext {
+  font-size: 12px;
+  color: var(--theme-elevation-400);
+  margin: 0;
+}

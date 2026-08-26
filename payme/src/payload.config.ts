@@ -23,6 +23,11 @@ export default buildConfig({
         Logo: '/admin/graphics/Logo',
         Icon: '/admin/graphics/Icon',
       },
+      Nav: '/admin/components/Nav#AdminNav',
+      actions: ['/admin/components/AppActions#AppActions'],
+      providers: ['/admin/components/AdminProvider#AdminProvider'],
+      beforeDashboard: ['/admin/components/Dashboard#AdminDashboard'],
+      beforeLogin: ['/admin/components/LoginBranding#LoginBranding'],
     },
     meta: {
       titleSuffix: ' — PayMe Admin',

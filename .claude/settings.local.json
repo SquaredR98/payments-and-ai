@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(find:*)",
+      "WebFetch(domain:payloadcms.com)",
+      "Bash(xargs:*)"
+    ]
+  }
+}

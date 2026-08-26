@@ -1,5 +1,7 @@
 import React from 'react'
 import { Inter } from 'next/font/google'
+import { ThemeProvider } from '@/providers/theme-provider'
+import { Toaster } from '@/components/ui/sonner'
 import './globals.css'
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-sans' })
@@ -13,9 +15,17 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
   const { children } = props
 
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className={`${inter.variable} font-sans antialiased`}>
-        <main>{children}</main>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <main>{children}</main>
+          <Toaster />
+        </ThemeProvider>
       </body>
     </html>
   )

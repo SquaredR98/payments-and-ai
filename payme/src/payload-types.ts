@@ -123,6 +123,32 @@ export interface UserAuthOperations {
  */
 export interface User {
   id: number;
+  firstName: string;
+  lastName: string;
+  phone?: string | null;
+  /**
+   * Appears on invoices as the sender business name.
+   */
+  businessName?: string | null;
+  /**
+   * Your business tax identification number. Appears on invoices.
+   */
+  taxId?: string | null;
+  address?: {
+    street?: string | null;
+    city?: string | null;
+    state?: string | null;
+    zip?: string | null;
+    country?: ('US' | 'GB' | 'CA' | 'AU' | 'IN' | 'DE' | 'FR' | 'JP' | 'BR' | 'OTHER') | null;
+  };
+  /**
+   * User role. Only admins can modify this.
+   */
+  role: 'user' | 'admin';
+  /**
+   * Your business logo. Appears on invoices and payment pages. Max 2MB, JPG/PNG only.
+   */
+  logo?: (number | null) | Media;
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -130,6 +156,8 @@ export interface User {
   resetPasswordExpiration?: string | null;
   salt?: string | null;
   hash?: string | null;
+  _verified?: boolean | null;
+  _verificationToken?: string | null;
   loginAttempts?: number | null;
   lockUntil?: string | null;
   sessions?:
@@ -240,6 +268,22 @@ export interface PayloadMigration {
  * via the `definition` "users_select".
  */
 export interface UsersSelect<T extends boolean = true> {
+  firstName?: T;
+  lastName?: T;
+  phone?: T;
+  businessName?: T;
+  taxId?: T;
+  address?:
+    | T
+    | {
+        street?: T;
+        city?: T;
+        state?: T;
+        zip?: T;
+        country?: T;
+      };
+  role?: T;
+  logo?: T;
   updatedAt?: T;
   createdAt?: T;
   email?: T;
@@ -247,6 +291,8 @@ export interface UsersSelect<T extends boolean = true> {
   resetPasswordExpiration?: T;
   salt?: T;
   hash?: T;
+  _verified?: T;
+  _verificationToken?: T;
   loginAttempts?: T;
   lockUntil?: T;
   sessions?:
