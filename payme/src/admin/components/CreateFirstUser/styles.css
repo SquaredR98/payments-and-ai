@@ -1,0 +1,61 @@
+@reference "tailwindcss";
+
+/* CreateFirstUser — Setup view styles */
+
+.cfu {
+  @apply flex flex-col items-center gap-6 w-full;
+}
+
+.cfu__header {
+  @apply flex flex-col items-center gap-2 mb-2;
+}
+
+.cfu__logo {
+  @apply w-12 h-12 mb-1;
+}
+
+.cfu__title {
+  @apply text-[28px] font-bold tracking-tight m-0;
+  color: var(--theme-elevation-1000);
+}
+
+.cfu__subtitle {
+  @apply text-sm m-0 text-center;
+  color: var(--theme-elevation-450);
+}
+
+/* Form card */
+.cfu form {
+  @apply w-full max-w-[500px] rounded-xl;
+  background: var(--theme-elevation-50);
+  border: 1px solid var(--theme-border-color);
+  padding: 28px 24px 24px;
+}
+
+.cfu form .form-submit {
+  @apply mt-2;
+}
+
+.cfu form .form-submit .btn {
+  @apply w-full rounded-lg font-semibold text-sm tracking-[0.01em];
+  background: #2563eb;
+}
+
+.cfu form .form-submit .btn:hover {
+  background: #1d4ed8;
+}
+
+/* Blue focus ring on inputs */
+.cfu form .field-type input:focus,
+.cfu form .field-type textarea:focus {
+  border-color: var(--theme-success-500);
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
+}
+
+.cfu form .render-fields {
+  @apply mb-0;
+}
+
+.cfu form .field-type {
+  @apply mb-4;
+}

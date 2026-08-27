@@ -1,0 +1,54 @@
+@reference "tailwindcss";
+
+/* QuickAccess — Dashboard widget styles */
+
+.quick-access {
+  @apply mt-1;
+}
+
+.quick-access__heading {
+  @apply text-[13px] font-semibold uppercase tracking-wide m-0 mb-2.5;
+  color: var(--theme-elevation-500);
+}
+
+.quick-access__list {
+  @apply flex flex-wrap gap-2.5;
+}
+
+.quick-access__item {
+  @apply flex items-center rounded-lg transition-colors duration-150;
+  background: var(--theme-elevation-50);
+  border: 1px solid var(--theme-border-color);
+  color: var(--theme-elevation-800);
+}
+
+.quick-access__item:hover {
+  background: var(--theme-elevation-100);
+  border-color: var(--theme-elevation-300);
+}
+
+.quick-access__link {
+  @apply flex items-center gap-2 py-2 px-3 no-underline;
+  color: inherit;
+}
+
+.quick-access__icon {
+  @apply flex items-center justify-center w-7 h-7 rounded-md shrink-0;
+  background: rgba(37, 99, 235, 0.08);
+  color: #2563eb;
+}
+
+.quick-access__label {
+  @apply text-[13.5px] font-medium whitespace-nowrap;
+}
+
+.quick-access__create {
+  @apply flex items-center justify-center w-[22px] h-[22px]
+         rounded no-underline transition-colors duration-150 mr-2;
+  color: var(--theme-elevation-400);
+}
+
+.quick-access__create:hover {
+  background: var(--theme-elevation-200);
+  color: var(--theme-elevation-700);
+}

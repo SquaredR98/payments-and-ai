@@ -1,0 +1,59 @@
+@reference "tailwindcss";
+
+/* Dashboard — Stat cards component styles */
+
+.dashboard {
+  @apply p-4;
+}
+
+.dashboard__grid {
+  @apply grid gap-4;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+}
+
+.stat-card {
+  @apply flex flex-col gap-3 rounded-[10px] p-5;
+  background: var(--theme-elevation-50);
+  border: 1px solid var(--theme-border-color);
+}
+
+.stat-card__header {
+  @apply flex items-center justify-between;
+}
+
+.stat-card__label {
+  @apply text-[13px] font-medium;
+  color: var(--theme-elevation-500);
+}
+
+.stat-card__trend {
+  @apply inline-flex items-center gap-[3px] text-xs font-semibold
+         py-0.5 px-2 rounded-full;
+  color: #16a34a;
+  background: rgba(22, 163, 74, 0.1);
+}
+
+.stat-card__body {
+  @apply flex items-center gap-3;
+}
+
+.stat-card__icon {
+  @apply w-10 h-10 rounded-lg flex items-center justify-center shrink-0;
+  background: rgba(37, 99, 235, 0.08);
+  color: #2563eb;
+}
+
+.stat-card__value {
+  @apply text-[28px] font-bold leading-none tracking-tight;
+  color: var(--theme-elevation-1000);
+}
+
+.stat-card__description {
+  @apply text-[13px] font-medium m-0 mb-0.5;
+  color: var(--theme-elevation-650);
+}
+
+.stat-card__subtext {
+  @apply text-xs m-0;
+  color: var(--theme-elevation-400);
+}

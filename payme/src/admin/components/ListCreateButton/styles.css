@@ -1,0 +1,18 @@
+@reference "tailwindcss";
+
+.list-create-btn {
+  @apply inline-flex items-center justify-center
+         w-10 h-10 rounded-lg cursor-pointer no-underline shrink-0;
+  background: #2563eb;
+  border: none;
+  transition: background 0.15s ease;
+}
+
+.list-create-btn:hover {
+  background: #1d4ed8;
+}
+
+.list-create-btn__icon {
+  @apply text-xl font-normal leading-none;
+  color: #fff;
+}

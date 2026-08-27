@@ -6,6 +6,7 @@ import {
   DollarSign,
   TrendingUp,
 } from 'lucide-react'
+import './styles.css'
 
 export async function AdminDashboard(props: ServerProps) {
   const { payload } = props

@@ -1,5 +1,7 @@
 'use client'
 
+import './styles.css'
+
 interface VerifiedBadgeCellProps {
   cellData?: boolean
 }

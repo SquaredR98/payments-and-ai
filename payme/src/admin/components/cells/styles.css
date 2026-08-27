@@ -1,0 +1,42 @@
+@reference "tailwindcss";
+
+/* Badge Cells — Role, Verified, Status */
+
+.badge {
+  @apply inline-flex items-center gap-[5px] py-[3px] px-2.5
+         rounded-full text-xs font-semibold tracking-[0.01em] whitespace-nowrap;
+}
+
+.badge__dot {
+  @apply w-1.5 h-1.5 rounded-full shrink-0;
+}
+
+/* Brand blue (admin role) */
+.badge--brand {
+  background: rgba(37, 99, 235, 0.1);
+  color: #2563eb;
+}
+
+.badge--brand .badge__dot {
+  background: #2563eb;
+}
+
+/* Muted/neutral (user role, unverified) */
+.badge--muted {
+  background: var(--theme-elevation-150);
+  color: var(--theme-elevation-600);
+}
+
+.badge--muted .badge__dot {
+  background: var(--theme-elevation-400);
+}
+
+/* Success/green (verified) */
+.badge--success {
+  background: rgba(22, 163, 74, 0.1);
+  color: #16a34a;
+}
+
+.badge--success .badge__dot {
+  background: #16a34a;
+}

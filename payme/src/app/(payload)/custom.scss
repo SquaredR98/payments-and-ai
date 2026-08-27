@@ -1,18 +1,15 @@
-/* PayMe Admin — Blue-tinted theme via CSS variable overrides.
- * Overrides Payload's --theme-elevation-* (neutrals) and --theme-success-* (accent).
- * All built-in components (buttons, inputs, tables, modals) pick up these values automatically.
- *
- * Payload's own layout CSS (from prod/styles.css):
- *   .template-default      → display: grid; grid-template-columns: var(--nav-width) auto
- *   .nav                   → position: sticky; top: 0; height: 100vh; overflow: hidden
- *   .template-default__wrap → flex-grow: 1; width: 100%; position: relative
- *   .app-header            → position: relative; height: var(--app-header-height)
- *
- * We override ONLY:
- *   1. CSS variables (theming) — zero structural changes
- *   2. Sidebar overflow (hidden → auto) so our custom nav content can scroll
- *   3. Sidebar border color to use our theme variable
- *   4. Nav group label styling to align with our custom nav links
+/* PayMe Admin — Payload Override CSS
+ * ==================================
+ * This file contains ONLY overrides for Payload's built-in classes and theme variables.
+ * All custom component styles live in colocated styles.css files:
+ *   - admin/components/AppActions/styles.css   (topbar)
+ *   - admin/components/Nav/styles.css          (sidebar, nav links)
+ *   - admin/components/Dashboard/styles.css    (stat cards)
+ *   - admin/components/cells/styles.css        (badge cells)
+ *   - admin/components/QuickAccess/styles.css  (dashboard widget)
+ *   - admin/components/CreateFirstUser/styles.css
+ *   - admin/components/LoginBranding/styles.css
+ *   - admin/components/ListCreateButton/styles.css
  */
 
 /* ── Light Theme ──────────────────────────────────────────── */
@@ -85,13 +82,7 @@ html[data-theme='dark'] {
   --theme-input-bg: hsl(222, 25%, 9%);
 }
 
-/* ── Sidebar Tweaks ─────────────────────────────────────────
- * NavWrapper provides: <aside class="nav"><div class="nav__scroll">
- * Payload's CSS handles: position: sticky; top: 0; height: 100vh; overflow: hidden
- * We only override:
- *   - border color to match our theme
- *   - .nav__scroll padding to 0 (our NavClient handles its own padding)
- */
+/* ── Sidebar Overrides ────────────────────────────────────── */
 .nav {
   border-right-color: var(--theme-border-color) !important;
 }
@@ -100,11 +91,7 @@ html[data-theme='dark'] {
   padding: 0 !important;
 }
 
-/* ── Nav Group Labels ───────────────────────────────────────
- * Payload's default: padding: 0; gap: 10px; align-items: flex-start
- * Our custom NavLinks use: padding: 7px 12px; margin: 1px 12px (= 24px left edge)
- * So we match the group toggle padding to align the label text.
- */
+/* Nav group labels — align with our custom nav links */
 .nav-group__toggle {
   padding: 6px 24px !important;
   font-size: 11px !important;
@@ -114,7 +101,6 @@ html[data-theme='dark'] {
   color: var(--theme-elevation-400) !important;
 }
 
-/* Chevron indicator — size and alignment */
 .nav-group__indicator {
   width: 16px !important;
   height: 16px !important;
@@ -127,11 +113,7 @@ html[data-theme='dark'] {
   opacity: 1;
 }
 
-/* ── AppHeader as Top Bar ─────────────────────────────────────
- * Payload's default: position: relative; height: var(--app-header-height)
- * We make it sticky with a bottom border so it acts as a proper top bar
- * that stays visible as the user scrolls the content area.
- */
+/* ── App Header (Top Bar) Overrides ───────────────────────── */
 .app-header {
   position: sticky !important;
   top: 0 !important;
@@ -140,25 +122,20 @@ html[data-theme='dark'] {
   z-index: 10 !important;
 }
 
-/* Remove the default translucent background overlay */
 .app-header__bg {
   display: none !important;
 }
 
-/* Hide default breadcrumbs — replaced by our AppActions page title */
-.app-header__step-nav-wrapper {
+/* Hide breadcrumb nav — our topbar shows the page title instead */
+.app-header__step-nav-wrapper,
+.app-header .step-nav {
   display: none !important;
 }
 
-/* Hide Payload's default account icon — we have profile link in sidebar */
 .app-header__account {
   display: none !important;
 }
 
-/* Let our actions fill the full header width.
- * Chain: .app-header__wrapper > .app-header__controls-wrapper > .app-header__actions-wrapper > .app-header__actions
- * All parents need to grow so our content can stretch left-to-right. */
-/* Reduce horizontal padding inside the top bar */
 .app-header__content {
   padding: 0 2rem;
 }
@@ -181,615 +158,40 @@ html[data-theme='dark'] {
   width: 100%;
 }
 
-/* ── Top Bar (AppActions) ──────────────────────────────────── */
-.topbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  width: 100%;
-}
-
-.topbar__title-group {
-  flex: 1;
-  min-width: 0;
-}
-
-.topbar__title {
-  font-size: 15px;
-  font-weight: 600;
-  color: var(--theme-elevation-1000);
-  margin: 0;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  line-height: 1.5;
-}
-
-.topbar__subtitle {
-  font-size: 12px;
-  color: var(--theme-elevation-450);
-  margin: 0;
-  line-height: 1.3;
-}
-
-.topbar__actions {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  flex-shrink: 0;
-}
-
-.topbar__separator {
-  width: 1px;
-  height: 20px;
-  background: var(--theme-border-color);
-  flex-shrink: 0;
-}
-
-.topbar__icon-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 32px;
-  height: 32px;
-  border-radius: 6px;
-  border: 1px solid var(--theme-border-color);
-  background: var(--theme-elevation-50);
-  color: var(--theme-elevation-500);
-  cursor: pointer;
-  text-decoration: none;
-  flex-shrink: 0;
-  transition: background 0.15s ease, color 0.15s ease;
-}
-
-.topbar__icon-btn:hover {
-  background: var(--theme-elevation-100);
-  color: var(--theme-elevation-700);
-}
-
-/* ── Sidebar (NavClient) ───────────────────────────────────── */
-.sidebar {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  background: var(--theme-elevation-0);
-}
-
-.sidebar__header {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 0 20px;
-  height: var(--app-header-height);
-  border-bottom: 1px solid var(--theme-border-color);
-  flex-shrink: 0;
-}
-
-.sidebar__logo {
-  height: 26px;
-  width: 26px;
-}
-
-.sidebar__brand {
-  font-size: 15px;
-  font-weight: 700;
-  letter-spacing: -0.01em;
-  color: var(--theme-elevation-1000);
-}
-
-.sidebar__quick-create {
-  padding: 12px 12px 8px;
-}
-
-.sidebar__quick-create-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  padding: 8px 12px;
-  border-radius: 8px;
-  font-size: 13px;
-  font-weight: 600;
-  color: #fff;
-  background: #2563eb;
-  text-decoration: none;
-  cursor: pointer;
-  border: none;
-  width: 100%;
-}
-
-.sidebar__quick-create-btn:hover {
-  background: #1d4ed8;
-}
-
-.sidebar__collections {
-  flex: 1;
-  overflow-y: auto;
-  padding: 4px 0;
-}
-
-.sidebar__footer {
-  border-top: 1px solid var(--theme-border-color);
-  padding: 10px 16px 14px;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.sidebar__icon-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 30px;
-  height: 30px;
-  border-radius: 6px;
-  border: 1px solid var(--theme-border-color);
-  background: var(--theme-elevation-50);
-  color: var(--theme-elevation-500);
-  cursor: pointer;
-  text-decoration: none;
-  transition: background 0.15s ease, color 0.15s ease;
-}
-
-.sidebar__icon-btn:hover {
-  background: var(--theme-elevation-100);
-  color: var(--theme-elevation-700);
-}
-
-.sidebar__spacer {
-  margin-left: auto;
-}
-
-/* ── Nav Links ─────────────────────────────────────────────── */
-.nav-link {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 7px 12px;
-  margin: 1px 12px;
-  border-radius: 6px;
-  font-size: 13.5px;
-  font-weight: 500;
-  text-decoration: none;
-  cursor: pointer;
-  position: relative;
-  transition: background 0.15s ease;
-  background: transparent;
-  color: var(--theme-elevation-650);
-}
-
-.nav-link:hover {
-  background: var(--theme-elevation-50);
-}
-
-.nav-link--active {
-  background: rgba(37, 99, 235, 0.08);
-  color: #2563eb;
-}
-
-.nav-link--active:hover {
-  background: rgba(37, 99, 235, 0.12);
-}
-
-.nav-link__indicator {
-  position: absolute;
-  left: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 3px;
-  height: 18px;
-  border-radius: 0 2px 2px 0;
-  background: #2563eb;
-}
-
-.nav-link__icon {
-  display: flex;
-  align-items: center;
-  flex-shrink: 0;
-}
-
-/* ── Dashboard Stat Cards ──────────────────────────────────── */
-.dashboard {
-  padding: 1rem;
-}
-
-.dashboard__grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-  gap: 16px;
-}
-
-.stat-card {
-  background: var(--theme-elevation-50);
-  border: 1px solid var(--theme-border-color);
-  border-radius: 10px;
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.stat-card__header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.stat-card__label {
-  font-size: 13px;
-  font-weight: 500;
-  color: var(--theme-elevation-500);
-}
-
-.stat-card__trend {
-  display: inline-flex;
-  align-items: center;
-  gap: 3px;
-  font-size: 12px;
-  font-weight: 600;
-  color: #16a34a;
-  background: rgba(22, 163, 74, 0.1);
-  padding: 2px 8px;
-  border-radius: 99px;
-}
-
-.stat-card__body {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.stat-card__icon {
-  width: 40px;
-  height: 40px;
-  border-radius: 8px;
-  background: rgba(37, 99, 235, 0.08);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #2563eb;
-  flex-shrink: 0;
-}
-
-.stat-card__value {
-  font-size: 28px;
-  font-weight: 700;
-  color: var(--theme-elevation-1000);
-  letter-spacing: -0.02em;
-  line-height: 1;
-}
-
-.stat-card__description {
-  font-size: 13px;
-  color: var(--theme-elevation-650);
-  margin: 0 0 2px;
-  font-weight: 500;
-}
-
-.stat-card__subtext {
-  font-size: 12px;
-  color: var(--theme-elevation-400);
-  margin: 0;
-}
-
-/* ── Create First User ────────────────────────────────────── */
-.cfu {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 24px;
-  width: 100%;
-}
-
-.cfu__header {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 8px;
-}
-
-.cfu__logo {
-  width: 48px;
-  height: 48px;
-  margin-bottom: 4px;
-}
-
-.cfu__title {
-  font-size: 28px;
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  color: var(--theme-elevation-1000);
-  margin: 0;
-}
-
-.cfu__subtitle {
-  font-size: 14px;
-  color: var(--theme-elevation-450);
-  margin: 0;
-  text-align: center;
-}
-
-/* Form container within create-first-user */
-.cfu form {
-  width: 100%;
-  max-width: 500px;
-  background: var(--theme-elevation-50);
-  border: 1px solid var(--theme-border-color);
-  border-radius: 12px;
-  padding: 28px 24px 24px;
-}
-
-/* Override the default submit button style inside the card */
-.cfu form .form-submit {
-  margin-top: 8px;
-}
-
-.cfu form .form-submit .btn {
-  width: 100%;
-  background: #2563eb;
-  border-radius: 8px;
-  font-weight: 600;
-  font-size: 14px;
-  letter-spacing: 0.01em;
-}
-
-.cfu form .form-submit .btn:hover {
-  background: #1d4ed8;
-}
-
-/* Blue focus ring on inputs */
-.cfu form .field-type input:focus,
-.cfu form .field-type textarea:focus {
-  border-color: var(--theme-success-500);
-  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
-}
-
-/* Tighter field spacing inside the card */
-.cfu form .render-fields {
-  margin-bottom: 0;
-}
-
-.cfu form .field-type {
-  margin-bottom: 16px;
-}
-
 /* ── Hide Default Collection Cards ────────────────────────── */
-/* Payload auto-injects a 'collections' widget. We replace it with
- * our custom QuickAccess widget, so hide the default entirely. */
 .collections {
   display: none !important;
 }
 
-/* ── Quick Access Widget (Dashboard) ──────────────────────── */
-.quick-access {
-  margin-top: 4px;
+.collection-list .collection-list__wrap {
+  padding: 2rem 2rem;
 }
 
-.quick-access__heading {
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--theme-elevation-500);
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-  margin: 0 0 10px;
-}
+/* ── List View Overrides ──────────────────────────────────── */
 
-.quick-access__list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-
-.quick-access__item {
-  display: flex;
-  align-items: center;
-  background: var(--theme-elevation-50);
-  border: 1px solid var(--theme-border-color);
-  border-radius: 8px;
-  color: var(--theme-elevation-800);
-  transition: background 0.15s ease, border-color 0.15s ease;
-}
-
-.quick-access__item:hover {
-  background: var(--theme-elevation-100);
-  border-color: var(--theme-elevation-300);
-}
-
-.quick-access__link {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 8px 12px;
-  text-decoration: none;
-  color: inherit;
-}
-
-.quick-access__icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 28px;
-  height: 28px;
-  border-radius: 6px;
-  background: rgba(37, 99, 235, 0.08);
-  color: #2563eb;
-  flex-shrink: 0;
-}
-
-.quick-access__label {
-  font-size: 13.5px;
-  font-weight: 500;
-  white-space: nowrap;
-}
-
-.quick-access__create {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 22px;
-  height: 22px;
-  border-radius: 4px;
-  color: var(--theme-elevation-400);
-  margin-right: 8px;
-  transition: background 0.15s ease, color 0.15s ease;
-  text-decoration: none;
-}
-
-.quick-access__create:hover {
-  background: var(--theme-elevation-200);
-  color: var(--theme-elevation-700);
-}
-
-/* ── Badge Cells (Role, Verified, Status) ────────────────── */
-.badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  padding: 3px 10px;
-  border-radius: 99px;
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.01em;
-  white-space: nowrap;
-}
-
-.badge__dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  flex-shrink: 0;
-}
-
-/* Brand blue badge (admin role) */
-.badge--brand {
-  background: rgba(37, 99, 235, 0.1);
-  color: #2563eb;
-}
-
-.badge--brand .badge__dot {
-  background: #2563eb;
-}
-
-/* Muted/neutral badge (user role, unverified) */
-.badge--muted {
-  background: var(--theme-elevation-150);
-  color: var(--theme-elevation-600);
-}
-
-.badge--muted .badge__dot {
-  background: var(--theme-elevation-400);
-}
-
-/* Success/green badge (verified) */
-.badge--success {
-  background: rgba(22, 163, 74, 0.1);
-  color: #16a34a;
-}
-
-.badge--success .badge__dot {
-  background: #16a34a;
-}
-
-/* ── List View (shadcn-style data table) ─────────────────── */
-
-/* --- List Header: hide title, show create btn as + icon ---
- * The topbar (AppActions) already shows the page title + description,
- * so we hide the list header entirely except for the create button.
- * The create button is repositioned to the right end of the search row. */
+/* Hide list header — title shown in topbar, create button portaled to search row */
 .list-header {
-  position: relative !important;
-  margin-bottom: -4px !important;
-  min-height: 0 !important;
-}
-
-.list-header__content {
-  display: flex !important;
-  justify-content: flex-end !important;
-}
-
-.list-header__title-and-actions {
   display: none !important;
 }
 
-/* Create actions: aligned to the right */
-.list-header__actions {
-  display: flex !important;
-  gap: 6px !important;
-}
-
-/* Style the create button as a compact + icon pill */
-.list-header__actions .pill {
-  background: #2563eb !important;
-  border: none !important;
-  border-radius: 8px !important;
-  font-size: 0px !important; /* hide text */
-  padding: 0 !important;
-  width: 40px !important;
-  height: 40px !important;
-  color: #fff !important;
-  transition: background 0.15s ease;
-  display: inline-flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  cursor: pointer;
-  position: relative;
-  overflow: hidden;
-}
-
-/* + icon via pseudo-element */
-.list-header__actions .pill::after {
-  content: '+';
-  font-size: 20px;
-  font-weight: 400;
-  line-height: 1;
-  color: #fff;
-}
-
-/* Hide the pill's inner text and icon */
-.list-header__actions .pill .pill__label,
-.list-header__actions .pill svg {
-  display: none !important;
-}
-
-.list-header__actions .pill:hover {
-  background: #1d4ed8 !important;
-}
-
-/* Tighten spacing between header / controls / table */
+/* Spacing between header / controls / table */
 .collection-list__wrap > *:not(:last-child) {
   margin-bottom: 10px !important;
 }
 
-/* Keep list-controls as flex-column (search row + pill chips below) */
+/* List controls — anchor for floating dropdowns */
 .list-controls {
   gap: 0 !important;
+  position: relative !important;
 }
 
-/* --- Search controls row ---
- * .list-controls is a flex-column by default. We keep that so the
- * pill-selector (column chips) wraps naturally below the search row.
- *
- * Search bar uses CSS Grid: auto 1fr auto (icon | input | actions).
- * Instead of pulling actions out with position: absolute (causes layout
- * instability), we:
- *   1. Remove the border/background from .search-bar itself
- *   2. Add a border only around the icon + input via .search-filter
- *   3. Let .search-bar__actions stay in the natural grid flow as the 3rd column
- *
- * This gives the visual effect of "detached" buttons without any positioning hacks.
- */
-
-/* Search bar: transparent wrapper, grid stays natural */
+/* Search bar: transparent wrapper, border on input only */
 .search-bar {
   border: none !important;
   background: transparent !important;
   min-height: 40px !important;
 }
 
-/* The search-filter spans grid columns 1/3 (over icon + input).
- * We add the visual border here so it wraps only the search area. */
 .search-bar .search-filter {
   border: 1px solid var(--theme-border-color) !important;
   border-radius: 8px !important;
@@ -802,14 +204,13 @@ html[data-theme='dark'] {
   box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.1);
 }
 
-/* Search icon: sits inside the filter's grid overlap, keep it visible */
 .search-bar .icon--search {
   z-index: 1;
   pointer-events: none;
   margin-left: 12px;
 }
 
-/* Actions (Columns/Filters) stay in normal grid flow as column 3 */
+/* Columns/Filters buttons in grid column 3 */
 .search-bar__actions {
   display: flex !important;
   align-items: center !important;
@@ -818,7 +219,6 @@ html[data-theme='dark'] {
   padding-left: 8px !important;
 }
 
-/* Columns / Filters styled as outlined buttons */
 .search-bar__actions .pill {
   background: var(--theme-elevation-50) !important;
   border: 1px solid var(--theme-border-color) !important;
@@ -839,43 +239,115 @@ html[data-theme='dark'] {
   border-color: var(--theme-elevation-300) !important;
 }
 
-/* --- Column Pill Selector: clean chip row below search --- */
-.list-controls .pill-selector {
-  background: transparent !important;
-  padding: 8px 0 0 !important;
-  gap: 6px !important;
-  width: 100% !important;
+/* --- Columns & Filters: floating dropdown panels ---
+ * Payload renders these inside AnimateHeight wrappers:
+ *   .list-controls__columns  (contains .pill-selector)
+ *   .list-controls__where    (contains .where-builder)
+ * We convert the inline expanding panel into a floating dropdown
+ * anchored below the search bar, overlaying the table content. */
+
+.list-controls__columns,
+.list-controls__where {
+  position: absolute !important;
+  top: 100% !important;
+  right: 0 !important;
+  z-index: 20 !important;
+  margin-top: 4px !important;
 }
 
-.pill-selector__pill {
-  border-radius: 6px !important;
-  font-size: 12px !important;
-  font-weight: 500 !important;
-  padding: 4px 8px !important;
-  color: var(--theme-elevation-600) !important;
-  background: var(--theme-elevation-50) !important;
-  box-shadow: none !important;
+/* Columns dropdown: vertical list of toggleable items */
+.list-controls__columns .pill-selector {
+  background: var(--theme-elevation-0) !important;
   border: 1px solid var(--theme-border-color) !important;
-  transition: background 0.15s ease, border-color 0.15s ease;
+  border-radius: 10px !important;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08), 0 1px 4px rgba(0, 0, 0, 0.04) !important;
+  padding: 6px !important;
+  gap: 2px !important;
+  width: 220px !important;
+  max-height: 320px !important;
+  overflow-y: auto !important;
+
+  /* Vertical list instead of horizontal wrap */
+  flex-direction: column !important;
+  flex-wrap: nowrap !important;
 }
 
-.pill-selector__pill:hover {
+/* Each column item: full-width row with label left, icon right.
+ * Payload uses alignIcon="left" which sets flex-direction: row-reverse.
+ * We override to row so label is first, icon is last. */
+.list-controls__columns .pill-selector__pill {
+  border-radius: 6px !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  padding: 8px 10px !important;
+  width: 100% !important;
+  box-shadow: none !important;
+  border: none !important;
+  background: transparent !important;
+  color: var(--theme-elevation-600) !important;
+  transition: background 0.1s ease;
+  /* Fix alignment: label left, icon right */
+  flex-direction: row !important;
+  gap: 8px !important;
+}
+
+.list-controls__columns .pill-selector__pill:hover {
+  background: var(--theme-elevation-50) !important;
+}
+
+/* Selected column: subtle brand tint */
+.list-controls__columns .pill-selector__pill--selected {
+  background: rgba(37, 99, 235, 0.06) !important;
+  color: var(--theme-elevation-900) !important;
+}
+
+.list-controls__columns .pill-selector__pill--selected:hover {
+  background: rgba(37, 99, 235, 0.1) !important;
+}
+
+/* Label takes available space, pushes icon to the right */
+.list-controls__columns .pill-selector__pill .pill__label {
+  flex: 1 !important;
+  text-align: left !important;
+}
+
+/* Icon: styled as a small rounded indicator */
+.list-controls__columns .pill-selector__pill .pill__icon {
+  flex-shrink: 0 !important;
+  width: 18px !important;
+  height: 18px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border-radius: 4px !important;
   background: var(--theme-elevation-100) !important;
-  border-color: var(--theme-elevation-300) !important;
+  color: var(--theme-elevation-400) !important;
+  transition: background 0.1s ease, color 0.1s ease;
 }
 
-.pill-selector__pill--selected {
-  background: rgba(37, 99, 235, 0.08) !important;
-  color: #2563eb !important;
-  border-color: rgba(37, 99, 235, 0.25) !important;
+.list-controls__columns .pill-selector__pill .pill__icon .icon {
+  width: 10px !important;
+  height: 10px !important;
 }
 
-.pill-selector__pill--selected:hover {
+/* Selected: icon becomes brand check */
+.list-controls__columns .pill-selector__pill--selected .pill__icon {
   background: rgba(37, 99, 235, 0.12) !important;
-  border-color: rgba(37, 99, 235, 0.35) !important;
+  color: #2563eb !important;
 }
 
-/* --- Table: bordered, clean rows --- */
+/* Filters dropdown card */
+.list-controls__where .where-builder {
+  background: var(--theme-elevation-0) !important;
+  border: 1px solid var(--theme-border-color) !important;
+  border-radius: 10px !important;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08), 0 1px 4px rgba(0, 0, 0, 0.04) !important;
+  padding: 12px !important;
+  min-width: 320px !important;
+  max-width: 480px !important;
+}
+
+/* Table: bordered, clean rows */
 .collection-list .table {
   border: 1px solid var(--theme-border-color);
   border-radius: 10px;
@@ -890,7 +362,6 @@ html[data-theme='dark'] {
   display: none !important;
 }
 
-/* Table header */
 .table thead {
   background: var(--theme-elevation-50) !important;
 }
@@ -905,12 +376,10 @@ html[data-theme='dark'] {
   padding: 10px 12px !important;
 }
 
-/* Remove default alternating row background */
 .table tbody tr:nth-child(odd) {
   background: transparent !important;
 }
 
-/* Row borders */
 .table tbody tr {
   border-bottom: 1px solid var(--theme-elevation-100);
   transition: background 0.1s ease;
@@ -920,12 +389,10 @@ html[data-theme='dark'] {
   border-bottom: none;
 }
 
-/* Row hover */
 .table tbody tr:hover {
   background: var(--theme-elevation-50) !important;
 }
 
-/* Cell styling */
 .table td {
   font-size: 13.5px !important;
   padding: 12px !important;
@@ -933,7 +400,6 @@ html[data-theme='dark'] {
   vertical-align: middle !important;
 }
 
-/* Primary link column — bolder with brand hover */
 .table td:nth-child(2) a {
   font-weight: 500;
   color: var(--theme-elevation-1000) !important;
@@ -944,7 +410,6 @@ html[data-theme='dark'] {
   color: #2563eb !important;
 }
 
-/* Sort column header interactions */
 .sort-column__label {
   transition: color 0.15s ease;
 }
@@ -953,7 +418,7 @@ html[data-theme='dark'] {
   color: var(--theme-elevation-700) !important;
 }
 
-/* --- Pagination --- */
+/* Pagination */
 .collection-list__page-info {
   font-size: 13px;
   color: var(--theme-elevation-500);
@@ -962,4 +427,204 @@ html[data-theme='dark'] {
 .per-page .pill {
   border-radius: 6px !important;
   font-size: 12px;
+}
+
+/* ── Edit / Create View Overrides ────────────────────────── */
+
+/* --- Document Controls Bar ---
+ * Sticky bar with metadata (left) and save/actions (right).
+ * We restyle it to be cleaner and match our design system. */
+
+.doc-controls {
+  background: var(--theme-elevation-0) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+/* Compact wrapper — tighter height */
+.doc-controls__wrapper {
+  height: auto !important;
+  min-height: 48px !important;
+  padding-top: 8px !important;
+  padding-bottom: 8px !important;
+}
+
+.doc-controls__divider {
+  background: var(--theme-border-color) !important;
+}
+
+/* Hide "Creating new User" label — topbar already shows context */
+.doc-controls__meta > li:first-child .doc-controls__value {
+  display: none !important;
+}
+
+/* Right-align controls when metadata side is empty (create page) */
+.doc-controls__content:empty,
+.doc-controls__content:has(> .doc-controls__meta:empty) {
+  display: none !important;
+}
+
+/* Metadata labels & values */
+.doc-controls__label {
+  font-size: 12px !important;
+  color: var(--theme-elevation-400) !important;
+}
+
+.doc-controls__value {
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  color: var(--theme-elevation-700) !important;
+}
+
+/* Save button — brand blue, prominent */
+.doc-controls__controls #action-save {
+  background: #2563eb !important;
+  color: #fff !important;
+  border: none !important;
+  border-radius: 8px !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  padding: 8px 20px !important;
+  transition: background 0.15s ease;
+}
+
+.doc-controls__controls #action-save:hover {
+  background: #1d4ed8 !important;
+}
+
+/* Secondary buttons in controls (e.g., Take Over) */
+.doc-controls__controls .btn--style-secondary {
+  border-radius: 8px !important;
+  border-color: var(--theme-border-color) !important;
+  font-size: 13px !important;
+}
+
+/* Dots menu button */
+.doc-controls__dots {
+  border-color: var(--theme-border-color) !important;
+  border-radius: 8px !important;
+}
+
+.doc-controls__dots:hover {
+  border-color: var(--theme-elevation-300) !important;
+  background: var(--theme-elevation-50) !important;
+}
+
+/* --- Document Fields Layout ---
+ * Main form area + sidebar. Add card treatments.
+ * Tighten the gap between doc-controls and the form. */
+
+.collection-edit__form {
+  padding-top: 0 !important;
+}
+
+.document-fields {
+  padding: 0 2rem !important;
+  gap: 24px !important;
+  margin-top: 16px !important;
+  margin-bottom: 24px !important;
+}
+
+/* Main form card */
+.document-fields__main {
+  border: 1px solid var(--theme-border-color) !important;
+  border-radius: 10px !important;
+  background: var(--theme-elevation-0) !important;
+  overflow: hidden;
+  border-right: 1px solid var(--theme-border-color) !important;
+}
+
+/* Sidebar card */
+.document-fields__sidebar-wrap {
+  border: 1px solid var(--theme-border-color) !important;
+  border-radius: 10px !important;
+  background: var(--theme-elevation-0) !important;
+  overflow: hidden;
+  height: fit-content !important;
+}
+
+.document-fields__sidebar {
+  height: auto !important;
+  max-height: calc(100vh - 160px) !important;
+  overflow-y: auto !important;
+}
+
+/* --- Auth Section (Email / Password on Create) ---
+ * Sits inside .document-fields__main (already a card),
+ * so we just add subtle separation instead of another card. */
+.collection-edit__auth {
+  border-bottom: 1px solid var(--theme-border-color) !important;
+  border-radius: 0 !important;
+  padding: 24px !important;
+  margin-bottom: 0 !important;
+}
+
+/* --- Tabs --- */
+.tabs-field__tabs {
+  border-bottom-color: var(--theme-border-color) !important;
+  gap: 0 !important;
+}
+
+.tabs-field__tab-button {
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  color: var(--theme-elevation-500) !important;
+  padding: 12px 16px !important;
+  border-bottom: 2px solid transparent !important;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+.tabs-field__tab-button:hover {
+  color: var(--theme-elevation-800) !important;
+}
+
+.tabs-field__tab-button--active {
+  color: var(--theme-elevation-1000) !important;
+  border-bottom-color: #2563eb !important;
+}
+
+/* --- Form Inputs --- */
+.field-type input,
+.field-type textarea,
+.field-type .rs__control {
+  border-radius: 8px !important;
+  border-color: var(--theme-border-color) !important;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.field-type input:focus,
+.field-type textarea:focus,
+.field-type .rs__control--is-focused {
+  border-color: var(--theme-success-500) !important;
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.1) !important;
+}
+
+/* Field labels */
+.field-type .field-label {
+  font-size: 12.5px !important;
+  font-weight: 600 !important;
+  color: var(--theme-elevation-700) !important;
+}
+
+/* Field descriptions */
+.field-type .field-description {
+  font-size: 12px !important;
+  color: var(--theme-elevation-400) !important;
+}
+
+/* --- Popup Menu (dots dropdown) --- */
+.popup-list {
+  border: 1px solid var(--theme-border-color) !important;
+  border-radius: 10px !important;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08), 0 1px 4px rgba(0, 0, 0, 0.04) !important;
+  overflow: hidden;
+}
+
+.popup-list__item {
+  font-size: 13px !important;
+  transition: background 0.1s ease;
+}
+
+.popup-list__item:hover {
+  background: var(--theme-elevation-50) !important;
 }

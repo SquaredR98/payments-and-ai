@@ -1,0 +1,12 @@
+@reference "tailwindcss";
+
+/* LoginBranding — Login page subtitle */
+
+.login-branding {
+  @apply text-center pb-4;
+}
+
+.login-branding__tagline {
+  @apply text-sm font-normal m-0;
+  color: var(--theme-elevation-500);
+}

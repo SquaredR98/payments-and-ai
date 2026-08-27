@@ -2,6 +2,7 @@ import React from 'react'
 import { buildFormState } from '@payloadcms/ui/utilities/buildFormState'
 
 import { CreateFirstUserClient } from './CreateFirstUserClient'
+import './styles.css'
 
 import type { AdminViewServerProps } from 'payload'
 

@@ -1,0 +1,43 @@
+@reference "tailwindcss";
+
+/* AppActions — Top bar component styles */
+
+.topbar {
+  @apply flex items-center justify-between gap-3 w-full;
+}
+
+.topbar__title-group {
+  @apply flex-1 min-w-0;
+}
+
+.topbar__title {
+  @apply text-[15px] font-semibold m-0 truncate leading-normal;
+  color: var(--theme-elevation-1000);
+}
+
+.topbar__subtitle {
+  @apply text-xs m-0 leading-tight;
+  color: var(--theme-elevation-450);
+}
+
+.topbar__actions {
+  @apply flex items-center gap-2 shrink-0;
+}
+
+.topbar__separator {
+  @apply w-px h-5 shrink-0;
+  background: var(--theme-border-color);
+}
+
+.topbar__icon-btn {
+  @apply flex items-center justify-center w-8 h-8 rounded-md shrink-0
+         cursor-pointer no-underline transition-colors duration-150;
+  border: 1px solid var(--theme-border-color);
+  background: var(--theme-elevation-50);
+  color: var(--theme-elevation-500);
+}
+
+.topbar__icon-btn:hover {
+  background: var(--theme-elevation-100);
+  color: var(--theme-elevation-700);
+}

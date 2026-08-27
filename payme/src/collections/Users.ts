@@ -11,6 +11,9 @@ export const Users: CollectionConfig = {
   admin: {
     useAsTitle: 'email',
     defaultColumns: ['email', 'firstName', 'lastName', 'role', '_verified'],
+    components: {
+      beforeList: ['/admin/components/ListCreateButton/index#ListCreateButton'],
+    },
   },
   access: {
     // Anyone can create an account (registration is public)

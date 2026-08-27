@@ -2,6 +2,7 @@ import React from 'react'
 import { formatAdminURL } from 'payload/shared'
 
 import type { PayloadRequest } from 'payload'
+import './styles.css'
 
 // Icon SVGs rendered inline to avoid client component dependency
 // These match the Lucide icons used in the sidebar nav

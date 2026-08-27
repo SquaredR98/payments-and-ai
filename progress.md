@@ -1,7 +1,7 @@
 # Progress Tracker
 
-> **Last Updated:** 2026-08-26
-> **Last Action:** Session 7 — Custom create-first-user view, QuickAccess dashboard widget, collection group cleanup
+> **Last Updated:** 2026-08-27
+> **Last Action:** Session 8 — Component folder restructure, edit view CSS overrides, ListCreateButton portal
 
 ---
 
@@ -74,6 +74,13 @@
 - ✅ QuickAccess dashboard widget — custom widget via `admin.dashboard.widgets` API, replaces default CollectionCards with compact pill-style items with inline SVG icons and create buttons
 - ✅ Removed `admin.group` from Users and Media collections (unnecessary with only 2 collections)
 
+**Component Restructure & Edit View (Session 8):**
+- ✅ Restructured all admin components into folder/index pattern with colocated styles.css files (AppActions, Nav, Dashboard, CreateFirstUser, LoginBranding, QuickAccess, ListCreateButton)
+- ✅ ListCreateButton — portal-based + button injected into search bar actions row via `beforeList` slot + `createPortal`
+- ✅ Edit/create view CSS overrides — doc-controls compact bar, brand-blue save button, card treatments for form/sidebar, tabs styling, form input focus rings, popup menu styling
+- ✅ Badge cell styles extracted to colocated styles.css
+- ⏳ Custom Edit View — researched Payload API (beforeDocumentControls, editMenuItems, SaveButton slots), implementation deferred
+
 ---
 
 ## Projects 2-8: Not Started
@@ -84,7 +91,7 @@ Feature tracking tables will be added when each project becomes active.
 
 ## Next Action
 
-**Feature 01.5 is complete.** Next: Continue with Feature 02 (Authentication & User Management) — doc already written, implementation steps 1-2 done (Users collection + auth config). Resume at Step 3: registration page, login page, email verification, password reset, route protection, auth provider/hook.
+**Feature 01.5 admin polish ongoing.** Edit/create view custom component implementation deferred. Next: Continue with Feature 02 (Authentication & User Management) — doc already written, implementation steps 1-2 done (Users collection + auth config). Resume at Step 3: registration page, login page, email verification, password reset, route protection, auth provider/hook.
 
 ---
 
@@ -100,3 +107,4 @@ Feature tracking tables will be added when each project becomes active.
 | 2026-08-25 | Session 5 | Feature 01.5 admin shell: custom Nav (NavWrapper fix for sidebar positioning), AppActions topbar with welcome/page title + quick actions, Dashboard stat cards, CSS theme overrides, AdminProvider, LoginBranding, list banners, RoleBadgeCell |
 | 2026-08-26 | Session 6 | Feature 01.5 cleanup: refactored all admin components — replaced inline styles with CSS classes in custom.scss (BEM naming), replaced `<a>` tags with Payload `Link` component for client-side routing, removed unused imports. Feature 01.5 marked complete. |
 | 2026-08-26 | Session 7 | Custom create-first-user view (branded, streamlined fields), QuickAccess dashboard widget (replaces default CollectionCards with icon pills), removed collection groups, CSS cleanup |
+| 2026-08-27 | Session 8 | Restructured all admin components into folder/index pattern with colocated styles.css, created ListCreateButton (portal into search bar actions), edit/create view CSS overrides (doc-controls, save button, card forms, tabs, inputs), researched Custom Edit View API |

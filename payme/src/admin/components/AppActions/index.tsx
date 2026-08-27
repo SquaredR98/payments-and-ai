@@ -5,6 +5,7 @@ import { usePathname } from 'next/navigation'
 import { useAuth, useConfig, Link } from '@payloadcms/ui'
 import { Sun, Moon, Plus, Upload, BookOpen } from 'lucide-react'
 import { formatAdminURL } from 'payload/shared'
+import './styles.css'
 
 // Map route segments to page titles
 function getPageTitle(pathname: string, adminRoute: string): { title: string; description?: string } {

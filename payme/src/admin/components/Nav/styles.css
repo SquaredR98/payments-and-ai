@@ -1,0 +1,100 @@
+@reference "tailwindcss";
+
+/* Nav — Sidebar component styles */
+
+.sidebar {
+  @apply flex flex-col h-full;
+  background: var(--theme-elevation-0);
+}
+
+.sidebar__header {
+  @apply flex items-center gap-2.5 shrink-0;
+  padding: 0 20px;
+  height: var(--app-header-height);
+  border-bottom: 1px solid var(--theme-border-color);
+}
+
+.sidebar__logo {
+  @apply h-[26px] w-[26px];
+}
+
+.sidebar__brand {
+  @apply text-[15px] font-bold tracking-tight;
+  color: var(--theme-elevation-1000);
+}
+
+.sidebar__quick-create {
+  @apply pt-3 px-3 pb-2;
+}
+
+.sidebar__quick-create-btn {
+  @apply flex items-center justify-center gap-1.5
+         py-2 px-3 rounded-lg text-[13px] font-semibold
+         text-white no-underline cursor-pointer border-none w-full;
+  background: #2563eb;
+}
+
+.sidebar__quick-create-btn:hover {
+  background: #1d4ed8;
+}
+
+.sidebar__collections {
+  @apply flex-1 overflow-y-auto py-1;
+}
+
+.sidebar__footer {
+  @apply flex items-center gap-1.5;
+  border-top: 1px solid var(--theme-border-color);
+  padding: 10px 16px 14px;
+}
+
+.sidebar__icon-btn {
+  @apply flex items-center justify-center w-[30px] h-[30px]
+         rounded-md cursor-pointer no-underline transition-colors duration-150;
+  border: 1px solid var(--theme-border-color);
+  background: var(--theme-elevation-50);
+  color: var(--theme-elevation-500);
+}
+
+.sidebar__icon-btn:hover {
+  background: var(--theme-elevation-100);
+  color: var(--theme-elevation-700);
+}
+
+.sidebar__spacer {
+  @apply ml-auto;
+}
+
+/* Nav Links */
+
+.nav-link {
+  @apply flex items-center gap-2.5 rounded-md text-[13.5px]
+         font-medium no-underline cursor-pointer relative
+         transition-colors duration-150;
+  padding: 7px 12px;
+  margin: 1px 12px;
+  background: transparent;
+  color: var(--theme-elevation-650);
+}
+
+.nav-link:hover {
+  background: var(--theme-elevation-50);
+}
+
+.nav-link--active {
+  background: rgba(37, 99, 235, 0.08);
+  color: #2563eb;
+}
+
+.nav-link--active:hover {
+  background: rgba(37, 99, 235, 0.12);
+}
+
+.nav-link__indicator {
+  @apply absolute left-0 top-1/2 -translate-y-1/2 w-[3px] h-[18px] rounded-r-sm;
+  background: #2563eb;
+}
+
+.nav-link__icon {
+  @apply flex items-center shrink-0;
+}

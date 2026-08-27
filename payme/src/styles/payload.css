@@ -1,0 +1,26 @@
+/* Tailwind for Payload Admin Panel
+ * ---------------------------------
+ * - NO preflight (would break Payload's built-in admin styles)
+ * - Utilities only, so we can use className="flex items-center ..." in admin components
+ * - Dark mode mapped to Payload's data-theme="dark" attribute
+ *
+ * NOTE: Payload's root font-size is 13px (not 16px), so rem-based
+ * Tailwind values (p-4 = 1rem = 13px, not 16px) render smaller.
+ * Use px-based values or adjust accordingly.
+ */
+
+@layer theme, base, components, utilities;
+@import 'tailwindcss/theme.css' layer(theme);
+/* Skipping preflight — Payload has its own reset */
+@import 'tailwindcss/utilities.css' layer(utilities);
+
+/* Payload uses data-theme="dark", not the .dark class */
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+
+/* Fix: Tailwind's .table utility overrides Payload's table display */
+@layer utilities {
+  .table {
+    display: block;
+    width: 100%;
+  }
+}

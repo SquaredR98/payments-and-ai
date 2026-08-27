@@ -23,14 +23,14 @@ export default buildConfig({
         Logo: '/admin/graphics/Logo',
         Icon: '/admin/graphics/Icon',
       },
-      Nav: '/admin/components/Nav#AdminNav',
-      actions: ['/admin/components/AppActions#AppActions'],
+      Nav: '/admin/components/Nav/index#AdminNav',
+      actions: ['/admin/components/AppActions/index#AppActions'],
       providers: ['/admin/components/AdminProvider#AdminProvider'],
-      beforeDashboard: ['/admin/components/Dashboard#AdminDashboard'],
-      beforeLogin: ['/admin/components/LoginBranding#LoginBranding'],
+      beforeDashboard: ['/admin/components/Dashboard/index#AdminDashboard'],
+      beforeLogin: ['/admin/components/LoginBranding/index#LoginBranding'],
       views: {
         createFirstUser: {
-          Component: '/admin/components/CreateFirstUser#CreateFirstUser',
+          Component: '/admin/components/CreateFirstUser/index#CreateFirstUser',
         },
       },
     },
@@ -38,7 +38,7 @@ export default buildConfig({
       widgets: [
         {
           slug: 'quick-access',
-          Component: '/admin/components/QuickAccess#QuickAccess',
+          Component: '/admin/components/QuickAccess/index#QuickAccess',
           minWidth: 'full',
           maxWidth: 'full',
         },

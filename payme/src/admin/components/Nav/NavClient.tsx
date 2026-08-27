@@ -28,6 +28,7 @@ import {
   Moon,
   User,
 } from 'lucide-react'
+import './styles.css'
 
 // Map collection slugs to Lucide icon components
 const iconMap: Record<string, React.ComponentType<{ size?: number; strokeWidth?: number }>> = {
