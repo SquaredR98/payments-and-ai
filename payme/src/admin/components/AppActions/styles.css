@@ -41,3 +41,39 @@
   background: var(--theme-elevation-100);
   color: var(--theme-elevation-700);
 }
+
+/* Title row — inline flex with badges */
+.topbar__title-row {
+  @apply flex items-center gap-2;
+}
+
+/* Role badge pill */
+.topbar__badge {
+  @apply inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold
+         uppercase tracking-wider leading-none shrink-0;
+}
+
+.topbar__badge--admin {
+  background: rgba(37, 99, 235, 0.1);
+  color: #2563eb;
+}
+
+.topbar__badge--user {
+  background: var(--theme-elevation-100);
+  color: var(--theme-elevation-500);
+}
+
+/* Verification status icon */
+.topbar__verified {
+  @apply inline-flex items-center justify-center w-5 h-5 rounded-full shrink-0;
+}
+
+.topbar__verified--yes {
+  background: rgba(34, 197, 94, 0.1);
+  color: #16a34a;
+}
+
+.topbar__verified--no {
+  background: rgba(234, 179, 8, 0.1);
+  color: #ca8a04;
+}

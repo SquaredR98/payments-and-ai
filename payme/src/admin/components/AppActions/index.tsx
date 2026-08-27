@@ -3,8 +3,9 @@
 import { useState, useEffect } from 'react'
 import { usePathname } from 'next/navigation'
 import { useAuth, useConfig, Link } from '@payloadcms/ui'
-import { Sun, Moon, Plus, Upload, BookOpen } from 'lucide-react'
+import { Sun, Moon, Plus, Upload, BookOpen, Check, Clock } from 'lucide-react'
 import { formatAdminURL } from 'payload/shared'
+import { useDocumentBridge } from '../AdminProvider'
 import './styles.css'
 
 // Map route segments to page titles
@@ -70,6 +71,7 @@ export function AppActions() {
   const { user } = useAuth()
   const { config } = useConfig()
   const { routes: { admin: adminRoute } } = config
+  const bridge = useDocumentBridge()
 
   const [isDark, setIsDark] = useState(false)
 
@@ -88,18 +90,69 @@ export function AppActions() {
     pathname === `${adminRoute}/` ||
     pathname === adminRoute + ''
 
-  const { title, description } = isDashboard
+  // Base title from URL
+  const urlInfo = isDashboard
     ? {
         title: `Welcome back, ${(user as { firstName?: string })?.firstName || (user as { email?: string })?.email || 'Admin'}`,
         description: "Here's your PayMe admin overview.",
       }
     : getPageTitle(pathname, adminRoute)
 
+  // Override with reactive bridge data on user edit/create pages
+  let title = urlInfo.title
+  let description = urlInfo.description
+  let roleBadge: { label: string; variant: 'admin' | 'user' } | null = null
+  let verifiedStatus: boolean | null = null
+
+  if (bridge.collectionSlug === 'users' && bridge.data) {
+    const d = bridge.data
+    const firstName = d.firstName as string | undefined
+    const lastName = d.lastName as string | undefined
+    const email = d.email as string | undefined
+    const role = d.role as string | undefined
+    const verified = d._verified as boolean | undefined
+
+    if (bridge.isEditing) {
+      // Edit page — show user's name if available
+      const name = [firstName, lastName].filter(Boolean).join(' ')
+      title = name || email || 'Edit User'
+      description = name && email ? email : undefined
+    } else {
+      // Create page — show reactive name as user types
+      const name = [firstName, lastName].filter(Boolean).join(' ')
+      title = name || 'New User'
+      description = email || undefined
+    }
+
+    if (role) {
+      roleBadge = { label: role === 'admin' ? 'Admin' : 'User', variant: role as 'admin' | 'user' }
+    }
+
+    if (typeof verified === 'boolean') {
+      verifiedStatus = verified
+    }
+  }
+
   return (
     <div className="topbar">
       {/* Page title / welcome message */}
       <div className="topbar__title-group">
-        <h1 className="topbar__title">{title}</h1>
+        <div className="topbar__title-row">
+          <h1 className="topbar__title">{title}</h1>
+          {roleBadge && (
+            <span className={`topbar__badge topbar__badge--${roleBadge.variant}`}>
+              {roleBadge.label}
+            </span>
+          )}
+          {verifiedStatus !== null && (
+            <span className={`topbar__verified topbar__verified--${verifiedStatus ? 'yes' : 'no'}`} title={verifiedStatus ? 'Email verified' : 'Email not verified'}>
+              {verifiedStatus
+                ? <Check size={12} strokeWidth={2.5} />
+                : <Clock size={12} strokeWidth={2} />
+              }
+            </span>
+          )}
+        </div>
         {description && <p className="topbar__subtitle">{description}</p>}
       </div>
 

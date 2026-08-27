@@ -13,6 +13,9 @@ export const Users: CollectionConfig = {
     defaultColumns: ['email', 'firstName', 'lastName', 'role', '_verified'],
     components: {
       beforeList: ['/admin/components/ListCreateButton/index#ListCreateButton'],
+      edit: {
+        beforeDocumentControls: ['/admin/components/DocumentBridge/index#DocumentBridge'],
+      },
     },
   },
   access: {

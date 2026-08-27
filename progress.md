@@ -1,7 +1,7 @@
 # Progress Tracker
 
 > **Last Updated:** 2026-08-27
-> **Last Action:** Session 8 — Component folder restructure, edit view CSS overrides, ListCreateButton portal
+> **Last Action:** Session 9 — Document context bridge (reactive header info on edit/create pages)
 
 ---
 
@@ -81,6 +81,15 @@
 - ✅ Badge cell styles extracted to colocated styles.css
 - ⏳ Custom Edit View — researched Payload API (beforeDocumentControls, editMenuItems, SaveButton slots), implementation deferred
 
+**Document Context Bridge (Session 9):**
+- ✅ Extended AdminProvider with DocumentBridgeContext — shared state + setState for bridging reactive document data across the component tree
+- ✅ Created DocumentBridge component (invisible, registered via `beforeDocumentControls`) — sits inside DocumentInfoProvider, pushes reactive form data into shared context
+- ✅ Registered DocumentBridge on Users collection (`admin.components.edit.beforeDocumentControls`)
+- ✅ Updated AppActions to read bridge data — on user edit/create pages shows reactive name (updates as user types), email subtitle, role badge pill (admin=blue, user=gray), verification status icon (green checkmark or amber clock)
+- ✅ Added topbar styles for title row, badges, and verification icons
+- ✅ Import map regenerated, type check passed (zero errors)
+- ⏳ Edit/create page layout consolidation — discussed moving save button + actions from doc-controls bar into sidebar card to reduce vertical space, NOT yet implemented
+
 ---
 
 ## Projects 2-8: Not Started
@@ -91,7 +100,7 @@ Feature tracking tables will be added when each project becomes active.
 
 ## Next Action
 
-**Feature 01.5 admin polish ongoing.** Edit/create view custom component implementation deferred. Next: Continue with Feature 02 (Authentication & User Management) — doc already written, implementation steps 1-2 done (Users collection + auth config). Resume at Step 3: registration page, login page, email verification, password reset, route protection, auth provider/hook.
+**Feature 01.5 admin polish ongoing.** Document context bridge complete — AppActions header now shows reactive document info on edit/create pages. Next up: edit/create page layout consolidation (move save/actions from doc-controls bar into sidebar card to reduce vertical space). After that, continue with Feature 02 (Authentication & User Management) — doc already written, implementation steps 1-2 done (Users collection + auth config). Resume at Step 3: registration page, login page, email verification, password reset, route protection, auth provider/hook.
 
 ---
 
@@ -108,3 +117,4 @@ Feature tracking tables will be added when each project becomes active.
 | 2026-08-26 | Session 6 | Feature 01.5 cleanup: refactored all admin components — replaced inline styles with CSS classes in custom.scss (BEM naming), replaced `<a>` tags with Payload `Link` component for client-side routing, removed unused imports. Feature 01.5 marked complete. |
 | 2026-08-26 | Session 7 | Custom create-first-user view (branded, streamlined fields), QuickAccess dashboard widget (replaces default CollectionCards with icon pills), removed collection groups, CSS cleanup |
 | 2026-08-27 | Session 8 | Restructured all admin components into folder/index pattern with colocated styles.css, created ListCreateButton (portal into search bar actions), edit/create view CSS overrides (doc-controls, save button, card forms, tabs, inputs), researched Custom Edit View API |
+| 2026-08-27 | Session 9 | Document context bridge: extended AdminProvider with DocumentBridgeContext, created invisible DocumentBridge component (beforeDocumentControls on Users), updated AppActions header with reactive document info (name, email, role badge, verification status). Discussed edit/create page layout consolidation (deferred). |

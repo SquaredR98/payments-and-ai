@@ -1,6 +1,7 @@
 import { RoleBadgeCell as RoleBadgeCell_0d2918d6b2b4d77b67ac0c98ce45e643 } from '../../../admin/components/cells/RoleBadgeCell'
 import { VerifiedBadgeCell as VerifiedBadgeCell_8a5693cb18402b20d485bf755d2892f8 } from '../../../admin/components/cells/VerifiedBadgeCell'
 import { ListCreateButton as ListCreateButton_2be996916d21a03ce6e6cb1dfacfd313 } from '../../../admin/components/ListCreateButton/index'
+import { DocumentBridge as DocumentBridge_2266ce0c338ed3463b7b1e6c7a5d21ff } from '../../../admin/components/DocumentBridge/index'
 import { AdminNav as AdminNav_d9539ee8dbbebf4504e6b7067de38126 } from '../../../admin/components/Nav/index'
 import { default as default_48a75e37b0630d5b8c8066e180c0e6ef } from '../../../admin/graphics/Icon'
 import { default as default_88541c286955dbac4d90fb5ed606381c } from '../../../admin/graphics/Logo'
@@ -17,6 +18,7 @@ export const importMap = {
   "/admin/components/cells/RoleBadgeCell#RoleBadgeCell": RoleBadgeCell_0d2918d6b2b4d77b67ac0c98ce45e643,
   "/admin/components/cells/VerifiedBadgeCell#VerifiedBadgeCell": VerifiedBadgeCell_8a5693cb18402b20d485bf755d2892f8,
   "/admin/components/ListCreateButton/index#ListCreateButton": ListCreateButton_2be996916d21a03ce6e6cb1dfacfd313,
+  "/admin/components/DocumentBridge/index#DocumentBridge": DocumentBridge_2266ce0c338ed3463b7b1e6c7a5d21ff,
   "/admin/components/Nav/index#AdminNav": AdminNav_d9539ee8dbbebf4504e6b7067de38126,
   "/admin/graphics/Icon#default": default_48a75e37b0630d5b8c8066e180c0e6ef,
   "/admin/graphics/Logo#default": default_88541c286955dbac4d90fb5ed606381c,
