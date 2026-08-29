@@ -15,6 +15,7 @@ export const Users: CollectionConfig = {
       beforeList: ['/admin/components/ListCreateButton/index#ListCreateButton'],
       edit: {
         beforeDocumentControls: ['/admin/components/DocumentBridge/index#DocumentBridge'],
+        SaveButton: '/admin/components/SidebarSave/index#SidebarSave',
       },
     },
   },

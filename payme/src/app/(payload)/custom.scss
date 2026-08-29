@@ -1,20 +1,91 @@
-/* PayMe Admin — Payload Override CSS
- * ==================================
- * This file contains ONLY overrides for Payload's built-in classes and theme variables.
- * All custom component styles live in colocated styles.css files:
- *   - admin/components/AppActions/styles.css   (topbar)
- *   - admin/components/Nav/styles.css          (sidebar, nav links)
- *   - admin/components/Dashboard/styles.css    (stat cards)
- *   - admin/components/cells/styles.css        (badge cells)
- *   - admin/components/QuickAccess/styles.css  (dashboard widget)
- *   - admin/components/CreateFirstUser/styles.css
- *   - admin/components/LoginBranding/styles.css
- *   - admin/components/ListCreateButton/styles.css
+/* 
+ * ╔══════════════════════════════════════════════════════════════════╗
+ * ║  PayMe Admin — Payload Override Stylesheet                       ║
+ * ╠══════════════════════════════════════════════════════════════════╣
+ * ║                                                                  ║
+ * ║  This file contains ONLY overrides for Payload's built-in        ║
+ * ║  classes and CSS custom properties. Custom component styles      ║
+ * ║  live in colocated files next to their components:               ║
+ * ║                                                                  ║
+ * ║    admin/components/AppActions/styles.css                        ║
+ * ║    admin/components/Nav/styles.css                               ║
+ * ║    admin/components/Dashboard/styles.css                         ║
+ * ║    admin/components/cells/styles.css                             ║
+ * ║    admin/components/QuickAccess/styles.css                       ║
+ * ║    admin/components/CreateFirstUser/styles.css                   ║
+ * ║    admin/components/LoginBranding/styles.css                     ║
+ * ║    admin/components/ListCreateButton/styles.css                  ║
+ * ║    admin/components/SidebarSave/styles.css                       ║
+ * ║                                                                  ║
+ * ╠══════════════════════════════════════════════════════════════════╣
+ * ║  TABLE OF CONTENTS                                               ║
+ * ║                                                                  ║
+ * ║  1. THEME TOKENS                                                 ║
+ * ║     1a. Light theme                                              ║
+ * ║     1b. Dark theme                                               ║
+ * ║                                                                  ║
+ * ║  2. LOGIN PAGE                                                   ║
+ * ║     2a. Split layout (desktop)                                   ║
+ * ║     2b. Form inputs & buttons                                    ║
+ * ║     2c. Responsive (mobile stack)                                ║
+ * ║                                                                  ║
+ * ║  3. SHELL (nav, header, dashboard)                               ║
+ * ║     3a. Sidebar navigation                                       ║
+ * ║     3b. App header (top bar)                                     ║
+ * ║     3c. Dashboard                                                ║
+ * ║                                                                  ║
+ * ║  4. LIST VIEW                                                    ║
+ * ║     4a. List header & controls                                   ║
+ * ║     4b. Search bar                                               ║
+ * ║     4c. Columns & filters dropdowns                              ║
+ * ║     4d. Table                                                    ║
+ * ║     4e. Pagination                                               ║
+ * ║                                                                  ║
+ * ║  5. EDIT VIEW                                                    ║
+ * ║     5a. Document header & controls bar                           ║
+ * ║     5b. Two-column layout (main card + sidebar card)             ║
+ * ║     5c. Main card — gutter variable system                       ║
+ * ║     5d. Sidebar card                                             ║
+ * ║     5e. Auth section (email / password)                          ║
+ * ║     5f. Tabs                                                     ║
+ * ║     5g. Groups                                                   ║
+ * ║     5h. Rows                                                     ║
+ * ║                                                                  ║
+ * ║  6. GLOBAL FIELD STYLES                                          ║
+ * ║     6a. Inputs & selects                                         ║
+ * ║     6b. Labels & descriptions                                    ║
+ * ║                                                                  ║
+ * ║  7. SHARED UI (popups, menus)                                    ║
+ * ║                                                                  ║
+ * ║  8. CHECKBOXES & RADIOS                                         ║
+ * ║                                                                  ║
+ * ║  9. TOAST NOTIFICATIONS                                         ║
+ * ║                                                                  ║
+ * ║  10. BANNERS (error / success / default)                        ║
+ * ║                                                                  ║
+ * ║  11. MODALS & DRAWERS                                           ║
+ * ║      11a. Confirmation modal                                    ║
+ * ║      11b. Drawer                                                ║
+ * ║                                                                  ║
+ * ║  12. LOADING OVERLAY                                            ║
+ * ║                                                                  ║
+ * ║  13. FIELD ERROR STATES                                         ║
+ * ║                                                                  ║
+ * ╚══════════════════════════════════════════════════════════════════╝
  */
 
-/* ── Light Theme ──────────────────────────────────────────── */
+
+/* =================================================================
+ * 1. THEME TOKENS
+ *
+ * Brand palette: blue-tinted neutrals (hue 220) + accent blue #2563eb.
+ * To rebrand, update the hue values and accent hex codes below.
+ * ================================================================= */
+
+/* ── 1a. Light Theme ─────────────────────────────────────────────── */
+
 :root {
-  /* Elevation: blue-tinted neutrals (hue ~220) */
+  /* Elevation scale: neutral blue (hue 220), lightest → darkest */
   --theme-elevation-0:    hsl(220, 30%, 99%);
   --theme-elevation-50:   hsl(220, 25%, 97%);
   --theme-elevation-100:  hsl(220, 20%, 95%);
@@ -37,19 +108,27 @@
   --theme-elevation-950:  hsl(220, 30%, 5%);
   --theme-elevation-1000: hsl(220, 32%, 3%);
 
-  /* Accent: brand blue #2563eb replaces default green/teal */
-  --theme-success-500: #2563eb;
-  --theme-success-600: #1d4ed8;
-  --theme-success-650: #1e40af;
+  /* Accent: brand blue (replaces Payload's default teal/cyan success palette).
+   * These tokens control: focus rings, checkboxes, radios, toasts, banners,
+   * save buttons, search focus, and any other "success" colored UI. */
+  --theme-success-100: hsl(220, 80%, 96%);   /* light blue bg (toasts, banners) */
+  --theme-success-200: hsl(220, 70%, 90%);   /* hover bg */
+  --theme-success-250: hsl(220, 60%, 82%);   /* border (toasts) */
+  --theme-success-400: rgba(37, 99, 235, 0.4); /* focus ring glow */
+  --theme-success-500: #2563eb;               /* primary accent */
+  --theme-success-600: #1d4ed8;               /* hover accent */
+  --theme-success-650: #1e40af;               /* active accent */
+  --theme-success-800: hsl(220, 50%, 30%);    /* text on light bg (toasts) */
 
   /* Borders & inputs */
   --theme-border-color: hsl(220, 15%, 88%);
   --theme-input-bg: hsl(220, 20%, 99%);
 }
 
-/* ── Dark Theme ───────────────────────────────────────────── */
+/* ── 1b. Dark Theme ──────────────────────────────────────────────── */
+
 html[data-theme='dark'] {
-  /* Elevation: dark blue-black */
+  /* Elevation scale: dark blue-black (hue 222) */
   --theme-elevation-0:    hsl(222, 30%, 7%);
   --theme-elevation-50:   hsl(222, 25%, 9%);
   --theme-elevation-100:  hsl(222, 22%, 12%);
@@ -72,17 +151,214 @@ html[data-theme='dark'] {
   --theme-elevation-950:  hsl(222, 20%, 96%);
   --theme-elevation-1000: hsl(222, 22%, 98%);
 
-  /* Accent: lighter blue for dark mode contrast */
-  --theme-success-500: #3b82f6;
-  --theme-success-600: #2563eb;
-  --theme-success-650: #1d4ed8;
+  /* Accent: lighter blue for dark-mode contrast (full success palette) */
+  --theme-success-100: hsl(222, 40%, 14%);    /* dark blue bg (toasts, banners) */
+  --theme-success-200: hsl(222, 35%, 18%);    /* hover bg */
+  --theme-success-250: hsl(222, 30%, 28%);    /* border (toasts) */
+  --theme-success-400: rgba(59, 130, 246, 0.45); /* focus ring glow */
+  --theme-success-500: #3b82f6;                /* primary accent */
+  --theme-success-600: #2563eb;                /* hover accent */
+  --theme-success-650: #1d4ed8;                /* active accent */
+  --theme-success-800: hsl(222, 60%, 82%);     /* text on dark bg (toasts) */
 
   /* Borders & inputs */
   --theme-border-color: hsl(222, 18%, 18%);
   --theme-input-bg: hsl(222, 25%, 9%);
 }
 
-/* ── Sidebar Overrides ────────────────────────────────────── */
+
+/* =================================================================
+ * 2. LOGIN PAGE
+ *
+ * Two-column split layout: brand panel (left) + form (right).
+ * Layout is driven by CSS Grid on `.template-minimal__wrap`.
+ * Responsive: stacks vertically below 860px.
+ * ================================================================= */
+
+/* ── 2a. Split Layout (desktop) ──────────────────────────────────── */
+
+section.template-minimal.login {
+  max-width: none !important;
+  width: 100vw !important;
+  min-height: 100vh !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+section.template-minimal.login > .template-minimal__wrap {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  grid-template-rows: 1fr auto auto auto 1fr !important;
+  max-width: none !important;
+  width: 100% !important;
+  min-height: 100vh !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  gap: 0 !important;
+}
+
+/* Brand panel — full left column, all rows */
+section.template-minimal.login .login-brand-panel {
+  grid-column: 1 !important;
+  grid-row: 1 / -1 !important;
+}
+
+/* Hide default Payload logo — custom icon in login-right__header */
+section.template-minimal.login .login__brand {
+  display: none !important;
+}
+
+/* Right column elements */
+section.template-minimal.login .login-right__header {
+  grid-column: 2 !important;
+  grid-row: 2 !important;
+  align-self: end !important;
+  padding: 0 clamp(32px, 5vw, 80px) !important;
+  margin-bottom: 28px !important;
+}
+
+section.template-minimal.login .login__form {
+  grid-column: 2 !important;
+  grid-row: 3 !important;
+  align-self: start !important;
+  padding: 0 clamp(32px, 5vw, 80px) !important;
+  max-width: none !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+section.template-minimal.login .login-right__footer {
+  grid-column: 2 !important;
+  grid-row: 4 !important;
+  align-self: start !important;
+  padding: 0 clamp(32px, 5vw, 80px) !important;
+  text-align: left !important;
+}
+
+/* Right column — constrain form width for readability */
+section.template-minimal.login .login-right__header,
+section.template-minimal.login .login__form__inputWrap,
+section.template-minimal.login .login__form > a,
+section.template-minimal.login .login__form .form-submit,
+section.template-minimal.login .login-right__footer {
+  max-width: 380px !important;
+}
+
+/* ── 2b. Form Inputs & Buttons ───────────────────────────────────── */
+
+section.template-minimal.login .login__form__inputWrap {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 12px;
+}
+
+section.template-minimal.login .login__form input {
+  border: 1px solid var(--theme-border-color) !important;
+  border-radius: 8px !important;
+  padding: 10px 14px !important;
+  font-size: 14px !important;
+  background: var(--theme-input-bg) !important;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+section.template-minimal.login .login__form input:focus {
+  border-color: #2563eb !important;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12) !important;
+  outline: none !important;
+}
+
+section.template-minimal.login .login__form .field-label {
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  color: var(--theme-elevation-700) !important;
+  margin-bottom: 4px !important;
+}
+
+/* Forgot password link */
+section.template-minimal.login .login__form > a {
+  font-size: 13px !important;
+  color: var(--theme-elevation-500) !important;
+  text-decoration: none !important;
+  transition: color 0.15s ease;
+  display: inline-block;
+  margin-bottom: 8px;
+}
+
+section.template-minimal.login .login__form > a:hover {
+  color: #2563eb !important;
+}
+
+/* Login button */
+section.template-minimal.login .login__form .form-submit .btn {
+  width: 100% !important;
+  background: #2563eb !important;
+  border: none !important;
+  border-radius: 8px !important;
+  padding: 10px 24px !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  color: #fff !important;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+section.template-minimal.login .login__form .form-submit .btn:hover {
+  background: #1d4ed8 !important;
+}
+
+/* ── 2c. Responsive (mobile stack) ───────────────────────────────── */
+
+@media (max-width: 860px) {
+  section.template-minimal.login > .template-minimal__wrap {
+    grid-template-columns: 1fr !important;
+    grid-template-rows: auto auto auto auto !important;
+    min-height: auto !important;
+  }
+
+  section.template-minimal.login .login-brand-panel {
+    grid-column: 1 !important;
+    grid-row: 1 !important;
+    min-height: auto !important;
+    padding: 32px 24px !important;
+  }
+
+  .login-brand-panel__heading {
+    font-size: 22px !important;
+  }
+
+  .login-brand-panel__features,
+  .login-brand-panel__footer {
+    display: none !important;
+  }
+
+  section.template-minimal.login .login-right__header {
+    grid-column: 1 !important;
+    grid-row: 2 !important;
+    padding: 32px 24px 0 !important;
+    margin-bottom: 20px !important;
+  }
+
+  section.template-minimal.login .login__form {
+    grid-column: 1 !important;
+    grid-row: 3 !important;
+    padding: 0 24px !important;
+  }
+
+  section.template-minimal.login .login-right__footer {
+    grid-column: 1 !important;
+    grid-row: 4 !important;
+    padding: 16px 24px 32px !important;
+  }
+}
+
+
+/* =================================================================
+ * 3. SHELL (navigation, header, dashboard)
+ * ================================================================= */
+
+/* ── 3a. Sidebar Navigation ──────────────────────────────────────── */
+
 .nav {
   border-right-color: var(--theme-border-color) !important;
 }
@@ -91,7 +367,6 @@ html[data-theme='dark'] {
   padding: 0 !important;
 }
 
-/* Nav group labels — align with our custom nav links */
 .nav-group__toggle {
   padding: 6px 24px !important;
   font-size: 11px !important;
@@ -113,7 +388,8 @@ html[data-theme='dark'] {
   opacity: 1;
 }
 
-/* ── App Header (Top Bar) Overrides ───────────────────────── */
+/* ── 3b. App Header (top bar) ────────────────────────────────────── */
+
 .app-header {
   position: sticky !important;
   top: 0 !important;
@@ -126,7 +402,7 @@ html[data-theme='dark'] {
   display: none !important;
 }
 
-/* Hide breadcrumb nav — our topbar shows the page title instead */
+/* Hide breadcrumbs — topbar shows the page title via AppActions */
 .app-header__step-nav-wrapper,
 .app-header .step-nav {
   display: none !important;
@@ -158,7 +434,9 @@ html[data-theme='dark'] {
   width: 100%;
 }
 
-/* ── Hide Default Collection Cards ────────────────────────── */
+/* ── 3c. Dashboard ───────────────────────────────────────────────── */
+
+/* Hide default collection cards — replaced by custom Dashboard component */
 .collections {
   display: none !important;
 }
@@ -167,25 +445,29 @@ html[data-theme='dark'] {
   padding: 2rem 2rem;
 }
 
-/* ── List View Overrides ──────────────────────────────────── */
 
-/* Hide list header — title shown in topbar, create button portaled to search row */
+/* =================================================================
+ * 4. LIST VIEW
+ * ================================================================= */
+
+/* ── 4a. List Header & Controls ──────────────────────────────────── */
+
+/* Hidden — title in topbar, create button portaled via ListCreateButton */
 .list-header {
   display: none !important;
 }
 
-/* Spacing between header / controls / table */
 .collection-list__wrap > *:not(:last-child) {
   margin-bottom: 10px !important;
 }
 
-/* List controls — anchor for floating dropdowns */
 .list-controls {
   gap: 0 !important;
   position: relative !important;
 }
 
-/* Search bar: transparent wrapper, border on input only */
+/* ── 4b. Search Bar ──────────────────────────────────────────────── */
+
 .search-bar {
   border: none !important;
   background: transparent !important;
@@ -210,7 +492,6 @@ html[data-theme='dark'] {
   margin-left: 12px;
 }
 
-/* Columns/Filters buttons in grid column 3 */
 .search-bar__actions {
   display: flex !important;
   align-items: center !important;
@@ -239,10 +520,8 @@ html[data-theme='dark'] {
   border-color: var(--theme-elevation-300) !important;
 }
 
-/* --- Columns & Filters: floating dropdown panels ---
- * Payload renders these inside AnimateHeight wrappers:
- *   .list-controls__columns  (contains .pill-selector)
- *   .list-controls__where    (contains .where-builder)
+/* ── 4c. Columns & Filters Dropdowns ─────────────────────────────
+ * Payload renders these inside AnimateHeight wrappers.
  * We convert the inline expanding panel into a floating dropdown
  * anchored below the search bar, overlaying the table content. */
 
@@ -255,7 +534,7 @@ html[data-theme='dark'] {
   margin-top: 4px !important;
 }
 
-/* Columns dropdown: vertical list of toggleable items */
+/* Columns dropdown */
 .list-controls__columns .pill-selector {
   background: var(--theme-elevation-0) !important;
   border: 1px solid var(--theme-border-color) !important;
@@ -266,15 +545,10 @@ html[data-theme='dark'] {
   width: 220px !important;
   max-height: 320px !important;
   overflow-y: auto !important;
-
-  /* Vertical list instead of horizontal wrap */
   flex-direction: column !important;
   flex-wrap: nowrap !important;
 }
 
-/* Each column item: full-width row with label left, icon right.
- * Payload uses alignIcon="left" which sets flex-direction: row-reverse.
- * We override to row so label is first, icon is last. */
 .list-controls__columns .pill-selector__pill {
   border-radius: 6px !important;
   font-size: 13px !important;
@@ -286,7 +560,6 @@ html[data-theme='dark'] {
   background: transparent !important;
   color: var(--theme-elevation-600) !important;
   transition: background 0.1s ease;
-  /* Fix alignment: label left, icon right */
   flex-direction: row !important;
   gap: 8px !important;
 }
@@ -295,7 +568,6 @@ html[data-theme='dark'] {
   background: var(--theme-elevation-50) !important;
 }
 
-/* Selected column: subtle brand tint */
 .list-controls__columns .pill-selector__pill--selected {
   background: rgba(37, 99, 235, 0.06) !important;
   color: var(--theme-elevation-900) !important;
@@ -305,13 +577,11 @@ html[data-theme='dark'] {
   background: rgba(37, 99, 235, 0.1) !important;
 }
 
-/* Label takes available space, pushes icon to the right */
 .list-controls__columns .pill-selector__pill .pill__label {
   flex: 1 !important;
   text-align: left !important;
 }
 
-/* Icon: styled as a small rounded indicator */
 .list-controls__columns .pill-selector__pill .pill__icon {
   flex-shrink: 0 !important;
   width: 18px !important;
@@ -330,13 +600,12 @@ html[data-theme='dark'] {
   height: 10px !important;
 }
 
-/* Selected: icon becomes brand check */
 .list-controls__columns .pill-selector__pill--selected .pill__icon {
   background: rgba(37, 99, 235, 0.12) !important;
   color: #2563eb !important;
 }
 
-/* Filters dropdown card */
+/* Filters dropdown */
 .list-controls__where .where-builder {
   background: var(--theme-elevation-0) !important;
   border: 1px solid var(--theme-border-color) !important;
@@ -347,7 +616,8 @@ html[data-theme='dark'] {
   max-width: 480px !important;
 }
 
-/* Table: bordered, clean rows */
+/* ── 4d. Table ───────────────────────────────────────────────────── */
+
 .collection-list .table {
   border: 1px solid var(--theme-border-color);
   border-radius: 10px;
@@ -418,7 +688,8 @@ html[data-theme='dark'] {
   color: var(--theme-elevation-700) !important;
 }
 
-/* Pagination */
+/* ── 4e. Pagination ──────────────────────────────────────────────── */
+
 .collection-list__page-info {
   font-size: 13px;
   color: var(--theme-elevation-500);
@@ -429,22 +700,45 @@ html[data-theme='dark'] {
   font-size: 12px;
 }
 
-/* ── Edit / Create View Overrides ────────────────────────── */
 
-/* --- Document Controls Bar ---
- * Sticky bar with metadata (left) and save/actions (right).
- * We restyle it to be cleaner and match our design system. */
+/* =================================================================
+ * 5. EDIT VIEW
+ *
+ * DOM structure (simplified):
+ *
+ *   <form class="collection-edit__form">
+ *     <div class="doc-controls">          ← sticky controls bar (Save, metadata)
+ *     <div class="document-fields">       ← flex container (2-column)
+ *       <div class="document-fields__main">        ← 66% — main card
+ *         <div class="document-fields__edit">       ← Gutter (24px padding)
+ *           <div class="collection-edit__auth">      ← auth fields (email/pw)
+ *           <div class="tabs-field">                 ← tabs (Profile/Business/Address)
+ *       <div class="document-fields__sidebar-wrap"> ← 33% — sidebar area
+ *         <div class="document-fields__sidebar">     ← sidebar card (role, verified)
+ *         <div class="sidebar-save">                 ← portaled save button
+ *
+ * The main card uses Payload's gutter variable system (see 5c).
+ * The save button is a React portal from SidebarSave component.
+ * ================================================================= */
 
+/* ── 5a. Document Header & Controls Bar ──────────────────────────── */
+
+/* Doc header (title + Edit/API tabs) — hidden, topbar shows title */
+.doc-header {
+  display: none !important;
+}
+
+/* Doc controls bar — visible by default (fallback for collections without sidebar).
+ * Hidden when SidebarSave is active (see bottom of this section). */
 .doc-controls {
   background: var(--theme-elevation-0) !important;
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
 }
 
-/* Compact wrapper — tighter height */
 .doc-controls__wrapper {
   height: auto !important;
-  min-height: 48px !important;
+  min-height: 44px !important;
   padding-top: 8px !important;
   padding-bottom: 8px !important;
 }
@@ -453,30 +747,17 @@ html[data-theme='dark'] {
   background: var(--theme-border-color) !important;
 }
 
-/* Hide "Creating new User" label — topbar already shows context */
-.doc-controls__meta > li:first-child .doc-controls__value {
+/* Hide metadata — topbar shows document context */
+.doc-controls__content {
   display: none !important;
 }
 
-/* Right-align controls when metadata side is empty (create page) */
-.doc-controls__content:empty,
-.doc-controls__content:has(> .doc-controls__meta:empty) {
+/* Hide dots menu — redundant with topbar actions */
+.doc-controls__popup {
   display: none !important;
 }
 
-/* Metadata labels & values */
-.doc-controls__label {
-  font-size: 12px !important;
-  color: var(--theme-elevation-400) !important;
-}
-
-.doc-controls__value {
-  font-size: 12px !important;
-  font-weight: 500 !important;
-  color: var(--theme-elevation-700) !important;
-}
-
-/* Save button — brand blue, prominent */
+/* Save button in controls bar (used by collections without SidebarSave) */
 .doc-controls__controls #action-save {
   background: #2563eb !important;
   color: #fff !important;
@@ -492,27 +773,21 @@ html[data-theme='dark'] {
   background: #1d4ed8 !important;
 }
 
-/* Secondary buttons in controls (e.g., Take Over) */
 .doc-controls__controls .btn--style-secondary {
   border-radius: 8px !important;
   border-color: var(--theme-border-color) !important;
   font-size: 13px !important;
 }
 
-/* Dots menu button */
-.doc-controls__dots {
-  border-color: var(--theme-border-color) !important;
-  border-radius: 8px !important;
+/* When SidebarSave component is active (portal rendered into sidebar),
+ * it adds .sidebar-save-active to .collection-edit__form.
+ * This hides the controls bar so only the sidebar save button is visible.
+ * Collections without a sidebar don't get this class → controls bar stays. */
+.sidebar-save-active .doc-controls {
+  display: none !important;
 }
 
-.doc-controls__dots:hover {
-  border-color: var(--theme-elevation-300) !important;
-  background: var(--theme-elevation-50) !important;
-}
-
-/* --- Document Fields Layout ---
- * Main form area + sidebar. Add card treatments.
- * Tighten the gap between doc-controls and the form. */
+/* ── 5b. Two-Column Layout ───────────────────────────────────────── */
 
 .collection-edit__form {
   padding-top: 0 !important;
@@ -525,41 +800,123 @@ html[data-theme='dark'] {
   margin-bottom: 24px !important;
 }
 
-/* Main form card */
+/* ── 5c. Main Card — Gutter Variable System ──────────────────────
+ *
+ * Payload uses CSS custom properties for the gutter (horizontal padding):
+ *   --gutter-h              Base value (default 60px, we set 24px)
+ *   --main-gutter-h-left    Left padding (default: --gutter-h)
+ *   --main-gutter-h-right   Right padding (default: calc(var(--base) * 2) = 40px)
+ *   --main-field-margin     Negative margin for tab/group breakout
+ *
+ * We override all 4 to create symmetric 24px gutters. This makes:
+ *   - Field content indented 24px from card edges
+ *   - Tabs/Groups break out with -24px margins → edge-to-edge borders
+ *   - Content-wrap re-adds 24px padding → fields align at 24px
+ *   - Auth uses the same breakout pattern
+ *   - Rows, Arrays, Blocks inherit from parent — no extra rules needed
+ *
+ * TO CHANGE INDENT: Only edit --gutter-h. Everything else follows. */
+
 .document-fields__main {
+  --gutter-h: 24px !important;
+  --main-gutter-h-left: var(--gutter-h) !important;
+  --main-gutter-h-right: var(--gutter-h) !important;
+  --main-field-margin: calc(var(--gutter-h) * -1) !important;
   border: 1px solid var(--theme-border-color) !important;
   border-radius: 10px !important;
   background: var(--theme-elevation-0) !important;
   overflow: hidden;
-  border-right: 1px solid var(--theme-border-color) !important;
 }
 
-/* Sidebar card */
+/* ── 5d. Sidebar Card ────────────────────────────────────────────
+ *
+ * The sidebar has two layers:
+ *   __sidebar-wrap   Sticky layout container (no visual styles)
+ *   __sidebar        The visual card (border, background, overflow)
+ *
+ * SidebarSave portals into __sidebar-wrap, so it sits BELOW the card. */
+
 .document-fields__sidebar-wrap {
-  border: 1px solid var(--theme-border-color) !important;
-  border-radius: 10px !important;
-  background: var(--theme-elevation-0) !important;
-  overflow: hidden;
   height: fit-content !important;
+  overflow: visible !important;
 }
 
 .document-fields__sidebar {
+  border: 1px solid var(--theme-border-color) !important;
+  border-radius: 10px !important;
+  background: var(--theme-elevation-0) !important;
+  overflow: hidden;
   height: auto !important;
-  max-height: calc(100vh - 160px) !important;
+  max-height: calc(100vh - 120px) !important;
   overflow-y: auto !important;
 }
 
-/* --- Auth Section (Email / Password on Create) ---
- * Sits inside .document-fields__main (already a card),
- * so we just add subtle separation instead of another card. */
+.document-fields__sidebar-fields {
+  padding: 20px !important;
+}
+
+/* ── 5e. Auth Section ────────────────────────────────────────────
+ *
+ * Auth (email + password) sits inside the Gutter, above the tabs.
+ * We break it out with negative margins so the bottom border spans
+ * the full card width, then re-add padding for field content. */
+
 .collection-edit__auth {
+  margin-left: calc(var(--gutter-h) * -1) !important;
+  margin-right: calc(var(--gutter-h) * -1) !important;
+  padding: 20px var(--gutter-h) !important;
   border-bottom: 1px solid var(--theme-border-color) !important;
-  border-radius: 0 !important;
-  padding: 24px !important;
+  margin-bottom: 0 !important;
+  background: transparent !important;
+}
+
+.collection-edit__auth .auth-fields__controls {
+  gap: 8px !important;
+}
+
+.collection-edit__auth .auth-fields__controls .btn {
+  background: transparent !important;
+  border: 1px solid var(--theme-border-color) !important;
+  border-radius: 8px !important;
+  font-size: 12.5px !important;
+  font-weight: 500 !important;
+  color: var(--theme-elevation-600) !important;
+  padding: 6px 14px !important;
+  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.collection-edit__auth .auth-fields__controls .btn:hover {
+  background: var(--theme-elevation-50) !important;
+  border-color: var(--theme-elevation-300) !important;
+  color: var(--theme-elevation-900) !important;
+}
+
+/* ── 5f. Tabs ────────────────────────────────────────────────────── */
+
+/* Remove top margin — card edge provides visual context */
+.document-fields__main .tabs-field {
+  margin-top: 0 !important;
+}
+
+/* Tabs wrapper: flush to card edges */
+.document-fields__main .tabs-field__tabs-wrap {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+/* Tab content: balanced vertical padding */
+.document-fields__main .tabs-field__content-wrap .render-fields {
+  padding-top: 16px !important;
+  padding-bottom: 20px !important;
+}
+
+/* Tab description: spacing below tab bar, flush with field content */
+.document-fields__main .tabs-field__content-wrap > .tabs-field__tab > .field-description {
+  margin-top: 16px !important;
   margin-bottom: 0 !important;
 }
 
-/* --- Tabs --- */
+/* Tab bar visual styling */
 .tabs-field__tabs {
   border-bottom-color: var(--theme-border-color) !important;
   gap: 0 !important;
@@ -583,7 +940,67 @@ html[data-theme='dark'] {
   border-bottom-color: #2563eb !important;
 }
 
-/* --- Form Inputs --- */
+/* ── 5g. Groups ──────────────────────────────────────────────────── */
+
+/* Strip decorative borders — the gutter breakout handles edge-to-edge */
+.document-fields__main .group-field {
+  border-top: none !important;
+  border-bottom: none !important;
+}
+
+/* Tighter spacing between group header and fields */
+.document-fields__main .group-field__header {
+  margin-bottom: 12px !important;
+}
+
+/* No extra vertical padding inside group's render-fields */
+.document-fields__main .group-field .render-fields {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+/* ── 5h. Rows ────────────────────────────────────────────────────
+ *
+ * Two fixes applied here:
+ *
+ * 1. VERTICAL SPACING between consecutive rows:
+ *    Payload's Row SCSS sets .field-type.row { margin-bottom: 0 } which
+ *    overrides the render-fields spacing. We restore it on the outer
+ *    wrapper so consecutive rows get consistent 20px vertical gaps.
+ *
+ * 2. HORIZONTAL ALIGNMENT (no bleed):
+ *    Payload uses a negative margin-inline trick on .row__fields
+ *    (container: -5px, children: +5px) for gap spacing. This causes
+ *    rows to bleed ~5px past sibling fields. We neutralize both
+ *    margins and use CSS gap instead. */
+
+.document-fields__main .render-fields > .field-type.row {
+  margin-bottom: var(--spacing-field) !important;
+}
+
+.document-fields__main .render-fields > .field-type.row:last-of-type {
+  margin-bottom: 0 !important;
+}
+
+.document-fields__main .row__fields {
+  margin-bottom: 0 !important;
+  margin-inline: 0 !important;
+  gap: calc(var(--base) / 2) !important;
+}
+
+.document-fields__main .row__fields > * {
+  margin-inline: 0 !important;
+}
+
+
+/* =================================================================
+ * 6. GLOBAL FIELD STYLES
+ *
+ * Applied across all views (edit, create, modal drawers).
+ * ================================================================= */
+
+/* ── 6a. Inputs & Selects ────────────────────────────────────────── */
+
 .field-type input,
 .field-type textarea,
 .field-type .rs__control {
@@ -599,20 +1016,26 @@ html[data-theme='dark'] {
   box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.1) !important;
 }
 
-/* Field labels */
+/* ── 6b. Labels & Descriptions ───────────────────────────────────── */
+
 .field-type .field-label {
   font-size: 12.5px !important;
   font-weight: 600 !important;
   color: var(--theme-elevation-700) !important;
 }
 
-/* Field descriptions */
 .field-type .field-description {
   font-size: 12px !important;
   color: var(--theme-elevation-400) !important;
 }
 
-/* --- Popup Menu (dots dropdown) --- */
+
+/* =================================================================
+ * 7. SHARED UI
+ *
+ * Popup menus, tooltips, and other shared UI elements.
+ * ================================================================= */
+
 .popup-list {
   border: 1px solid var(--theme-border-color) !important;
   border-radius: 10px !important;
@@ -627,4 +1050,182 @@ html[data-theme='dark'] {
 
 .popup-list__item:hover {
   background: var(--theme-elevation-50) !important;
+}
+
+
+/* =================================================================
+ * 8. CHECKBOXES & RADIOS
+ *
+ * Payload uses `--theme-success-400` for focus rings (box-shadow).
+ * With our full success palette override (section 1), these now
+ * resolve to brand blue automatically. The rules below handle
+ * additional styling: border-radius, checked state colors, etc.
+ * ================================================================= */
+
+/* Checkbox: rounded corners on the input box */
+.checkbox-input__input {
+  border-radius: 4px !important;
+}
+
+/* Checkbox checked state: fill with brand blue */
+.checkbox-input--checked .checkbox-input__input {
+  background: var(--theme-success-500) !important;
+  border-color: var(--theme-success-500) !important;
+}
+
+.checkbox-input--checked .checkbox-input__icon svg {
+  color: #fff !important;
+}
+
+/* Radio selected: dot uses brand blue instead of elevation-800 */
+.radio-input--is-selected .radio-input__styled-radio::before {
+  background-color: var(--theme-success-500) !important;
+}
+
+
+/* =================================================================
+ * 9. TOAST NOTIFICATIONS
+ *
+ * Payload toasts use `border-radius: 4px` and theme-success-* for
+ * success state. With the full palette override, colors are handled.
+ * We just fix border-radius + add subtle refinements.
+ * ================================================================= */
+
+.payload-toast-item {
+  border-radius: 8px !important;
+}
+
+/* Toastify container (wraps payload-toast-item) */
+.Toastify__toast {
+  border-radius: 8px !important;
+}
+
+
+/* =================================================================
+ * 10. BANNERS (error / success / default)
+ *
+ * Payload banners use `$style-radius-m` (4px). We bump to 8px.
+ * Success banner colors are handled by the palette override.
+ * ================================================================= */
+
+.banner {
+  border-radius: 8px !important;
+}
+
+
+/* =================================================================
+ * 11. MODALS & DRAWERS
+ *
+ * Confirmation modals: add border-radius, style action buttons.
+ * Drawers: slight border-radius on the content panel edge.
+ * ================================================================= */
+
+/* ── 11a. Confirmation Modal ────────────────────────────────────── */
+
+.confirmation-modal__wrapper {
+  background: var(--theme-elevation-0) !important;
+  border: 1px solid var(--theme-border-color) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12), 0 2px 8px rgba(0, 0, 0, 0.06) !important;
+}
+
+/* Primary action (e.g. "Confirm") */
+.confirmation-modal__controls .btn:first-child {
+  background: #2563eb !important;
+  color: #fff !important;
+  border: none !important;
+  border-radius: 8px !important;
+  font-weight: 600 !important;
+  font-size: 13px !important;
+  padding: 8px 20px !important;
+  transition: background 0.15s ease;
+}
+
+.confirmation-modal__controls .btn:first-child:hover {
+  background: #1d4ed8 !important;
+}
+
+/* Secondary action (e.g. "Cancel") */
+.confirmation-modal__controls .btn:not(:first-child) {
+  background: transparent !important;
+  color: var(--theme-elevation-600) !important;
+  border: 1px solid var(--theme-border-color) !important;
+  border-radius: 8px !important;
+  font-weight: 500 !important;
+  font-size: 13px !important;
+  padding: 8px 20px !important;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.confirmation-modal__controls .btn:not(:first-child):hover {
+  background: var(--theme-elevation-50) !important;
+  border-color: var(--theme-elevation-300) !important;
+}
+
+/* ── 11b. Drawer ────────────────────────────────────────────────── */
+
+/* Rounded leading edge on drawer content panel */
+.drawer__content {
+  border-radius: 12px 0 0 12px !important;
+  border-left: 1px solid var(--theme-border-color) !important;
+}
+
+[dir='rtl'] .drawer__content {
+  border-radius: 0 12px 12px 0 !important;
+  border-left: none !important;
+  border-right: 1px solid var(--theme-border-color) !important;
+}
+
+/* Drawer header close button */
+.drawer__header__close {
+  border-radius: 6px !important;
+  transition: background 0.15s ease;
+}
+
+.drawer__header__close:hover {
+  background: var(--theme-elevation-100) !important;
+}
+
+
+/* =================================================================
+ * 12. LOADING OVERLAY
+ *
+ * Bars use `currentColor`. We set the color to brand blue.
+ * ================================================================= */
+
+.loading-overlay__bars {
+  color: var(--theme-success-500) !important;
+}
+
+
+/* =================================================================
+ * 13. FIELD ERROR STATES
+ *
+ * Error colors (red palette) are Payload's defaults and look fine.
+ * We only ensure border-radius consistency on error messages and
+ * that error labels don't clash with our label overrides.
+ * ================================================================= */
+
+/* Error message below fields */
+.field-error {
+  font-size: 12px !important;
+  border-radius: 4px !important;
+}
+
+/* Ensure error label color takes priority over our label override */
+.field-type.error .field-label {
+  color: var(--theme-error-600) !important;
+}
+
+/* Error border on inputs */
+.field-type.error input,
+.field-type.error textarea,
+.field-type.error .rs__control {
+  border-color: var(--theme-error-500) !important;
+}
+
+.field-type.error input:focus,
+.field-type.error textarea:focus,
+.field-type.error .rs__control--is-focused {
+  box-shadow: 0 0 0 2px rgba(218, 75, 72, 0.15) !important;
 }

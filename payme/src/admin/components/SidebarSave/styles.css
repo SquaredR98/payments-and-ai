@@ -1,0 +1,30 @@
+.sidebar-save {
+  padding: 12px 0 0;
+}
+
+.sidebar-save__btn {
+  width: 100%;
+  padding: 10px 16px;
+  border-radius: 8px;
+  border: none;
+  font-size: 13px;
+  font-weight: 600;
+  color: #fff;
+  cursor: pointer;
+  background: #2563eb;
+  transition: background 0.15s ease, opacity 0.15s ease;
+}
+
+.sidebar-save__btn:hover:not(:disabled) {
+  background: #1d4ed8;
+}
+
+.sidebar-save__btn--disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.sidebar-save__btn--processing {
+  cursor: wait;
+  opacity: 0.7;
+}

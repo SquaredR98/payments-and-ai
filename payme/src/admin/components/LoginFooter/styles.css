@@ -1,0 +1,32 @@
+@reference "tailwindcss";
+
+/* ── Login Right Panel — Header & Footer ── */
+
+/* Header: icon + title + subtitle, positioned above the form via CSS order */
+.login-right__header {
+  @apply flex flex-col items-start;
+  gap: 6px;
+}
+
+.login-right__icon {
+  width: 40px;
+  height: 40px;
+  margin-bottom: 8px;
+}
+
+.login-right__title {
+  @apply text-2xl font-bold m-0 tracking-tight;
+  color: var(--theme-elevation-1000);
+}
+
+.login-right__subtitle {
+  @apply text-sm m-0;
+  color: var(--theme-elevation-450);
+}
+
+/* Footer: muted text below the form */
+.login-right__footer {
+  @apply text-xs text-center;
+  color: var(--theme-elevation-350);
+  margin-top: 24px;
+}

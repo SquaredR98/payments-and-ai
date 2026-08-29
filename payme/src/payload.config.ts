@@ -14,6 +14,7 @@ const dirname = path.dirname(filename)
 
 export default buildConfig({
   admin: {
+    theme: 'all',
     user: Users.slug,
     importMap: {
       baseDir: path.resolve(dirname),
@@ -28,6 +29,7 @@ export default buildConfig({
       providers: ['/admin/components/AdminProvider#AdminProvider'],
       beforeDashboard: ['/admin/components/Dashboard/index#AdminDashboard'],
       beforeLogin: ['/admin/components/LoginBranding/index#LoginBranding'],
+      afterLogin: ['/admin/components/LoginFooter/index#LoginFooter'],
       views: {
         createFirstUser: {
           Component: '/admin/components/CreateFirstUser/index#CreateFirstUser',

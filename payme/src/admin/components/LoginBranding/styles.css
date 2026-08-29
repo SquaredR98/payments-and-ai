@@ -1,12 +1,116 @@
 @reference "tailwindcss";
 
-/* LoginBranding — Login page subtitle */
+/* ── Login Brand Panel ──
+ * Left side of the split login layout.
+ * Blue gradient background with floating geometric shapes and brand info. */
 
-.login-branding {
-  @apply text-center pb-4;
+.login-brand-panel {
+  @apply relative flex flex-col justify-between overflow-hidden;
+  background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 50%, #3b82f6 100%);
+  padding: 48px 40px;
+  min-height: 100%;
 }
 
-.login-branding__tagline {
-  @apply text-sm font-normal m-0;
-  color: var(--theme-elevation-500);
+/* Floating decorative shapes */
+.login-brand-panel__shapes {
+  @apply absolute inset-0 pointer-events-none;
+}
+
+.login-brand-panel__shape {
+  @apply absolute;
+}
+
+.login-brand-panel__shape--1 {
+  width: 120px;
+  top: -20px;
+  right: -20px;
+  opacity: 0.8;
+}
+
+.login-brand-panel__shape--2 {
+  width: 80px;
+  bottom: 20%;
+  left: -10px;
+  opacity: 0.7;
+}
+
+.login-brand-panel__shape--3 {
+  width: 60px;
+  top: 40%;
+  right: 15%;
+  opacity: 0.6;
+}
+
+.login-brand-panel__shape--4 {
+  width: 100px;
+  bottom: -15px;
+  right: 25%;
+  opacity: 0.5;
+}
+
+.login-brand-panel__shape--5 {
+  width: 140px;
+  top: 15%;
+  left: 20%;
+  opacity: 0.4;
+}
+
+/* Brand content — centered vertically */
+.login-brand-panel__content {
+  @apply relative flex flex-col gap-6 z-10;
+  flex: 1;
+  justify-content: center;
+}
+
+/* Logo row: icon + brand name */
+.login-brand-panel__logo-row {
+  @apply flex items-center gap-3;
+}
+
+.login-brand-panel__icon {
+  width: 36px;
+  height: 36px;
+}
+
+.login-brand-panel__name {
+  @apply text-lg font-bold tracking-tight;
+  color: white;
+}
+
+/* Main heading */
+.login-brand-panel__heading {
+  @apply text-3xl font-bold leading-tight m-0;
+  color: white;
+  letter-spacing: -0.02em;
+}
+
+/* Description text */
+.login-brand-panel__description {
+  @apply text-sm leading-relaxed m-0;
+  color: rgba(255, 255, 255, 0.75);
+  max-width: 340px;
+}
+
+/* Feature highlights */
+.login-brand-panel__features {
+  @apply flex flex-col gap-3 mt-2;
+}
+
+.login-brand-panel__feature {
+  @apply flex items-center gap-2.5 text-sm;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.login-brand-panel__feature-icon {
+  @apply shrink-0;
+  width: 16px;
+  height: 16px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* Footer */
+.login-brand-panel__footer {
+  @apply relative z-10 text-xs;
+  color: rgba(255, 255, 255, 0.4);
+  margin-top: 32px;
 }

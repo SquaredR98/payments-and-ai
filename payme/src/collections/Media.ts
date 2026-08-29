@@ -5,6 +5,9 @@ export const Media: CollectionConfig = {
   admin: {
     components: {
       beforeList: ['/admin/components/ListCreateButton/index#ListCreateButton'],
+      edit: {
+        SaveButton: '/admin/components/SidebarSave/index#SidebarSave',
+      },
     },
   },
   access: {
