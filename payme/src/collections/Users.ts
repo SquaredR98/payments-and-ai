@@ -4,7 +4,36 @@ export const Users: CollectionConfig = {
   slug: 'users',
   auth: {
     tokenExpiration: 604800, // 7 days in seconds
-    verify: true, // Enable email verification — sends a verification email on registration
+    verify: {
+      generateEmailHTML: ({ token }) => {
+        const url = `${process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'}/verify-email?token=${token}`
+        return `
+          <h1>Verify your email</h1>
+          <p>Thanks for signing up for PayMe! Please verify your email address by clicking the link below:</p>
+          <p><a href="${url}">Verify Email</a></p>
+          <p>Or copy and paste this URL into your browser:</p>
+          <p>${url}</p>
+          <p>If you didn't create an account, you can safely ignore this email.</p>
+        `
+      },
+      generateEmailSubject: () => 'Verify your PayMe account',
+    },
+    forgotPassword: {
+      generateEmailHTML: (args) => {
+        const token = args?.token
+        if (!token) return ''
+        const url = `${process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'}/reset-password?token=${token}`
+        return `
+          <h1>Reset your password</h1>
+          <p>You requested a password reset for your PayMe account. Click the link below to set a new password:</p>
+          <p><a href="${url}">Reset Password</a></p>
+          <p>Or copy and paste this URL into your browser:</p>
+          <p>${url}</p>
+          <p>If you didn't request this, you can safely ignore this email. Your password will not be changed.</p>
+        `
+      },
+      generateEmailSubject: () => 'Reset your PayMe password',
+    },
     maxLoginAttempts: 5, // Lock account after 5 failed login attempts
     lockTime: 600 * 1000, // 10 minutes lockout in milliseconds
   },
