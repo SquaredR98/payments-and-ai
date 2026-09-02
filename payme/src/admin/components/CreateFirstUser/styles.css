@@ -38,18 +38,18 @@
 
 .cfu form .form-submit .btn {
   @apply w-full rounded-lg font-semibold text-sm tracking-[0.01em];
-  background: #2563eb;
+  background: var(--theme-success-500);
 }
 
 .cfu form .form-submit .btn:hover {
-  background: #1d4ed8;
+  background: var(--theme-success-600);
 }
 
 /* Blue focus ring on inputs */
 .cfu form .field-type input:focus,
 .cfu form .field-type textarea:focus {
   border-color: var(--theme-success-500);
-  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
+  box-shadow: 0 0 0 2px var(--theme-success-400);
 }
 
 .cfu form .render-fields {

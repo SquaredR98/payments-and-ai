@@ -1,8 +1,7 @@
 'use client'
 
-import { useState, useEffect } from 'react'
 import { usePathname } from 'next/navigation'
-import { useAuth, useConfig, Link } from '@payloadcms/ui'
+import { useAuth, useConfig, useTheme, Link } from '@payloadcms/ui'
 import { Sun, Moon, Plus, Upload, BookOpen, Check, Clock } from 'lucide-react'
 import { formatAdminURL } from 'payload/shared'
 import { useDocumentBridge } from '../AdminProvider'
@@ -73,16 +72,11 @@ export function AppActions() {
   const { routes: { admin: adminRoute } } = config
   const bridge = useDocumentBridge()
 
-  const [isDark, setIsDark] = useState(false)
-
-  useEffect(() => {
-    setIsDark(document.documentElement.getAttribute('data-theme') === 'dark')
-  }, [])
+  const { theme, setTheme } = useTheme()
+  const isDark = theme === 'dark'
 
   const toggleTheme = () => {
-    const next = isDark ? 'light' : 'dark'
-    document.documentElement.setAttribute('data-theme', next)
-    setIsDark(!isDark)
+    setTheme(isDark ? 'light' : 'dark')
   }
 
   const isDashboard =

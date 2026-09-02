@@ -13,12 +13,12 @@
 
 /* Brand blue (admin role) */
 .badge--brand {
-  background: rgba(37, 99, 235, 0.1);
-  color: #2563eb;
+  background: color-mix(in srgb, var(--theme-success-500) 10%, transparent);
+  color: var(--theme-success-500);
 }
 
 .badge--brand .badge__dot {
-  background: #2563eb;
+  background: var(--theme-success-500);
 }
 
 /* Muted/neutral (user role, unverified) */

@@ -1,6 +1,5 @@
 'use client'
 
-import { useState, useEffect } from 'react'
 import { usePathname } from 'next/navigation'
 import {
   NavGroup,
@@ -8,6 +7,7 @@ import {
   useConfig,
   useAuth,
   useTranslation,
+  useTheme,
   Hamburger,
   Logout,
   Link,
@@ -60,17 +60,11 @@ export function AdminNavClient({ groups, navPreferences }: AdminNavClientProps) 
   const { user } = useAuth()
   const { navOpen, setNavOpen } = useNav()
 
-  const [isDark, setIsDark] = useState(false)
-
-  useEffect(() => {
-    setIsDark(document.documentElement.getAttribute('data-theme') === 'dark')
-  }, [])
+  const { theme, setTheme } = useTheme()
+  const isDark = theme === 'dark'
 
   const toggleTheme = () => {
-    const current = document.documentElement.getAttribute('data-theme')
-    const next = current === 'dark' ? 'light' : 'dark'
-    document.documentElement.setAttribute('data-theme', next)
-    setIsDark(next === 'dark')
+    setTheme(isDark ? 'light' : 'dark')
   }
 
   const dashboardHref = formatAdminURL({ adminRoute, path: '' })

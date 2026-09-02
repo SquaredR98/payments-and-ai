@@ -54,8 +54,8 @@
 }
 
 .topbar__badge--admin {
-  background: rgba(37, 99, 235, 0.1);
-  color: #2563eb;
+  background: color-mix(in srgb, var(--theme-success-500) 10%, transparent);
+  color: var(--theme-success-500);
 }
 
 .topbar__badge--user {

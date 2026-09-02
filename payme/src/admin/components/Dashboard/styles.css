@@ -39,8 +39,8 @@
 
 .stat-card__icon {
   @apply w-10 h-10 rounded-lg flex items-center justify-center shrink-0;
-  background: rgba(37, 99, 235, 0.08);
-  color: #2563eb;
+  background: color-mix(in srgb, var(--theme-success-500) 8%, transparent);
+  color: var(--theme-success-500);
 }
 
 .stat-card__value {

@@ -1,7 +1,7 @@
 # Progress Tracker
 
-> **Last Updated:** 2026-08-27
-> **Last Action:** Session 9 — Document context bridge (reactive header info on edit/create pages)
+> **Last Updated:** 2026-08-29
+> **Last Action:** Session 10 — SidebarSave, login redesign, UI component overrides, theme persistence
 
 ---
 
@@ -9,7 +9,7 @@
 
 - **Active Project:** Project 1 — PayMe
 - **Current Phase:** Phase 3 — Implementation
-- **Current Feature:** Feature 01.5 — Theming, Layout System & Admin Shell Customization (admin shell implemented)
+- **Current Feature:** Feature 01.5 complete — ready to resume Feature 02 (Authentication & User Management)
 - **Blocked:** No
 
 ---
@@ -90,6 +90,16 @@
 - ✅ Import map regenerated, type check passed (zero errors)
 - ⏳ Edit/create page layout consolidation — discussed moving save button + actions from doc-controls bar into sidebar card to reduce vertical space, NOT yet implemented
 
+**Edit View Polish & UI Overrides (Session 10):**
+- ✅ SidebarSave component — React portal-based save button below sidebar card, replaces Payload's SaveButton via `edit.SaveButton` slot, conditionally hides doc-controls bar via `.sidebar-save-active` class
+- ✅ Login page redesign — split layout with brand panel (blue gradient, floating geometric shapes, feature highlights), LoginFooter component
+- ✅ Row vertical spacing fix — restored `margin-bottom: var(--spacing-field)` on consecutive `.field-type.row` wrappers
+- ✅ Sidebar card two-layer architecture — border moved from `__sidebar-wrap` to `__sidebar` so portaled save button sits outside the card
+- ✅ custom.scss full reorganization — ASCII art header, TOC (13 sections), section headers, DOM structure diagram, gutter variable system documentation
+- ✅ Full `--theme-success-*` palette override (8 stops) in both light/dark themes — eliminates residual teal from focus rings, checkboxes, radios, toasts, banners
+- ✅ UI component overrides: checkbox/radio (blue fill + focus ring), toast/banner (border-radius 8px), confirmation modal (border-radius 12px, styled buttons), drawer (rounded edge), loading overlay (brand blue bars), field error states
+- ✅ Theme persistence fix — added `admin.theme: 'all'` to payload config so ThemeProvider reads cookie on mount
+
 ---
 
 ## Projects 2-8: Not Started
@@ -100,7 +110,7 @@ Feature tracking tables will be added when each project becomes active.
 
 ## Next Action
 
-**Feature 01.5 admin polish ongoing.** Document context bridge complete — AppActions header now shows reactive document info on edit/create pages. Next up: edit/create page layout consolidation (move save/actions from doc-controls bar into sidebar card to reduce vertical space). After that, continue with Feature 02 (Authentication & User Management) — doc already written, implementation steps 1-2 done (Users collection + auth config). Resume at Step 3: registration page, login page, email verification, password reset, route protection, auth provider/hook.
+**Feature 01.5 complete.** All admin shell customization done (theming, layout, nav, dashboard, edit view, sidebar save, login redesign, UI component overrides). Ready to resume **Feature 02 (Authentication & User Management)** — doc already written and awaiting approval. Implementation steps 1-2 done (Users collection + auth config). Resume at Step 3: registration page, login page, email verification, password reset, route protection, auth provider/hook.
 
 ---
 
@@ -118,3 +128,4 @@ Feature tracking tables will be added when each project becomes active.
 | 2026-08-26 | Session 7 | Custom create-first-user view (branded, streamlined fields), QuickAccess dashboard widget (replaces default CollectionCards with icon pills), removed collection groups, CSS cleanup |
 | 2026-08-27 | Session 8 | Restructured all admin components into folder/index pattern with colocated styles.css, created ListCreateButton (portal into search bar actions), edit/create view CSS overrides (doc-controls, save button, card forms, tabs, inputs), researched Custom Edit View API |
 | 2026-08-27 | Session 9 | Document context bridge: extended AdminProvider with DocumentBridgeContext, created invisible DocumentBridge component (beforeDocumentControls on Users), updated AppActions header with reactive document info (name, email, role badge, verification status). Discussed edit/create page layout consolidation (deferred). |
+| 2026-08-29 | Session 10 | Edit view polish: SidebarSave portal component (save button below sidebar card), login page redesign (split layout with brand panel), row vertical spacing fix, custom.scss reorganization (13 sections with TOC), full --theme-success-* palette override (8 stops, both themes), UI component overrides (checkboxes, radios, toasts, banners, modals, drawers, loading, error states), theme persistence fix (admin.theme='all'). Feature 01.5 marked fully complete. |

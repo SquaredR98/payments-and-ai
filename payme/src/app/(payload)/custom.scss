@@ -78,13 +78,13 @@
 /* =================================================================
  * 1. THEME TOKENS
  *
- * Brand palette: blue-tinted neutrals (hue 220) + accent blue #2563eb.
+ * Brand palette: blue-tinted neutrals (hue 220) + accent via --theme-success-* tokens.
  * To rebrand, update the hue values and accent hex codes below.
  * ================================================================= */
 
 /* ── 1a. Light Theme ─────────────────────────────────────────────── */
 
-:root {
+:root:root {
   /* Elevation scale: neutral blue (hue 220), lightest → darkest */
   --theme-elevation-0:    hsl(220, 30%, 99%);
   --theme-elevation-50:   hsl(220, 25%, 97%);
@@ -127,43 +127,44 @@
 
 /* ── 1b. Dark Theme ──────────────────────────────────────────────── */
 
-html[data-theme='dark'] {
-  /* Elevation scale: dark blue-black (hue 222) */
-  --theme-elevation-0:    hsl(222, 30%, 7%);
-  --theme-elevation-50:   hsl(222, 25%, 9%);
-  --theme-elevation-100:  hsl(222, 22%, 12%);
-  --theme-elevation-150:  hsl(222, 20%, 15%);
-  --theme-elevation-200:  hsl(222, 18%, 18%);
-  --theme-elevation-250:  hsl(222, 16%, 22%);
-  --theme-elevation-300:  hsl(222, 14%, 28%);
-  --theme-elevation-350:  hsl(222, 12%, 35%);
-  --theme-elevation-400:  hsl(222, 10%, 42%);
-  --theme-elevation-450:  hsl(222, 8%, 50%);
-  --theme-elevation-500:  hsl(222, 8%, 58%);
-  --theme-elevation-550:  hsl(222, 8%, 65%);
-  --theme-elevation-600:  hsl(222, 8%, 72%);
-  --theme-elevation-650:  hsl(222, 8%, 78%);
-  --theme-elevation-700:  hsl(222, 10%, 82%);
-  --theme-elevation-750:  hsl(222, 12%, 86%);
-  --theme-elevation-800:  hsl(222, 14%, 89%);
-  --theme-elevation-850:  hsl(222, 16%, 92%);
-  --theme-elevation-900:  hsl(222, 18%, 94%);
-  --theme-elevation-950:  hsl(222, 20%, 96%);
-  --theme-elevation-1000: hsl(222, 22%, 98%);
+html[data-theme='dark'][data-theme='dark'] {
+  /* Darker slate + Indigo accent.
+   * Surfaces: hue 222 (slate), pushed darker for depth. Indigo pops as only saturated color. */
+  --theme-elevation-0:    hsl(222, 47%, 6%);
+  --theme-elevation-50:   hsl(222, 40%, 9%);
+  --theme-elevation-100:  hsl(222, 33%, 12%);
+  --theme-elevation-150:  hsl(222, 28%, 15%);
+  --theme-elevation-200:  hsl(222, 22%, 19%);
+  --theme-elevation-250:  hsl(222, 18%, 25%);
+  --theme-elevation-300:  hsl(222, 14%, 33%);
+  --theme-elevation-350:  hsl(222, 11%, 41%);
+  --theme-elevation-400:  hsl(222, 9%, 49%);
+  --theme-elevation-450:  hsl(222, 7%, 57%);
+  --theme-elevation-500:  hsl(222, 6%, 64%);
+  --theme-elevation-550:  hsl(222, 5%, 70%);
+  --theme-elevation-600:  hsl(222, 4%, 76%);
+  --theme-elevation-650:  hsl(222, 4%, 82%);
+  --theme-elevation-700:  hsl(222, 3%, 87%);
+  --theme-elevation-750:  hsl(222, 3%, 91%);
+  --theme-elevation-800:  hsl(222, 3%, 94%);
+  --theme-elevation-850:  hsl(222, 2%, 96%);
+  --theme-elevation-900:  hsl(222, 2%, 97%);
+  --theme-elevation-950:  hsl(222, 2%, 98%);
+  --theme-elevation-1000: hsl(222, 2%, 99%);
 
-  /* Accent: lighter blue for dark-mode contrast (full success palette) */
-  --theme-success-100: hsl(222, 40%, 14%);    /* dark blue bg (toasts, banners) */
-  --theme-success-200: hsl(222, 35%, 18%);    /* hover bg */
-  --theme-success-250: hsl(222, 30%, 28%);    /* border (toasts) */
-  --theme-success-400: rgba(59, 130, 246, 0.45); /* focus ring glow */
-  --theme-success-500: #3b82f6;                /* primary accent */
-  --theme-success-600: #2563eb;                /* hover accent */
-  --theme-success-650: #1d4ed8;                /* active accent */
-  --theme-success-800: hsl(222, 60%, 82%);     /* text on dark bg (toasts) */
+  /* Accent: Sky blue palette — light blue that pops on dark slate */
+  --theme-success-100: hsl(204, 30%, 12%);
+  --theme-success-200: hsl(204, 25%, 17%);
+  --theme-success-250: hsl(204, 20%, 26%);
+  --theme-success-400: rgba(56, 189, 248, 0.3);
+  --theme-success-500: #38BDF8;
+  --theme-success-600: #0EA5E9;
+  --theme-success-650: #0284C7;
+  --theme-success-800: #BAE6FD;
 
   /* Borders & inputs */
-  --theme-border-color: hsl(222, 18%, 18%);
-  --theme-input-bg: hsl(222, 25%, 9%);
+  --theme-border-color: hsl(222, 18%, 17%);
+  --theme-input-bg: hsl(222, 40%, 9%);
 }
 
 
@@ -263,8 +264,8 @@ section.template-minimal.login .login__form input {
 }
 
 section.template-minimal.login .login__form input:focus {
-  border-color: #2563eb !important;
-  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12) !important;
+  border-color: var(--theme-success-500) !important;
+  box-shadow: 0 0 0 3px var(--theme-success-400) !important;
   outline: none !important;
 }
 
@@ -286,13 +287,13 @@ section.template-minimal.login .login__form > a {
 }
 
 section.template-minimal.login .login__form > a:hover {
-  color: #2563eb !important;
+  color: var(--theme-success-500) !important;
 }
 
 /* Login button */
 section.template-minimal.login .login__form .form-submit .btn {
   width: 100% !important;
-  background: #2563eb !important;
+  background: var(--theme-success-500) !important;
   border: none !important;
   border-radius: 8px !important;
   padding: 10px 24px !important;
@@ -304,7 +305,7 @@ section.template-minimal.login .login__form .form-submit .btn {
 }
 
 section.template-minimal.login .login__form .form-submit .btn:hover {
-  background: #1d4ed8 !important;
+  background: var(--theme-success-600) !important;
 }
 
 /* ── 2c. Responsive (mobile stack) ───────────────────────────────── */
@@ -483,7 +484,7 @@ section.template-minimal.login .login__form .form-submit .btn:hover {
 
 .search-bar:focus-within .search-filter {
   border-color: var(--theme-success-500) !important;
-  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.1);
+  box-shadow: 0 0 0 2px var(--theme-success-400);
 }
 
 .search-bar .icon--search {
@@ -569,12 +570,12 @@ section.template-minimal.login .login__form .form-submit .btn:hover {
 }
 
 .list-controls__columns .pill-selector__pill--selected {
-  background: rgba(37, 99, 235, 0.06) !important;
+  background: color-mix(in srgb, var(--theme-success-500) 6%, transparent) !important;
   color: var(--theme-elevation-900) !important;
 }
 
 .list-controls__columns .pill-selector__pill--selected:hover {
-  background: rgba(37, 99, 235, 0.1) !important;
+  background: color-mix(in srgb, var(--theme-success-500) 10%, transparent) !important;
 }
 
 .list-controls__columns .pill-selector__pill .pill__label {
@@ -601,8 +602,8 @@ section.template-minimal.login .login__form .form-submit .btn:hover {
 }
 
 .list-controls__columns .pill-selector__pill--selected .pill__icon {
-  background: rgba(37, 99, 235, 0.12) !important;
-  color: #2563eb !important;
+  background: color-mix(in srgb, var(--theme-success-500) 12%, transparent) !important;
+  color: var(--theme-success-500) !important;
 }
 
 /* Filters dropdown */
@@ -677,7 +678,7 @@ section.template-minimal.login .login__form .form-submit .btn:hover {
 }
 
 .table td:nth-child(2) a:hover {
-  color: #2563eb !important;
+  color: var(--theme-success-500) !important;
 }
 
 .sort-column__label {
@@ -759,7 +760,7 @@ section.template-minimal.login .login__form .form-submit .btn:hover {
 
 /* Save button in controls bar (used by collections without SidebarSave) */
 .doc-controls__controls #action-save {
-  background: #2563eb !important;
+  background: var(--theme-success-500) !important;
   color: #fff !important;
   border: none !important;
   border-radius: 8px !important;
@@ -770,7 +771,7 @@ section.template-minimal.login .login__form .form-submit .btn:hover {
 }
 
 .doc-controls__controls #action-save:hover {
-  background: #1d4ed8 !important;
+  background: var(--theme-success-600) !important;
 }
 
 .doc-controls__controls .btn--style-secondary {
@@ -937,7 +938,7 @@ section.template-minimal.login .login__form .form-submit .btn:hover {
 
 .tabs-field__tab-button--active {
   color: var(--theme-elevation-1000) !important;
-  border-bottom-color: #2563eb !important;
+  border-bottom-color: var(--theme-success-500) !important;
 }
 
 /* ── 5g. Groups ──────────────────────────────────────────────────── */
@@ -1013,7 +1014,7 @@ section.template-minimal.login .login__form .form-submit .btn:hover {
 .field-type textarea:focus,
 .field-type .rs__control--is-focused {
   border-color: var(--theme-success-500) !important;
-  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.1) !important;
+  box-shadow: 0 0 0 2px var(--theme-success-400) !important;
 }
 
 /* ── 6b. Labels & Descriptions ───────────────────────────────────── */
@@ -1131,7 +1132,7 @@ section.template-minimal.login .login__form .form-submit .btn:hover {
 
 /* Primary action (e.g. "Confirm") */
 .confirmation-modal__controls .btn:first-child {
-  background: #2563eb !important;
+  background: var(--theme-success-500) !important;
   color: #fff !important;
   border: none !important;
   border-radius: 8px !important;
@@ -1142,7 +1143,7 @@ section.template-minimal.login .login__form .form-submit .btn:hover {
 }
 
 .confirmation-modal__controls .btn:first-child:hover {
-  background: #1d4ed8 !important;
+  background: var(--theme-success-600) !important;
 }
 
 /* Secondary action (e.g. "Cancel") */

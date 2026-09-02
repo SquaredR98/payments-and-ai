@@ -34,8 +34,8 @@
 
 .quick-access__icon {
   @apply flex items-center justify-center w-7 h-7 rounded-md shrink-0;
-  background: rgba(37, 99, 235, 0.08);
-  color: #2563eb;
+  background: color-mix(in srgb, var(--theme-success-500) 8%, transparent);
+  color: var(--theme-success-500);
 }
 
 .quick-access__label {

@@ -28,7 +28,7 @@ export function LoginBranding() {
         <div className="login-brand-panel__logo-row">
           <svg viewBox="0 0 34 34" fill="none" className="login-brand-panel__icon">
             <rect width="34" height="34" rx="8" fill="white" />
-            <path d="M10 17 L17 10 L24 17 L17 24 Z" fill="#2563eb" />
+            <path d="M10 17 L17 10 L24 17 L17 24 Z" fill="var(--theme-success-500)" />
           </svg>
           <span className="login-brand-panel__name">PayMe</span>
         </div>

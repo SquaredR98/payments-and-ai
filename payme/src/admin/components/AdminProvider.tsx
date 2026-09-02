@@ -11,8 +11,8 @@ interface AdminBrandContext {
 
 const defaultBrand: AdminBrandContext = {
   brandName: 'PayMe',
-  brandColor: '#2563eb',
-  brandColorMuted: 'rgba(37, 99, 235, 0.08)',
+  brandColor: 'var(--theme-success-500)',
+  brandColorMuted: 'color-mix(in srgb, var(--theme-success-500) 8%, transparent)',
 }
 
 const BrandContext = createContext<AdminBrandContext>(defaultBrand)
