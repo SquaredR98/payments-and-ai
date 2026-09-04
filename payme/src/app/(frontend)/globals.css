@@ -142,7 +142,7 @@
 
     /* --- Brand primary (sky blue in dark, matches admin accent) --- */
     --primary: oklch(0.72 0.15 210);
-    --primary-foreground: oklch(0.98 0.002 222);
+    --primary-foreground: oklch(0.15 0.02 222);
 
     /* --- Secondary --- */
     --secondary: oklch(0.25 0.013 222);

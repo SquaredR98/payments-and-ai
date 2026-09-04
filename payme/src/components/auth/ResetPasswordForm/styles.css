@@ -1,0 +1,29 @@
+@reference "../../../app/(frontend)/globals.css";
+
+.reset-password-form {
+  @apply flex flex-col gap-6;
+}
+
+.reset-password-form__invalid {
+  @apply flex flex-col gap-2;
+}
+
+.reset-password-form__link {
+  @apply text-sm font-medium text-primary underline-offset-4 hover:underline;
+}
+
+.reset-password-form__back-link {
+  @apply flex items-center justify-center text-sm text-muted-foreground underline-offset-4 hover:underline;
+}
+
+.reset-password-form__password-wrapper {
+  @apply relative;
+}
+
+.reset-password-form__toggle-password {
+  @apply absolute right-2.5 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground;
+}
+
+.reset-password-form__toggle-icon {
+  @apply size-3.5;
+}

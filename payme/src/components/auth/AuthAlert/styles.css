@@ -1,0 +1,17 @@
+@reference "../../../app/(frontend)/globals.css";
+
+.auth-alert {
+  @apply flex items-center gap-2.5 rounded-[10px] border px-3 py-2.5 text-[13px] font-medium;
+}
+
+.auth-alert--success {
+  @apply border-success/30 bg-success/5 text-success;
+}
+
+.auth-alert--error {
+  @apply border-destructive/30 bg-destructive/5 text-destructive;
+}
+
+.auth-alert__icon {
+  @apply size-4 shrink-0;
+}

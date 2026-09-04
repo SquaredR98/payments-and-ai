@@ -14,12 +14,7 @@ export const auth = {
     })
   },
 
-  register(data: {
-    email: string
-    password: string
-    firstName: string
-    lastName: string
-  }) {
+  register(data: { email: string; password: string; firstName: string; lastName: string }) {
     return post<{ doc: AuthUser }>('/api/users', data)
   },
 
@@ -36,10 +31,7 @@ export const auth = {
   },
 
   resetPassword(token: string, password: string) {
-    return post<{ user: AuthUser; token: string }>(
-      '/api/users/reset-password',
-      { token, password },
-    )
+    return post<{ user: AuthUser; token: string }>('/api/users/reset-password', { token, password })
   },
 
   verifyEmail(token: string) {

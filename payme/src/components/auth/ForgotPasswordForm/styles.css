@@ -1,0 +1,17 @@
+@reference "../../../app/(frontend)/globals.css";
+
+.forgot-password-form {
+  @apply flex flex-col gap-6;
+}
+
+.forgot-password-form__submitted {
+  @apply flex flex-col items-center gap-4 text-center;
+}
+
+.forgot-password-form__icon {
+  @apply flex size-14 items-center justify-center rounded-full bg-primary/10;
+}
+
+.forgot-password-form__back-link {
+  @apply text-sm text-muted-foreground underline-offset-4 hover:underline;
+}

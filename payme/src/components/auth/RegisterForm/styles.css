@@ -1,0 +1,25 @@
+@reference "../../../app/(frontend)/globals.css";
+
+.register-form {
+  @apply flex flex-col gap-6;
+}
+
+.register-form__name-row {
+  @apply grid gap-3 sm:grid-cols-2;
+}
+
+.register-form__password-wrapper {
+  @apply relative;
+}
+
+.register-form__toggle-password {
+  @apply absolute right-2.5 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground;
+}
+
+.register-form__toggle-icon {
+  @apply size-3.5;
+}
+
+.register-form__footer {
+  @apply text-center;
+}

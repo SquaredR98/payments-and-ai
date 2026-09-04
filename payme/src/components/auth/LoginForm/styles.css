@@ -1,0 +1,29 @@
+@reference "../../../app/(frontend)/globals.css";
+
+.login-form {
+  @apply flex flex-col gap-6;
+}
+
+.login-form__password-header {
+  @apply flex items-center;
+}
+
+.login-form__forgot-link {
+  @apply ml-auto shrink-0 text-[13px] text-primary underline-offset-4 hover:underline;
+}
+
+.login-form__password-wrapper {
+  @apply relative;
+}
+
+.login-form__toggle-password {
+  @apply absolute right-2.5 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground;
+}
+
+.login-form__toggle-icon {
+  @apply size-3.5;
+}
+
+.login-form__footer {
+  @apply text-center;
+}

@@ -1,0 +1,45 @@
+@reference "../../../app/(frontend)/globals.css";
+
+.auth-layout {
+  @apply flex min-h-svh items-center justify-center bg-muted p-4 sm:p-6;
+}
+
+.auth-layout__card {
+  @apply grid w-full md:max-w-7xl overflow-hidden rounded-2xl border border-border bg-background shadow-xl lg:min-h-200 lg:min-w-300 lg:grid-cols-[56%_1fr];
+}
+
+.auth-layout__form-column {
+  @apply flex flex-col p-5 sm:p-7 sm:px-8;
+}
+
+.auth-layout__header {
+  @apply flex items-center justify-between;
+}
+
+.auth-layout__logo {
+  @apply flex items-center gap-2.5 text-[17px] font-bold tracking-tight text-foreground;
+}
+
+.auth-layout__logo-icon {
+  @apply size-6.5;
+}
+
+.auth-layout__body {
+  @apply flex flex-1 items-center justify-center py-6 sm:py-10;
+}
+
+.auth-layout__content {
+  @apply flex w-full flex-col gap-5.5 lg:max-w-sm;
+  animation: auth-enter 0.35s ease-out both;
+}
+
+@keyframes auth-enter {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

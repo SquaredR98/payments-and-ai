@@ -1,0 +1,173 @@
+@reference "../../../app/(frontend)/globals.css";
+
+.auth-hero {
+  @apply relative flex-1 overflow-hidden;
+  background: radial-gradient(120% 110% at 72% -10%, #1B2842 0%, #0B0F17 62%);
+}
+
+.auth-hero__grid {
+  @apply absolute inset-0;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+/* --- Invoice floating card --- */
+.auth-hero__invoice {
+  @apply absolute left-[88px] top-[210px] flex w-[320px] flex-col gap-4 rounded-2xl bg-[#F7F8FB] p-[22px] shadow-[0_30px_60px_-20px_rgba(0,0,0,0.6)];
+  transform: rotate(-6deg);
+}
+
+.auth-hero__invoice-header {
+  @apply flex items-center justify-between;
+}
+
+.auth-hero__invoice-title {
+  @apply flex flex-col gap-0.5;
+}
+
+.auth-hero__invoice-title span:first-child {
+  @apply text-[15px] font-bold text-[#0B1220];
+}
+
+.auth-hero__invoice-title span:last-child {
+  @apply text-xs text-[#8A93A3];
+}
+
+.auth-hero__invoice-badge {
+  @apply rounded-full px-2.5 py-1 text-[11px] font-semibold;
+}
+
+.auth-hero__invoice-badge--sent {
+  @apply bg-[rgba(37,99,235,0.1)] text-[#2563EB];
+}
+
+.auth-hero__invoice-badge--paid {
+  @apply bg-[rgba(16,185,129,0.12)] text-[#0E9F6E];
+}
+
+.auth-hero__invoice-badge--cleared {
+  @apply bg-[rgba(16,185,129,0.12)] text-[#0E9F6E];
+}
+
+.auth-hero__invoice-lines {
+  @apply flex flex-col gap-2.5;
+}
+
+.auth-hero__invoice-line {
+  @apply flex justify-between text-[13px] text-[#4B5565];
+}
+
+.auth-hero__invoice-line span:last-child {
+  @apply text-[#0B1220];
+}
+
+.auth-hero__invoice-divider {
+  @apply h-px bg-[#E4E7EE];
+}
+
+.auth-hero__invoice-total {
+  @apply flex justify-between text-[15px] font-bold text-[#0B1220];
+}
+
+/* --- Payment receipt card (reset-password variant) --- */
+.auth-hero__receipt {
+  @apply absolute left-[88px] top-[220px] flex w-[320px] flex-col gap-3.5 rounded-2xl bg-[#F7F8FB] p-[22px] shadow-[0_30px_60px_-20px_rgba(0,0,0,0.6)];
+  transform: rotate(-6deg);
+}
+
+.auth-hero__receipt-title {
+  @apply flex flex-col gap-0.5;
+}
+
+.auth-hero__receipt-title span:first-child {
+  @apply text-[15px] font-bold text-[#0B1220];
+}
+
+.auth-hero__receipt-title span:last-child {
+  @apply text-xs text-[#8A93A3];
+}
+
+.auth-hero__receipt-amount {
+  @apply flex items-baseline justify-between;
+}
+
+.auth-hero__receipt-amount span:first-child {
+  @apply text-2xl font-bold text-[#0B1220];
+}
+
+.auth-hero__receipt-footer {
+  @apply flex justify-between text-[13px] text-[#4B5565];
+}
+
+/* --- Email card (verify-email variant) --- */
+.auth-hero__email {
+  @apply absolute left-24 top-[300px] flex w-[300px] flex-col items-start gap-3.5 rounded-2xl bg-[#F7F8FB] p-6 shadow-[0_30px_60px_-20px_rgba(0,0,0,0.6)];
+  transform: rotate(-4deg);
+}
+
+.auth-hero__email-icon {
+  @apply flex size-11 items-center justify-center rounded-full bg-[rgba(37,99,235,0.1)];
+}
+
+.auth-hero__email-title {
+  @apply text-base font-bold text-[#0B1220];
+}
+
+.auth-hero__email-description {
+  @apply text-[13px]/[1.5] text-[#4B5565];
+}
+
+/* --- Credit card element --- */
+.auth-hero__card {
+  @apply absolute left-[300px] top-[470px] flex h-[140px] w-[228px] flex-col justify-between rounded-[14px] p-[18px] shadow-[0_26px_50px_-18px_rgba(0,0,0,0.65)];
+  background: linear-gradient(135deg, var(--card-gradient-start, #2563EB), #1E3A8A);
+  transform: rotate(5deg);
+}
+
+.auth-hero__card-chip {
+  @apply h-[23px] w-8 rounded-[5px] bg-[#E7C878];
+}
+
+.auth-hero__card-details {
+  @apply flex flex-col gap-1.5;
+}
+
+.auth-hero__card-number {
+  @apply font-mono text-sm font-medium tracking-widest text-white/90;
+}
+
+.auth-hero__card-name {
+  @apply font-sans text-[10px] tracking-[0.12em] text-white/60;
+}
+
+/* --- Green checkmark badge --- */
+.auth-hero__check {
+  @apply absolute left-[352px] top-[172px] flex size-[46px] items-center justify-center rounded-full bg-[#10B981] shadow-[0_12px_26px_-6px_rgba(16,185,129,0.6)];
+}
+
+/* --- Bottom text overlay --- */
+.auth-hero__text {
+  @apply absolute bottom-20 left-[88px] flex max-w-[420px] flex-col gap-2.5;
+  animation: auth-enter 0.35s ease-out 0.15s both;
+}
+
+.auth-hero__headline {
+  @apply text-[26px] font-bold tracking-tight text-[#F7F9FC];
+}
+
+.auth-hero__subtitle {
+  @apply text-[15px]/[1.5] text-[rgba(247,249,252,0.62)];
+}
+
+@keyframes auth-enter {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
