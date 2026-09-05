@@ -1,0 +1,218 @@
+@reference "tailwindcss";
+
+/* ── Admin Login — Centered Card Layout ──
+ * Matches the frontend auth pattern: centered elevated card
+ * with form column (left) and brand panel (right).
+ * Replaces the old split-screen layout from custom.scss section 2.
+ *
+ * Payload wraps auth views in `.template-minimal` which constrains
+ * width/height. We neutralize it so our card layout takes over. */
+
+section.template-minimal:has(.admin-login) {
+  max-width: none !important;
+  width: 100% !important;
+  min-height: 100vh !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+section.template-minimal:has(.admin-login) > .template-minimal__wrap {
+  max-width: none !important;
+  width: 100% !important;
+  min-height: 100vh !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  gap: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+.admin-login {
+  @apply flex flex-1 items-center justify-center p-4 sm:p-6;
+  background: var(--theme-elevation-50);
+  min-height: 100vh;
+}
+
+.admin-login__card {
+  @apply grid w-full overflow-hidden rounded-2xl shadow-xl;
+  border: 1px solid var(--theme-border-color);
+  background: var(--theme-elevation-0);
+  max-width: 960px;
+}
+
+@media (min-width: 1024px) {
+  .admin-login__card {
+    grid-template-columns: 1fr 1fr;
+    min-height: 560px;
+  }
+}
+
+/* ── Form Column ── */
+
+.admin-login__form-column {
+  @apply flex flex-col justify-center;
+  padding: 40px clamp(32px, 5vw, 56px);
+  background: var(--theme-elevation-0);
+}
+
+.admin-login__form-header {
+  @apply flex flex-col items-start;
+  gap: 6px;
+  margin-bottom: 28px;
+}
+
+.admin-login__icon {
+  width: 40px;
+  height: 40px;
+  margin-bottom: 8px;
+}
+
+.admin-login__title {
+  @apply text-2xl font-bold m-0 tracking-tight;
+  color: var(--theme-elevation-1000);
+}
+
+.admin-login__subtitle {
+  @apply text-sm m-0;
+  color: var(--theme-elevation-450);
+}
+
+/* Form fields */
+.admin-login__form {
+  @apply flex flex-col;
+  gap: 16px;
+  max-width: 380px;
+}
+
+.admin-login__fields {
+  @apply flex flex-col;
+  gap: 16px;
+}
+
+.admin-login__forgot {
+  @apply text-sm no-underline;
+  color: var(--theme-elevation-500);
+  align-self: flex-end;
+  margin-top: -8px;
+  transition: color 0.15s ease;
+}
+
+.admin-login__forgot:hover {
+  color: var(--theme-success-500);
+}
+
+.admin-login__submit {
+  width: 100%;
+}
+
+.admin-login__footer {
+  @apply text-xs;
+  color: var(--theme-elevation-350);
+  margin-top: 24px;
+}
+
+/* ── Brand Panel ── */
+
+.admin-login__brand {
+  @apply relative hidden flex-col justify-between overflow-hidden lg:flex;
+  background: linear-gradient(135deg, #312e81 0%, var(--theme-success-500) 50%, #818CF8 100%);
+  padding: 40px 36px;
+  min-height: 100%;
+}
+
+/* Decorative shapes */
+.admin-login__brand-shapes {
+  @apply absolute inset-0 pointer-events-none;
+}
+
+.admin-login__shape {
+  @apply absolute;
+}
+
+.admin-login__shape--1 {
+  width: 120px;
+  top: -20px;
+  right: -20px;
+  opacity: 0.8;
+}
+
+.admin-login__shape--2 {
+  width: 80px;
+  bottom: 20%;
+  left: -10px;
+  opacity: 0.7;
+}
+
+.admin-login__shape--3 {
+  width: 60px;
+  top: 40%;
+  right: 15%;
+  opacity: 0.6;
+}
+
+.admin-login__shape--4 {
+  width: 100px;
+  bottom: -15px;
+  right: 25%;
+  opacity: 0.5;
+}
+
+.admin-login__shape--5 {
+  width: 140px;
+  top: 15%;
+  left: 20%;
+  opacity: 0.4;
+}
+
+/* Brand content */
+.admin-login__brand-content {
+  @apply relative z-10 flex flex-1 flex-col justify-center gap-5;
+}
+
+.admin-login__brand-logo {
+  @apply flex items-center gap-3;
+}
+
+.admin-login__brand-icon {
+  width: 36px;
+  height: 36px;
+}
+
+.admin-login__brand-name {
+  @apply text-lg font-bold tracking-tight;
+  color: white;
+}
+
+.admin-login__brand-heading {
+  @apply text-2xl font-bold leading-tight m-0;
+  color: white;
+  letter-spacing: -0.02em;
+}
+
+.admin-login__brand-desc {
+  @apply text-sm leading-relaxed m-0;
+  color: rgba(255, 255, 255, 0.75);
+  max-width: 320px;
+}
+
+.admin-login__brand-features {
+  @apply flex flex-col gap-3 mt-1;
+}
+
+.admin-login__brand-feature {
+  @apply flex items-center gap-2.5 text-sm;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.admin-login__feature-check {
+  @apply shrink-0;
+  width: 16px;
+  height: 16px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.admin-login__brand-footer {
+  @apply relative z-10 text-xs;
+  color: rgba(255, 255, 255, 0.4);
+  margin-top: 24px;
+}

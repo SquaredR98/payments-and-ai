@@ -1,0 +1,96 @@
+@reference "tailwindcss";
+
+/* ── Admin Forgot Password — Centered Card ──
+ * Single-column centered card, no brand panel. */
+
+section.template-minimal:has(.admin-forgot) {
+  max-width: none !important;
+  width: 100% !important;
+  min-height: 100vh !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+section.template-minimal:has(.admin-forgot) > .template-minimal__wrap {
+  max-width: none !important;
+  width: 100% !important;
+  min-height: 100vh !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  gap: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+.admin-forgot {
+  @apply flex flex-1 items-center justify-center p-4 sm:p-6;
+  background: var(--theme-elevation-50);
+  min-height: 100vh;
+}
+
+.admin-forgot__card {
+  @apply flex w-full flex-col gap-6 overflow-hidden rounded-2xl p-10 shadow-xl sm:p-12;
+  border: 1px solid var(--theme-border-color);
+  background: var(--theme-elevation-0);
+  max-width: 440px;
+}
+
+/* Header */
+.admin-forgot__header {
+  @apply flex flex-col items-start;
+  gap: 6px;
+}
+
+.admin-forgot__icon {
+  width: 40px;
+  height: 40px;
+  margin-bottom: 8px;
+}
+
+.admin-forgot__title {
+  @apply text-2xl font-bold m-0 tracking-tight;
+  color: var(--theme-elevation-1000);
+}
+
+.admin-forgot__desc {
+  @apply text-sm m-0;
+  color: var(--theme-elevation-450);
+}
+
+/* Form */
+.admin-forgot__form {
+  @apply flex flex-col;
+  gap: 16px;
+}
+
+/* Back to login link */
+.admin-forgot__back-link {
+  @apply text-sm no-underline;
+  color: var(--theme-elevation-500);
+  transition: color 0.15s ease;
+}
+
+.admin-forgot__back-link:hover {
+  color: var(--theme-success-500);
+}
+
+/* ── Email Sent State ── */
+.admin-forgot__sent {
+  @apply flex flex-col items-center text-center gap-3;
+}
+
+.admin-forgot__sent-icon {
+  width: 48px;
+  height: 48px;
+  color: var(--theme-success-500);
+  margin-bottom: 4px;
+}
+
+.admin-forgot__sent .admin-forgot__title {
+  @apply text-xl;
+}
+
+.admin-forgot__sent .admin-forgot__desc {
+  color: var(--theme-elevation-450);
+  max-width: 300px;
+}
