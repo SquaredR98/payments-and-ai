@@ -4,9 +4,13 @@ export const Media: CollectionConfig = {
   slug: 'media',
   admin: {
     components: {
-      beforeList: ['/admin/components/ListCreateButton/index#ListCreateButton'],
       edit: {
         SaveButton: '/admin/components/SidebarSave/index#SidebarSave',
+      },
+      views: {
+        list: {
+          Component: '/admin/components/CollectionListView/index#CollectionListView',
+        },
       },
     },
   },

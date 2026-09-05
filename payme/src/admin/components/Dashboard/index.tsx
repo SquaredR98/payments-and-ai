@@ -84,7 +84,7 @@ export async function AdminDashboard(props: ServerProps) {
                 <div className="stat-card__icon">
                   <Icon size={20} strokeWidth={1.75} />
                 </div>
-                <span className="stat-card__value">{stat.value}</span>
+                <span className={`stat-card__value${stat.value === '—' ? ' stat-card__value--empty' : ''}`}>{stat.value}</span>
               </div>
 
               <div>

@@ -39,12 +39,21 @@ export const Users: CollectionConfig = {
   },
   admin: {
     useAsTitle: 'email',
-    defaultColumns: ['email', 'firstName', 'lastName', 'role', '_verified'],
+    defaultColumns: ['email', 'firstName', 'role', '_verified', 'createdAt'],
     components: {
-      beforeList: ['/admin/components/ListCreateButton/index#ListCreateButton'],
       edit: {
         beforeDocumentControls: ['/admin/components/DocumentBridge/index#DocumentBridge'],
         SaveButton: '/admin/components/SidebarSave/index#SidebarSave',
+      },
+      views: {
+        edit: {
+          default: {
+            Component: '/admin/components/UserEditView/index#UserEditView',
+          },
+        },
+        list: {
+          Component: '/admin/components/CollectionListView/index#CollectionListView'
+        }
       },
     },
   },
@@ -87,12 +96,16 @@ export const Users: CollectionConfig = {
               fields: [
                 {
                   name: 'firstName',
+                  label: 'Name',
                   type: 'text',
                   required: true,
                   minLength: 1,
                   maxLength: 100,
                   admin: {
                     placeholder: 'John',
+                    components: {
+                      Cell: '/admin/components/cells/NameCell#NameCell'
+                    }
                   },
                 },
                 {
@@ -211,6 +224,16 @@ export const Users: CollectionConfig = {
       ],
     },
 
+    // --- Top-Level Fields (rendered by custom edit view) ---
+    {
+      name: 'company',
+      type: 'text',
+      maxLength: 200,
+      admin: {
+        placeholder: 'Acme Inc.',
+      },
+    },
+
     // --- Sidebar Fields ---
     {
       name: 'role',
@@ -247,6 +270,7 @@ export const Users: CollectionConfig = {
     // Override the auto-generated _verified field to add a custom Cell
     {
       name: '_verified',
+      label: 'Status',
       type: 'checkbox',
       admin: {
         components: {

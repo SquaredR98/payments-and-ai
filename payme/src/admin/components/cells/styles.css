@@ -1,5 +1,12 @@
 @reference "tailwindcss";
 
+/* Name Cell */
+
+.name-cell {
+  @apply text-[13.5px] font-medium;
+  color: var(--theme-elevation-800);
+}
+
 /* Badge Cells — Role, Verified, Status */
 
 .badge {

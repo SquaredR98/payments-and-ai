@@ -1,0 +1,208 @@
+@reference "tailwindcss";
+
+/* ── UserEditView — Custom Edit View Layout ──
+ *
+ * Two-column layout: main card (fields + tabs) + sidebar (metadata + save).
+ * Replaces Payload's default edit view for the Users collection.
+ *
+ * Structure:
+ *   .user-edit                    ← flex container (2-column)
+ *     .user-edit__main            ← left column (~66%)
+ *       .user-edit__card          ← visual card (border, bg, radius)
+ *         .user-edit__tabs        ← tab navigation bar
+ *         .user-edit__content     ← active tab content
+ *     .user-edit__sidebar-wrap    ← right column (~33%)
+ *       .edit-sidebar             ← metadata card
+ *       .user-edit__save          ← save button slot
+ */
+
+
+/* ── Layout ──────────────────────────────────────────────────────── */
+
+.user-edit {
+  @apply flex gap-6 px-8 pt-4 pb-6;
+}
+
+.user-edit__main {
+  @apply flex-1 min-w-0;
+}
+
+.user-edit__sidebar-wrap {
+  @apply w-96 shrink-0 sticky self-start;
+}
+
+
+/* ── Main Card ───────────────────────────────────────────────────── */
+
+.user-edit__card {
+  @apply rounded-[10px];
+  border: 1px solid var(--theme-border-color);
+  background: var(--theme-elevation-0);
+}
+
+
+/* ── Tab Navigation ──────────────────────────────────────────────── */
+
+.user-edit__tabs {
+  @apply flex gap-0;
+  border-bottom: 1px solid var(--theme-border-color);
+}
+
+.user-edit__tab {
+  @apply text-[13px] font-medium py-3 px-4 cursor-pointer;
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: var(--theme-elevation-500);
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+.user-edit__tab:hover {
+  color: var(--theme-elevation-800);
+}
+
+.user-edit__tab--active {
+  color: var(--theme-elevation-1000);
+  border-bottom-color: var(--theme-success-500);
+}
+
+
+/* ── Tab Content ─────────────────────────────────────────────────── */
+
+.user-edit__content {
+  @apply p-6;
+}
+
+
+/* ── Account Tab — Fields ────────────────────────────────────────── */
+
+.user-edit__fields {
+  @apply flex flex-col gap-4;
+}
+
+.user-edit__row {
+  @apply grid grid-cols-2 gap-4;
+}
+
+
+/* ── Account Tab — Auth Section ──────────────────────────────────── */
+
+.user-edit__auth {
+  @apply mt-8 pt-6;
+  border-top: 1px solid var(--theme-border-color);
+}
+
+.user-edit__auth-title {
+  @apply text-[11px] font-semibold uppercase tracking-wider m-0 mb-3;
+  color: var(--theme-success-500);
+}
+
+.user-edit__auth-actions {
+  @apply flex flex-wrap gap-2;
+}
+
+.user-edit__auth-btn {
+  @apply text-[12.5px] font-medium py-1.5 px-3.5 rounded-lg cursor-pointer;
+  background: transparent;
+  border: 1px solid var(--theme-border-color);
+  color: var(--theme-elevation-600);
+  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.user-edit__auth-btn:hover {
+  background: var(--theme-elevation-50);
+  border-color: var(--theme-elevation-300);
+  color: var(--theme-elevation-900);
+}
+
+.user-edit__auth-btn--active {
+  background: color-mix(in srgb, var(--theme-success-500) 8%, transparent);
+  border-color: var(--theme-success-500);
+  color: var(--theme-success-500);
+}
+
+.user-edit__auth-message {
+  @apply text-xs m-0 mt-3;
+  color: var(--theme-elevation-500);
+}
+
+.user-edit__password-fields {
+  @apply flex flex-col gap-4 mt-4;
+}
+
+
+/* ── Placeholder Tabs (Preferences, Activity) ────────────────────── */
+
+.user-edit__placeholder {
+  @apply flex flex-col items-center justify-center text-center py-12;
+}
+
+.user-edit__placeholder-icon {
+  @apply w-12 h-12 rounded-xl flex items-center justify-center mb-4;
+  background: color-mix(in srgb, var(--theme-success-500) 8%, transparent);
+  color: var(--theme-success-500);
+}
+
+.user-edit__placeholder-title {
+  @apply text-base font-semibold m-0 mb-1;
+  color: var(--theme-elevation-800);
+}
+
+.user-edit__placeholder-desc {
+  @apply text-sm m-0;
+  color: var(--theme-elevation-400);
+  max-width: 320px;
+}
+
+
+/* ── Sidebar — Metadata Card ─────────────────────────────────────── */
+
+.edit-sidebar {
+  @apply rounded-[10px] overflow-hidden;
+  border: 1px solid var(--theme-border-color);
+  background: var(--theme-elevation-0);
+}
+
+.edit-sidebar__heading {
+  @apply text-[11px] font-semibold uppercase tracking-wider m-0 px-5 pt-4 pb-2;
+  color: var(--theme-success-500);
+}
+
+.edit-sidebar__fields {
+  @apply flex flex-col px-5 pb-4;
+}
+
+.edit-sidebar__field {
+  @apply flex flex-col gap-1 py-3;
+  border-bottom: 1px solid var(--theme-elevation-100);
+}
+
+.edit-sidebar__field:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.edit-sidebar__label {
+  @apply text-[11.5px] font-semibold;
+  color: var(--theme-elevation-600);
+}
+
+.edit-sidebar__value {
+  @apply text-[13px] font-mono;
+  color: var(--theme-elevation-800);
+}
+
+
+/* ── Save Button ─────────────────────────────────────────────────── */
+
+.user-edit__save-btn {
+  @apply w-full mt-4 rounded-[10px] text-sm font-semibold py-3 cursor-pointer;
+  background: var(--theme-success-500);
+  color: #fff;
+  border: none;
+  transition: background 0.15s ease;
+}
+
+.user-edit__save-btn:hover {
+  background: var(--theme-success-600);
+}

@@ -13,8 +13,9 @@
  * ║    admin/components/cells/styles.css                             ║
  * ║    admin/components/QuickAccess/styles.css                       ║
  * ║    admin/components/CreateFirstUser/styles.css                   ║
- * ║    admin/components/LoginBranding/styles.css                     ║
- * ║    admin/components/ListCreateButton/styles.css                  ║
+ * ║    admin/components/AdminLogin/styles.css                        ║
+ * ║    admin/components/ListControls/styles.css                      ║
+ * ║    admin/components/DataTable/styles.css                         ║
  * ║    admin/components/SidebarSave/styles.css                       ║
  * ║                                                                  ║
  * ╠══════════════════════════════════════════════════════════════════╣
@@ -24,10 +25,7 @@
  * ║     1a. Light theme                                              ║
  * ║     1b. Dark theme                                               ║
  * ║                                                                  ║
- * ║  2. LOGIN PAGE                                                   ║
- * ║     2a. Split layout (desktop)                                   ║
- * ║     2b. Form inputs & buttons                                    ║
- * ║     2c. Responsive (mobile stack)                                ║
+ * ║  (Login page is now a custom view — see AdminLogin component)    ║
  * ║                                                                  ║
  * ║  3. SHELL (nav, header, dashboard)                               ║
  * ║     3a. Sidebar navigation                                       ║
@@ -35,10 +33,8 @@
  * ║     3c. Dashboard                                                ║
  * ║                                                                  ║
  * ║  4. LIST VIEW                                                    ║
- * ║     4a. List header & controls                                   ║
- * ║     4b. Search bar                                               ║
- * ║     4c. Columns & filters dropdowns                              ║
- * ║     4d. Table                                                    ║
+ * ║     4a. List header                                              ║
+ * ║     4b–d. (moved to custom components)                           ║
  * ║     4e. Pagination                                               ║
  * ║                                                                  ║
  * ║  5. EDIT VIEW                                                    ║
@@ -169,192 +165,6 @@ html[data-theme='dark'][data-theme='dark'] {
 
 
 /* =================================================================
- * 2. LOGIN PAGE
- *
- * Two-column split layout: brand panel (left) + form (right).
- * Layout is driven by CSS Grid on `.template-minimal__wrap`.
- * Responsive: stacks vertically below 860px.
- * ================================================================= */
-
-/* ── 2a. Split Layout (desktop) ──────────────────────────────────── */
-
-section.template-minimal.login {
-  max-width: none !important;
-  width: 100vw !important;
-  min-height: 100vh !important;
-  margin: 0 !important;
-  padding: 0 !important;
-}
-
-section.template-minimal.login > .template-minimal__wrap {
-  display: grid !important;
-  grid-template-columns: 1fr 1fr !important;
-  grid-template-rows: 1fr auto auto auto 1fr !important;
-  max-width: none !important;
-  width: 100% !important;
-  min-height: 100vh !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  gap: 0 !important;
-}
-
-/* Brand panel — full left column, all rows */
-section.template-minimal.login .login-brand-panel {
-  grid-column: 1 !important;
-  grid-row: 1 / -1 !important;
-}
-
-/* Hide default Payload logo — custom icon in login-right__header */
-section.template-minimal.login .login__brand {
-  display: none !important;
-}
-
-/* Right column elements */
-section.template-minimal.login .login-right__header {
-  grid-column: 2 !important;
-  grid-row: 2 !important;
-  align-self: end !important;
-  padding: 0 clamp(32px, 5vw, 80px) !important;
-  margin-bottom: 28px !important;
-}
-
-section.template-minimal.login .login__form {
-  grid-column: 2 !important;
-  grid-row: 3 !important;
-  align-self: start !important;
-  padding: 0 clamp(32px, 5vw, 80px) !important;
-  max-width: none !important;
-  width: 100% !important;
-  box-sizing: border-box !important;
-}
-
-section.template-minimal.login .login-right__footer {
-  grid-column: 2 !important;
-  grid-row: 4 !important;
-  align-self: start !important;
-  padding: 0 clamp(32px, 5vw, 80px) !important;
-  text-align: left !important;
-}
-
-/* Right column — constrain form width for readability */
-section.template-minimal.login .login-right__header,
-section.template-minimal.login .login__form__inputWrap,
-section.template-minimal.login .login__form > a,
-section.template-minimal.login .login__form .form-submit,
-section.template-minimal.login .login-right__footer {
-  max-width: 380px !important;
-}
-
-/* ── 2b. Form Inputs & Buttons ───────────────────────────────────── */
-
-section.template-minimal.login .login__form__inputWrap {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  margin-bottom: 12px;
-}
-
-section.template-minimal.login .login__form input {
-  border: 1px solid var(--theme-border-color) !important;
-  border-radius: 8px !important;
-  padding: 10px 14px !important;
-  font-size: 14px !important;
-  background: var(--theme-input-bg) !important;
-  transition: border-color 0.15s ease, box-shadow 0.15s ease;
-}
-
-section.template-minimal.login .login__form input:focus {
-  border-color: var(--theme-success-500) !important;
-  box-shadow: 0 0 0 3px var(--theme-success-400) !important;
-  outline: none !important;
-}
-
-section.template-minimal.login .login__form .field-label {
-  font-size: 13px !important;
-  font-weight: 600 !important;
-  color: var(--theme-elevation-700) !important;
-  margin-bottom: 4px !important;
-}
-
-/* Forgot password link */
-section.template-minimal.login .login__form > a {
-  font-size: 13px !important;
-  color: var(--theme-elevation-500) !important;
-  text-decoration: none !important;
-  transition: color 0.15s ease;
-  display: inline-block;
-  margin-bottom: 8px;
-}
-
-section.template-minimal.login .login__form > a:hover {
-  color: var(--theme-success-500) !important;
-}
-
-/* Login button */
-section.template-minimal.login .login__form .form-submit .btn {
-  width: 100% !important;
-  background: var(--theme-success-500) !important;
-  border: none !important;
-  border-radius: 8px !important;
-  padding: 10px 24px !important;
-  font-size: 14px !important;
-  font-weight: 600 !important;
-  color: #fff !important;
-  cursor: pointer;
-  transition: background 0.15s ease;
-}
-
-section.template-minimal.login .login__form .form-submit .btn:hover {
-  background: var(--theme-success-600) !important;
-}
-
-/* ── 2c. Responsive (mobile stack) ───────────────────────────────── */
-
-@media (max-width: 860px) {
-  section.template-minimal.login > .template-minimal__wrap {
-    grid-template-columns: 1fr !important;
-    grid-template-rows: auto auto auto auto !important;
-    min-height: auto !important;
-  }
-
-  section.template-minimal.login .login-brand-panel {
-    grid-column: 1 !important;
-    grid-row: 1 !important;
-    min-height: auto !important;
-    padding: 32px 24px !important;
-  }
-
-  .login-brand-panel__heading {
-    font-size: 22px !important;
-  }
-
-  .login-brand-panel__features,
-  .login-brand-panel__footer {
-    display: none !important;
-  }
-
-  section.template-minimal.login .login-right__header {
-    grid-column: 1 !important;
-    grid-row: 2 !important;
-    padding: 32px 24px 0 !important;
-    margin-bottom: 20px !important;
-  }
-
-  section.template-minimal.login .login__form {
-    grid-column: 1 !important;
-    grid-row: 3 !important;
-    padding: 0 24px !important;
-  }
-
-  section.template-minimal.login .login-right__footer {
-    grid-column: 1 !important;
-    grid-row: 4 !important;
-    padding: 16px 24px 32px !important;
-  }
-}
-
-
-/* =================================================================
  * 3. SHELL (navigation, header, dashboard)
  * ================================================================= */
 
@@ -413,6 +223,11 @@ section.template-minimal.login .login__form .form-submit .btn:hover {
   display: none !important;
 }
 
+/* Hide default nav toggler — replaced by custom collapse/expand buttons */
+.nav-toggler {
+  display: none !important;
+}
+
 .app-header__content {
   padding: 0 2rem;
 }
@@ -451,9 +266,9 @@ section.template-minimal.login .login__form .form-submit .btn:hover {
  * 4. LIST VIEW
  * ================================================================= */
 
-/* ── 4a. List Header & Controls ──────────────────────────────────── */
+/* ── 4a. List Header ─────────────────────────────────────────────── */
 
-/* Hidden — title in topbar, create button portaled via ListCreateButton */
+/* Hidden — title shown in topbar via AppActions */
 .list-header {
   display: none !important;
 }
@@ -462,232 +277,11 @@ section.template-minimal.login .login__form .form-submit .btn:hover {
   margin-bottom: 10px !important;
 }
 
-.list-controls {
-  gap: 0 !important;
-  position: relative !important;
-}
-
-/* ── 4b. Search Bar ──────────────────────────────────────────────── */
-
-.search-bar {
-  border: none !important;
-  background: transparent !important;
-  min-height: 40px !important;
-}
-
-.search-bar .search-filter {
-  border: 1px solid var(--theme-border-color) !important;
-  border-radius: 8px !important;
-  background: var(--theme-elevation-0) !important;
-  transition: border-color 0.15s ease, box-shadow 0.15s ease;
-}
-
-.search-bar:focus-within .search-filter {
-  border-color: var(--theme-success-500) !important;
-  box-shadow: 0 0 0 2px var(--theme-success-400);
-}
-
-.search-bar .icon--search {
-  z-index: 1;
-  pointer-events: none;
-  margin-left: 12px;
-}
-
-.search-bar__actions {
-  display: flex !important;
-  align-items: center !important;
-  gap: 6px !important;
-  padding: 0 !important;
-  padding-left: 8px !important;
-}
-
-.search-bar__actions .pill {
-  background: var(--theme-elevation-50) !important;
-  border: 1px solid var(--theme-border-color) !important;
-  border-radius: 8px !important;
-  font-size: 12.5px !important;
-  font-weight: 500 !important;
-  padding: 8px 12px !important;
-  color: var(--theme-elevation-600) !important;
-  transition: background 0.15s ease, border-color 0.15s ease;
-  white-space: nowrap;
-  height: 40px;
-  display: inline-flex !important;
-  align-items: center !important;
-}
-
-.search-bar__actions .pill:hover {
-  background: var(--theme-elevation-100) !important;
-  border-color: var(--theme-elevation-300) !important;
-}
-
-/* ── 4c. Columns & Filters Dropdowns ─────────────────────────────
- * Payload renders these inside AnimateHeight wrappers.
- * We convert the inline expanding panel into a floating dropdown
- * anchored below the search bar, overlaying the table content. */
-
-.list-controls__columns,
-.list-controls__where {
-  position: absolute !important;
-  top: 100% !important;
-  right: 0 !important;
-  z-index: 20 !important;
-  margin-top: 4px !important;
-}
-
-/* Columns dropdown */
-.list-controls__columns .pill-selector {
-  background: var(--theme-elevation-0) !important;
-  border: 1px solid var(--theme-border-color) !important;
-  border-radius: 10px !important;
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08), 0 1px 4px rgba(0, 0, 0, 0.04) !important;
-  padding: 6px !important;
-  gap: 2px !important;
-  width: 220px !important;
-  max-height: 320px !important;
-  overflow-y: auto !important;
-  flex-direction: column !important;
-  flex-wrap: nowrap !important;
-}
-
-.list-controls__columns .pill-selector__pill {
-  border-radius: 6px !important;
-  font-size: 13px !important;
-  font-weight: 500 !important;
-  padding: 8px 10px !important;
-  width: 100% !important;
-  box-shadow: none !important;
-  border: none !important;
-  background: transparent !important;
-  color: var(--theme-elevation-600) !important;
-  transition: background 0.1s ease;
-  flex-direction: row !important;
-  gap: 8px !important;
-}
-
-.list-controls__columns .pill-selector__pill:hover {
-  background: var(--theme-elevation-50) !important;
-}
-
-.list-controls__columns .pill-selector__pill--selected {
-  background: color-mix(in srgb, var(--theme-success-500) 6%, transparent) !important;
-  color: var(--theme-elevation-900) !important;
-}
-
-.list-controls__columns .pill-selector__pill--selected:hover {
-  background: color-mix(in srgb, var(--theme-success-500) 10%, transparent) !important;
-}
-
-.list-controls__columns .pill-selector__pill .pill__label {
-  flex: 1 !important;
-  text-align: left !important;
-}
-
-.list-controls__columns .pill-selector__pill .pill__icon {
-  flex-shrink: 0 !important;
-  width: 18px !important;
-  height: 18px !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  border-radius: 4px !important;
-  background: var(--theme-elevation-100) !important;
-  color: var(--theme-elevation-400) !important;
-  transition: background 0.1s ease, color 0.1s ease;
-}
-
-.list-controls__columns .pill-selector__pill .pill__icon .icon {
-  width: 10px !important;
-  height: 10px !important;
-}
-
-.list-controls__columns .pill-selector__pill--selected .pill__icon {
-  background: color-mix(in srgb, var(--theme-success-500) 12%, transparent) !important;
-  color: var(--theme-success-500) !important;
-}
-
-/* Filters dropdown */
-.list-controls__where .where-builder {
-  background: var(--theme-elevation-0) !important;
-  border: 1px solid var(--theme-border-color) !important;
-  border-radius: 10px !important;
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08), 0 1px 4px rgba(0, 0, 0, 0.04) !important;
-  padding: 12px !important;
-  min-width: 320px !important;
-  max-width: 480px !important;
-}
-
-/* ── 4d. Table ───────────────────────────────────────────────────── */
-
-.collection-list .table {
-  border: 1px solid var(--theme-border-color);
-  border-radius: 10px;
-  overflow: hidden;
-  width: 100% !important;
-  max-width: 100% !important;
-  left: 0 !important;
-  padding-left: 0 !important;
-}
-
-.collection-list .table:after {
-  display: none !important;
-}
-
-.table thead {
-  background: var(--theme-elevation-50) !important;
-}
-
-.table thead th {
-  font-size: 11.5px !important;
-  font-weight: 600 !important;
-  text-transform: uppercase !important;
-  letter-spacing: 0.05em !important;
-  color: var(--theme-elevation-500) !important;
-  border-bottom: 1px solid var(--theme-border-color) !important;
-  padding: 10px 12px !important;
-}
-
-.table tbody tr:nth-child(odd) {
-  background: transparent !important;
-}
-
-.table tbody tr {
-  border-bottom: 1px solid var(--theme-elevation-100);
-  transition: background 0.1s ease;
-}
-
-.table tbody tr:last-child {
-  border-bottom: none;
-}
-
-.table tbody tr:hover {
-  background: var(--theme-elevation-50) !important;
-}
-
-.table td {
-  font-size: 13.5px !important;
-  padding: 12px !important;
-  color: var(--theme-elevation-800) !important;
-  vertical-align: middle !important;
-}
-
-.table td:nth-child(2) a {
-  font-weight: 500;
-  color: var(--theme-elevation-1000) !important;
-  text-decoration: none;
-}
-
-.table td:nth-child(2) a:hover {
-  color: var(--theme-success-500) !important;
-}
-
-.sort-column__label {
-  transition: color 0.15s ease;
-}
-
-.sort-column:hover .sort-column__label {
-  color: var(--theme-elevation-700) !important;
-}
+/* ── 4b–d. List Controls, Search, Table ──────────────────────────
+ * Replaced by custom components:
+ *   - CollectionListControls  → admin/components/ListControls/
+ *   - DataTable               → admin/components/DataTable/
+ * Styles live in their colocated CSS files. */
 
 /* ── 4e. Pagination ──────────────────────────────────────────────── */
 

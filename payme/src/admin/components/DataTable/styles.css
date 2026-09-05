@@ -1,0 +1,96 @@
+@reference "tailwindcss";
+
+/* ── DataTable ──────────────────────────────────────────────────────
+ *
+ * Reusable table for collection list views.
+ * Replaces Payload's default table with custom sort-on-click headers.
+ *
+ * Structure:
+ *   .data-table                  ← outer wrapper (border + radius)
+ *     .data-table__table         ← <table> element
+ *       .data-table__thead       ← header row
+ *         .data-table__th        ← header cell (clickable for sorting)
+ *       .data-table__tbody       ← body rows
+ *         .data-table__row       ← data row
+ *         .data-table__td        ← data cell
+ */
+
+
+/* ── Wrapper ────────────────────────────────────────────────────── */
+
+.data-table {
+  @apply w-full overflow-hidden rounded-[10px];
+  border: 1px solid var(--theme-border-color);
+}
+
+.data-table__table {
+  @apply w-full;
+  border-collapse: collapse;
+}
+
+
+/* ── Header ─────────────────────────────────────────────────────── */
+
+.data-table__thead {
+  border-bottom: 1px solid var(--theme-border-color);
+}
+
+.data-table__th {
+  @apply text-left text-[11.5px] font-semibold uppercase tracking-[0.05em] select-none cursor-pointer;
+  padding: 10px 16px;
+  color: var(--theme-elevation-400);
+  transition: color 0.15s ease;
+}
+
+.data-table__th:hover {
+  color: var(--theme-elevation-700);
+}
+
+.data-table__th--sorted {
+  color: var(--theme-elevation-700);
+}
+
+.data-table__th-label {
+  @apply inline;
+}
+
+.data-table__th-arrow {
+  @apply inline-block ml-1 text-[10px];
+  color: var(--theme-success-500);
+}
+
+
+/* ── Body ───────────────────────────────────────────────────────── */
+
+.data-table__row {
+  border-bottom: 1px solid var(--theme-elevation-100);
+  transition: background 0.1s ease;
+}
+
+.data-table__row:last-child {
+  border-bottom: none;
+}
+
+.data-table__row:hover {
+  background: var(--theme-elevation-50);
+}
+
+.data-table__td {
+  @apply text-[13.5px];
+  padding: 12px 16px;
+  color: var(--theme-elevation-800);
+  vertical-align: middle;
+}
+
+.data-table__td:last-child {
+  color: var(--theme-elevation-400);
+  font-size: 13px;
+}
+
+
+/* ── Empty State ────────────────────────────────────────────────── */
+
+.data-table__empty {
+  @apply text-center text-sm py-12;
+  color: var(--theme-elevation-400);
+}

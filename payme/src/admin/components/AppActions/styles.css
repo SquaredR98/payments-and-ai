@@ -6,17 +6,33 @@
   @apply flex items-center justify-between gap-3 w-full;
 }
 
+.topbar__nav-toggle {
+  @apply flex items-center justify-center shrink-0 rounded-md cursor-pointer
+         transition-colors duration-150;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  background: transparent;
+  border: none;
+  color: var(--theme-elevation-500);
+}
+
+.topbar__nav-toggle:hover {
+  background: var(--theme-elevation-100);
+  color: var(--theme-elevation-700);
+}
+
 .topbar__title-group {
   @apply flex-1 min-w-0;
 }
 
 .topbar__title {
-  @apply text-[15px] font-semibold m-0 truncate leading-normal;
+  @apply text-[18px] font-semibold m-0 truncate leading-normal;
   color: var(--theme-elevation-1000);
 }
 
 .topbar__subtitle {
-  @apply text-xs m-0 leading-tight;
+  @apply m-0 leading-tight;
   color: var(--theme-elevation-450);
 }
 

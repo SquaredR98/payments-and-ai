@@ -9,7 +9,7 @@
 
 .sidebar__header {
   @apply flex items-center gap-2.5 shrink-0;
-  padding: 0 20px;
+  padding: 0 12px;
   height: var(--app-header-height);
   border-bottom: 1px solid var(--theme-border-color);
 }
@@ -19,8 +19,24 @@
 }
 
 .sidebar__brand {
-  @apply text-[15px] font-bold tracking-tight;
+  @apply text-[15px] font-bold tracking-tight flex-1;
   color: var(--theme-elevation-1000);
+}
+
+.sidebar__collapse-btn {
+  @apply flex items-center justify-center shrink-0 rounded-md cursor-pointer
+         transition-colors duration-150;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  background: transparent;
+  border: none;
+  color: var(--theme-elevation-400);
+}
+
+.sidebar__collapse-btn:hover {
+  background: var(--theme-elevation-100);
+  color: var(--theme-elevation-700);
 }
 
 .sidebar__quick-create {

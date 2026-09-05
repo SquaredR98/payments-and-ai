@@ -142,6 +142,7 @@ export interface User {
     zip?: string | null;
     country?: ('US' | 'GB' | 'CA' | 'AU' | 'IN' | 'DE' | 'FR' | 'JP' | 'BR' | 'OTHER') | null;
   };
+  company?: string | null;
   /**
    * User role. Only admins can modify this.
    */
@@ -283,6 +284,7 @@ export interface UsersSelect<T extends boolean = true> {
         zip?: T;
         country?: T;
       };
+  company?: T;
   role?: T;
   logo?: T;
   updatedAt?: T;

@@ -7,8 +7,6 @@ import {
   useConfig,
   useAuth,
   useTranslation,
-  useTheme,
-  Hamburger,
   Logout,
   Link,
 } from '@payloadcms/ui'
@@ -24,9 +22,8 @@ import {
   ClipboardList,
   FolderOpen,
   Plus,
-  Sun,
-  Moon,
   User,
+  PanelLeftClose,
 } from 'lucide-react'
 import './styles.css'
 
@@ -60,13 +57,6 @@ export function AdminNavClient({ groups, navPreferences }: AdminNavClientProps) 
   const { user } = useAuth()
   const { navOpen, setNavOpen } = useNav()
 
-  const { theme, setTheme } = useTheme()
-  const isDark = theme === 'dark'
-
-  const toggleTheme = () => {
-    setTheme(isDark ? 'light' : 'dark')
-  }
-
   const dashboardHref = formatAdminURL({ adminRoute, path: '' })
   const isDashboard =
     pathname === dashboardHref ||
@@ -84,6 +74,14 @@ export function AdminNavClient({ groups, navPreferences }: AdminNavClientProps) 
       <div className="sidebar__header">
         <img src="/logo-icon.svg" alt="" className="sidebar__logo" />
         <span className="sidebar__brand">PayMe Admin</span>
+        <button
+          type="button"
+          className="sidebar__collapse-btn"
+          onClick={() => setNavOpen(false)}
+          title="Collapse sidebar"
+        >
+          <PanelLeftClose size={24} strokeWidth={1.75} />
+        </button>
       </div>
 
       {/* Quick Create */}
@@ -154,19 +152,6 @@ export function AdminNavClient({ groups, navPreferences }: AdminNavClientProps) 
 
       {/* Footer */}
       <div className="sidebar__footer">
-        <button
-          type="button"
-          onClick={toggleTheme}
-          title={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
-          className="sidebar__icon-btn"
-        >
-          {isDark ? (
-            <Moon size={14} strokeWidth={1.75} />
-          ) : (
-            <Sun size={14} strokeWidth={1.75} />
-          )}
-        </button>
-
         <a
           href={profileHref}
           title="Your profile"
@@ -178,18 +163,6 @@ export function AdminNavClient({ groups, navPreferences }: AdminNavClientProps) 
         <div className="sidebar__spacer">
           <Logout tabIndex={navOpen ? 0 : -1} />
         </div>
-      </div>
-
-      {/* Mobile Close */}
-      <div className="nav__header" style={{ padding: '12px', display: 'flex', justifyContent: 'flex-end' }}>
-        <button
-          type="button"
-          className="nav__mobile-close"
-          onClick={() => setNavOpen(false)}
-          tabIndex={!navOpen ? -1 : undefined}
-        >
-          <Hamburger isActive />
-        </button>
       </div>
     </div>
     </NavWrapper>

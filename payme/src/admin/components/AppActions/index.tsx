@@ -1,8 +1,8 @@
 'use client'
 
 import { usePathname } from 'next/navigation'
-import { useAuth, useConfig, useTheme, Link } from '@payloadcms/ui'
-import { Sun, Moon, Plus, Upload, BookOpen, Check, Clock } from 'lucide-react'
+import { useAuth, useConfig, useTheme, useNav, Link } from '@payloadcms/ui'
+import { Sun, Moon, Plus, Upload, BookOpen, Check, Clock, PanelLeftOpen } from 'lucide-react'
 import { formatAdminURL } from 'payload/shared'
 import { useDocumentBridge } from '../AdminProvider'
 import './styles.css'
@@ -72,6 +72,7 @@ export function AppActions() {
   const { routes: { admin: adminRoute } } = config
   const bridge = useDocumentBridge()
 
+  const { navOpen, setNavOpen } = useNav()
   const { theme, setTheme } = useTheme()
   const isDark = theme === 'dark'
 
@@ -129,6 +130,18 @@ export function AppActions() {
 
   return (
     <div className="topbar">
+      {/* Sidebar expand button — visible only when sidebar is collapsed */}
+      {!navOpen && (
+        <button
+          type="button"
+          className="topbar__nav-toggle"
+          onClick={() => setNavOpen(true)}
+          title="Expand sidebar"
+        >
+          <PanelLeftOpen size={24} strokeWidth={1.75} />
+        </button>
+      )}
+
       {/* Page title / welcome message */}
       <div className="topbar__title-group">
         <div className="topbar__title-row">

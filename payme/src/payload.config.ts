@@ -28,11 +28,18 @@ export default buildConfig({
       actions: ['/admin/components/AppActions/index#AppActions'],
       providers: ['/admin/components/AdminProvider#AdminProvider'],
       beforeDashboard: ['/admin/components/Dashboard/index#AdminDashboard'],
-      beforeLogin: ['/admin/components/LoginBranding/index#LoginBranding'],
-      afterLogin: ['/admin/components/LoginFooter/index#LoginFooter'],
       views: {
         createFirstUser: {
           Component: '/admin/components/CreateFirstUser/index#CreateFirstUser',
+        },
+        forgot: {
+          Component: '/admin/components/AdminForgotPassword/index#AdminForgotPassword',
+        },
+        login: {
+          Component: '/admin/components/AdminLogin/index#AdminLogin',
+        },
+        reset: {
+          Component: '/admin/components/AdminResetPassword/index#AdminResetPassword',
         },
       },
     },
