@@ -173,7 +173,14 @@ Feature tracking tables will be added when each project becomes active.
 
 ## Next Action
 
-Resume **Feature 02 Steps 9-11** (user profile settings, business details, account security pages). Before building, resolve the design component sizing decision (input/button heights from design audit).
+Resume **Feature 02 Steps 9-11** (user profile settings, business details, account security pages).
+
+**Open questions to resolve before implementing:**
+
+1. **Design sizing:** Input height (42px vs 32px) and button height (46px vs 36px) from design audit (`payme/.claude/design-implementation.md`). Settings pages use these heavily. Resolve first or use current defaults?
+2. **Page structure:** Three separate pages under `/dashboard/settings/` or one page with sidebar nav tabs (Profile | Business | Security)?
+3. **Dashboard layout:** Current `DashboardLayout` is a basic shell — assess if it needs refinement before building settings pages inside it.
+4. **Codebase cleanup:** User flagged inline SVGs and component grouping issues. Audit and fix before building new pages so new code follows right patterns?
 
 ---
 
