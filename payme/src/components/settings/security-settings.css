@@ -1,0 +1,52 @@
+@reference "tailwindcss";
+
+.security-settings {
+  @apply flex flex-col gap-8;
+}
+
+.security-settings__section {
+  @apply flex flex-col gap-5 rounded-lg border p-5;
+  border-color: var(--border);
+}
+
+.security-settings__heading {
+  @apply text-base font-semibold;
+  color: var(--foreground);
+}
+
+.security-settings__field {
+  @apply flex flex-col gap-1.5;
+}
+
+.security-settings__hint {
+  @apply text-xs;
+  color: var(--muted-foreground);
+}
+
+.security-settings__actions {
+  @apply flex justify-end pt-1;
+}
+
+.security-settings__message {
+  @apply rounded-lg px-4 py-3 text-sm font-medium;
+}
+
+.security-settings__message--success {
+  background: oklch(0.90 0.05 155);
+  color: oklch(0.30 0.08 155);
+}
+
+:root.dark .security-settings__message--success {
+  background: oklch(0.25 0.05 155);
+  color: oklch(0.80 0.06 155);
+}
+
+.security-settings__message--error {
+  background: oklch(0.93 0.04 25);
+  color: oklch(0.45 0.15 25);
+}
+
+:root.dark .security-settings__message--error {
+  background: oklch(0.25 0.06 25);
+  color: oklch(0.80 0.08 25);
+}

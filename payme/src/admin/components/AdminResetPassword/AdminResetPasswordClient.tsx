@@ -13,6 +13,7 @@ import {
 } from '@payloadcms/ui'
 import { useRouter } from 'next/navigation'
 import { formatAdminURL } from 'payload/shared'
+import { BrandIcon } from '../BrandIcon'
 
 type Props = {
   token: string
@@ -49,10 +50,7 @@ export function AdminResetPasswordClient({ token, userSlug }: Props) {
     <div className="admin-reset">
       <div className="admin-reset__card">
         <div className="admin-reset__header">
-          <svg viewBox="0 0 34 34" fill="none" className="admin-reset__icon">
-            <rect width="34" height="34" rx="8" fill="var(--theme-success-500)" />
-            <path d="M10 17 L17 10 L24 17 L17 24 Z" fill="white" />
-          </svg>
+          <BrandIcon className="admin-reset__icon" />
           <h1 className="admin-reset__title">{t('authentication:resetPassword')}</h1>
           <p className="admin-reset__desc">Enter your new password below.</p>
         </div>

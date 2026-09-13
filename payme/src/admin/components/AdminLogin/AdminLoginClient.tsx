@@ -11,6 +11,8 @@ import {
   useTranslation,
 } from '@payloadcms/ui'
 import { formatAdminURL, getSafeRedirect } from 'payload/shared'
+import { Check } from 'lucide-react'
+import { BrandIcon } from '../BrandIcon'
 
 type Props = {
   prefillEmail?: string
@@ -57,10 +59,7 @@ export function AdminLoginClient({
         {/* ── Form Column ── */}
         <div className="admin-login__form-column">
           <div className="admin-login__form-header">
-            <svg viewBox="0 0 34 34" fill="none" className="admin-login__icon">
-              <rect width="34" height="34" rx="8" fill="var(--theme-success-500)" />
-              <path d="M10 17 L17 10 L24 17 L17 24 Z" fill="white" />
-            </svg>
+            <BrandIcon className="admin-login__icon" />
             <h1 className="admin-login__title">Welcome back</h1>
             <p className="admin-login__subtitle">Sign in to your PayMe account</p>
           </div>
@@ -133,13 +132,6 @@ export function AdminLoginClient({
           </div>
 
           <div className="admin-login__brand-content">
-            <div className="admin-login__brand-logo">
-              <svg viewBox="0 0 34 34" fill="none" className="admin-login__brand-icon">
-                <rect width="34" height="34" rx="8" fill="white" />
-                <path d="M10 17 L17 10 L24 17 L17 24 Z" fill="var(--theme-success-500)" />
-              </svg>
-              <span className="admin-login__brand-name">PayMe</span>
-            </div>
             <h2 className="admin-login__brand-heading">
               Professional invoicing,<br />made simple.
             </h2>
@@ -148,21 +140,15 @@ export function AdminLoginClient({
             </p>
             <div className="admin-login__brand-features">
               <div className="admin-login__brand-feature">
-                <svg viewBox="0 0 20 20" fill="none" className="admin-login__feature-check">
-                  <path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" fill="currentColor" />
-                </svg>
+                <Check size={16} strokeWidth={2.5} className="admin-login__feature-check" />
                 <span>Stripe &amp; PayPal checkout</span>
               </div>
               <div className="admin-login__brand-feature">
-                <svg viewBox="0 0 20 20" fill="none" className="admin-login__feature-check">
-                  <path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" fill="currentColor" />
-                </svg>
+                <Check size={16} strokeWidth={2.5} className="admin-login__feature-check" />
                 <span>PDF invoice generation</span>
               </div>
               <div className="admin-login__brand-feature">
-                <svg viewBox="0 0 20 20" fill="none" className="admin-login__feature-check">
-                  <path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" fill="currentColor" />
-                </svg>
+                <Check size={16} strokeWidth={2.5} className="admin-login__feature-check" />
                 <span>Email notifications</span>
               </div>
             </div>

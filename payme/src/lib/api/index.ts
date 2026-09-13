@@ -1,9 +1,10 @@
-import { post, get } from './client'
+import { post, get, patch } from './client'
 import { auth } from './auth'
 
 export const api = {
   post,
   get,
+  patch,
   auth,
 }
 

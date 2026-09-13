@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useRef, useEffect } from 'react'
+import { ChevronDown } from 'lucide-react'
 
 interface Option {
   label: string
@@ -47,19 +48,11 @@ export function CustomSelect({
         <span className={`filter-select__value ${!selected ? 'filter-select__value--placeholder' : ''}`}>
           {selected ? selected.label : placeholder}
         </span>
-        <svg
+        <ChevronDown
           className={`filter-select__chevron ${open ? 'filter-select__chevron--open' : ''}`}
-          width="10"
-          height="6"
-          viewBox="0 0 10 6"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        >
-          <polyline points="1 1 5 5 9 1" />
-        </svg>
+          size={12}
+          strokeWidth={1.5}
+        />
       </button>
 
       {open && (

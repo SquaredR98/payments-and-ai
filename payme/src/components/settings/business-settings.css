@@ -1,0 +1,72 @@
+@reference "tailwindcss";
+
+.business-settings {
+  @apply flex flex-col gap-5;
+}
+
+.business-settings__row {
+  @apply grid grid-cols-1 gap-4 sm:grid-cols-2;
+}
+
+.business-settings__field {
+  @apply flex flex-col gap-1.5;
+}
+
+.business-settings__hint {
+  @apply text-xs;
+  color: var(--muted-foreground);
+}
+
+.business-settings__group {
+  @apply flex flex-col gap-4 rounded-lg border p-4;
+  border-color: var(--border);
+}
+
+.business-settings__legend {
+  @apply text-sm font-semibold px-1;
+  color: var(--foreground);
+}
+
+.business-settings__select {
+  @apply h-10 w-full rounded-lg border px-3 text-sm transition-colors outline-none;
+  border-color: var(--input);
+  background: transparent;
+  color: var(--foreground);
+}
+
+.business-settings__select:focus {
+  border-color: var(--ring);
+  box-shadow: 0 0 0 3px oklch(from var(--ring) l c h / 0.5);
+}
+
+:root.dark .business-settings__select {
+  background: var(--input);
+}
+
+.business-settings__actions {
+  @apply flex justify-end pt-2;
+}
+
+.business-settings__message {
+  @apply rounded-lg px-4 py-3 text-sm font-medium;
+}
+
+.business-settings__message--success {
+  background: oklch(0.90 0.05 155);
+  color: oklch(0.30 0.08 155);
+}
+
+:root.dark .business-settings__message--success {
+  background: oklch(0.25 0.05 155);
+  color: oklch(0.80 0.06 155);
+}
+
+.business-settings__message--error {
+  background: oklch(0.93 0.04 25);
+  color: oklch(0.45 0.15 25);
+}
+
+:root.dark .business-settings__message--error {
+  background: oklch(0.25 0.06 25);
+  color: oklch(0.80 0.08 25);
+}

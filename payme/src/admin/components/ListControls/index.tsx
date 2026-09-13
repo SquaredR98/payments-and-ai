@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect, useMemo } from 'react'
 import { useListQuery, useTableColumns } from '@payloadcms/ui'
+import { Search, X, LayoutGrid, Check, Filter, Plus } from 'lucide-react'
 
 import { FilterBuilder } from './FilterBuilder'
 import type { FilterableField, FieldType } from './FilterBuilder/types'
@@ -92,20 +93,7 @@ export function CollectionListControls({
     <div className="list-controls-custom">
       {/* Search */}
       <div className="list-controls-custom__search">
-        <svg
-          className="list-controls-custom__search-icon"
-          width="16"
-          height="16"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        >
-          <circle cx="11" cy="11" r="8" />
-          <line x1="21" y1="21" x2="16.65" y2="16.65" />
-        </svg>
+        <Search className="list-controls-custom__search-icon" size={16} strokeWidth={2} />
         <input
           className="list-controls-custom__search-input"
           type="text"
@@ -120,19 +108,7 @@ export function CollectionListControls({
             onClick={() => onSearchChange('')}
             aria-label="Clear search"
           >
-            <svg
-              width="14"
-              height="14"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <line x1="18" y1="6" x2="6" y2="18" />
-              <line x1="6" y1="6" x2="18" y2="18" />
-            </svg>
+            <X size={14} strokeWidth={2} />
           </button>
         )}
       </div>
@@ -146,21 +122,7 @@ export function CollectionListControls({
             type="button"
             onClick={() => setColumnsOpen(!columnsOpen)}
           >
-            <svg
-              width="14"
-              height="14"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <rect x="3" y="3" width="7" height="7" />
-              <rect x="14" y="3" width="7" height="7" />
-              <rect x="3" y="14" width="7" height="7" />
-              <rect x="14" y="14" width="7" height="7" />
-            </svg>
+            <LayoutGrid size={14} strokeWidth={2} />
             Columns
           </button>
 
@@ -174,20 +136,7 @@ export function CollectionListControls({
                   onClick={() => toggleColumn(col.accessor)}
                 >
                   <span className="list-controls-custom__dropdown-check">
-                    {col.active && (
-                      <svg
-                        width="12"
-                        height="12"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="3"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      >
-                        <polyline points="20 6 9 17 4 12" />
-                      </svg>
-                    )}
+                    {col.active && <Check size={12} strokeWidth={3} />}
                   </span>
                   <span className="list-controls-custom__dropdown-label">
                     {col.field?.label || col.accessor}
@@ -205,18 +154,7 @@ export function CollectionListControls({
             type="button"
             onClick={() => setFilterOpen(!filterOpen)}
           >
-            <svg
-              width="14"
-              height="14"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3" />
-            </svg>
+            <Filter size={14} strokeWidth={2} />
             Filters
             {activeFilterCount > 0 && (
               <span className="list-controls-custom__pill-badge">{activeFilterCount}</span>
@@ -241,19 +179,7 @@ export function CollectionListControls({
             className="list-controls-custom__create-btn"
             aria-label="Create new"
           >
-            <svg
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <line x1="12" y1="5" x2="12" y2="19" />
-              <line x1="5" y1="12" x2="19" y2="12" />
-            </svg>
+            <Plus size={16} strokeWidth={2.5} />
           </a>
         )}
       </div>

@@ -1,0 +1,46 @@
+@reference "tailwindcss";
+
+.profile-settings {
+  @apply flex flex-col gap-5;
+}
+
+.profile-settings__row {
+  @apply grid grid-cols-1 gap-4 sm:grid-cols-2;
+}
+
+.profile-settings__field {
+  @apply flex flex-col gap-1.5;
+}
+
+.profile-settings__hint {
+  @apply text-xs;
+  color: var(--muted-foreground);
+}
+
+.profile-settings__actions {
+  @apply flex justify-end pt-2;
+}
+
+.profile-settings__message {
+  @apply rounded-lg px-4 py-3 text-sm font-medium;
+}
+
+.profile-settings__message--success {
+  background: oklch(0.90 0.05 155);
+  color: oklch(0.30 0.08 155);
+}
+
+:root.dark .profile-settings__message--success {
+  background: oklch(0.25 0.05 155);
+  color: oklch(0.80 0.06 155);
+}
+
+.profile-settings__message--error {
+  background: oklch(0.93 0.04 25);
+  color: oklch(0.45 0.15 25);
+}
+
+:root.dark .profile-settings__message--error {
+  background: oklch(0.25 0.06 25);
+  color: oklch(0.80 0.08 25);
+}

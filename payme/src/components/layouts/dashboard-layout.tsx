@@ -16,9 +16,10 @@ import { cn } from '@/lib/utils'
 import { ThemeToggle } from '@/components/theme-toggle'
 import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
+import { PageHeaderProvider, usePageHeaderContext } from '@/contexts/page-header-context'
 
 const navItems = [
-  { label: 'Dashboard', href: '/dashboard', icon: LayoutDashboard },
+  { label: 'Dashboard', href: '/dashboard', icon: LayoutDashboard, exact: true },
   { label: 'Invoices', href: '/dashboard/invoices', icon: FileText },
   { label: 'Payment Links', href: '/dashboard/links', icon: Link2 },
   { label: 'Payments', href: '/dashboard/payments', icon: CreditCard },
@@ -42,8 +43,9 @@ function NavLink({
   pathname: string
   onClick?: () => void
 }) {
-  const isActive =
-    pathname === item.href || pathname.startsWith(item.href + '/')
+  const isActive = item.exact
+    ? pathname === item.href
+    : pathname === item.href || pathname.startsWith(item.href + '/')
   return (
     <Link
       href={item.href}
@@ -108,72 +110,96 @@ function SidebarContent({
   )
 }
 
+function DashboardHeader({
+  user,
+  onMobileMenuOpen,
+}: {
+  user: DashboardLayoutProps['user']
+  onMobileMenuOpen: () => void
+}) {
+  const { header } = usePageHeaderContext()
+
+  return (
+    <header className="sticky top-0 z-30 flex h-14 items-center gap-3 border-b bg-background/80 px-4 backdrop-blur-lg">
+      <Button
+        variant="ghost"
+        size="icon"
+        className="lg:hidden"
+        onClick={onMobileMenuOpen}
+      >
+        <Menu className="size-5" />
+        <span className="sr-only">Open menu</span>
+      </Button>
+
+      {header ? (
+        <div className="flex items-baseline gap-2">
+          <h1 className="text-base font-semibold">{header.title}</h1>
+          {header.subtitle && (
+            <span className="hidden text-sm text-muted-foreground sm:inline">
+              {header.subtitle}
+            </span>
+          )}
+        </div>
+      ) : (
+        <span className="text-sm text-muted-foreground">
+          {user.firstName || user.email}
+        </span>
+      )}
+
+      <div className="flex-1" />
+
+      <ThemeToggle />
+    </header>
+  )
+}
+
 export function DashboardLayout({ children, user }: DashboardLayoutProps) {
   const pathname = usePathname()
   const [mobileOpen, setMobileOpen] = useState(false)
 
   return (
-    <div className="flex min-h-screen">
-      {/* Desktop sidebar */}
-      <aside className="hidden w-60 shrink-0 border-r bg-sidebar lg:flex lg:flex-col">
-        <SidebarContent pathname={pathname} />
-      </aside>
+    <PageHeaderProvider>
+      <div className="flex min-h-screen">
+        {/* Desktop sidebar */}
+        <aside className="hidden w-60 shrink-0 border-r bg-sidebar lg:sticky lg:top-0 lg:h-screen lg:flex lg:flex-col">
+          <SidebarContent pathname={pathname} />
+        </aside>
 
-      {/* Mobile sidebar overlay */}
-      {mobileOpen && (
-        <div className="fixed inset-0 z-50 lg:hidden">
-          {/* Backdrop */}
-          <div
-            className="absolute inset-0 bg-black/20 backdrop-blur-xs"
-            onClick={() => setMobileOpen(false)}
-          />
-          {/* Sidebar panel */}
-          <aside className="relative flex h-full w-60 flex-col border-r bg-sidebar shadow-lg">
-            <Button
-              variant="ghost"
-              size="icon"
-              className="absolute right-2 top-3"
+        {/* Mobile sidebar overlay */}
+        {mobileOpen && (
+          <div className="fixed inset-0 z-50 lg:hidden">
+            <div
+              className="absolute inset-0 bg-black/20 backdrop-blur-xs"
               onClick={() => setMobileOpen(false)}
-            >
-              <X className="size-4" />
-              <span className="sr-only">Close menu</span>
-            </Button>
-            <SidebarContent
-              pathname={pathname}
-              onLinkClick={() => setMobileOpen(false)}
             />
-          </aside>
+            <aside className="relative flex h-full w-60 flex-col border-r bg-sidebar shadow-lg">
+              <Button
+                variant="ghost"
+                size="icon"
+                className="absolute right-2 top-3"
+                onClick={() => setMobileOpen(false)}
+              >
+                <X className="size-4" />
+                <span className="sr-only">Close menu</span>
+              </Button>
+              <SidebarContent
+                pathname={pathname}
+                onLinkClick={() => setMobileOpen(false)}
+              />
+            </aside>
+          </div>
+        )}
+
+        {/* Main area */}
+        <div className="flex flex-1 flex-col">
+          <DashboardHeader
+            user={user}
+            onMobileMenuOpen={() => setMobileOpen(true)}
+          />
+
+          <main className="flex-1 p-4 sm:p-6 lg:p-8">{children}</main>
         </div>
-      )}
-
-      {/* Main area */}
-      <div className="flex flex-1 flex-col">
-        {/* Top bar */}
-        <header className="sticky top-0 z-30 flex h-14 items-center gap-3 border-b bg-background/80 px-4 backdrop-blur-lg">
-          {/* Mobile hamburger */}
-          <Button
-            variant="ghost"
-            size="icon"
-            className="lg:hidden"
-            onClick={() => setMobileOpen(true)}
-          >
-            <Menu className="size-5" />
-            <span className="sr-only">Open menu</span>
-          </Button>
-
-          {/* Spacer */}
-          <div className="flex-1" />
-
-          {/* Right side actions */}
-          <span className="text-sm text-muted-foreground">
-            {user.firstName || user.email}
-          </span>
-          <ThemeToggle />
-        </header>
-
-        {/* Page content */}
-        <main className="flex-1 p-4 sm:p-6 lg:p-8">{children}</main>
       </div>
-    </div>
+    </PageHeaderProvider>
   )
 }

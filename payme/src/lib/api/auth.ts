@@ -1,5 +1,5 @@
 import type { User } from '@/payload-types'
-import { post, get } from './client'
+import { post, get, patch } from './client'
 
 export type AuthUser = Omit<
   User,
@@ -36,5 +36,16 @@ export const auth = {
 
   verifyEmail(token: string) {
     return post<{ message: string }>(`/api/users/verify/${token}`)
+  },
+
+  updateProfile(id: string | number, data: Partial<User>) {
+    return patch<{ doc: AuthUser }>(`/api/users/${id}`, data)
+  },
+
+  changePassword(id: string | number, currentPassword: string, newPassword: string) {
+    return patch<{ doc: AuthUser }>(`/api/users/${id}`, {
+      password: newPassword,
+      currentPassword,
+    })
   },
 }

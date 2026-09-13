@@ -1,0 +1,25 @@
+@reference "tailwindcss";
+
+.coming-soon {
+  @apply flex flex-col items-center justify-center text-center py-20 gap-4;
+}
+
+.coming-soon__icon-wrap {
+  @apply flex items-center justify-center size-14 rounded-xl;
+  background: var(--muted);
+}
+
+.coming-soon__icon {
+  @apply size-7;
+  color: var(--muted-foreground);
+}
+
+.coming-soon__title {
+  @apply text-lg font-semibold;
+  color: var(--foreground);
+}
+
+.coming-soon__description {
+  @apply text-sm max-w-sm;
+  color: var(--muted-foreground);
+}

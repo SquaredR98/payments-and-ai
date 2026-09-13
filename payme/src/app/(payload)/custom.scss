@@ -78,6 +78,27 @@
  * To rebrand, update the hue values and accent hex codes below.
  * ================================================================= */
 
+/* ── 0. Typography ───────────────────────────────────────────────
+ *
+ * Payload defaults: system font stack, 13px root.
+ * We override to match the frontend: Inter, 15px root.
+ * Bumping from 13px → 15px scales all rem-based Payload UI
+ * proportionally (buttons, inputs, spacing) — better on 24"+ screens. */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  font-size: 15px;
+  --style-radius-s: 8px;
+  --style-radius-m: 8px;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
 /* ── 1a. Light Theme ─────────────────────────────────────────────── */
 
 :root:root {
@@ -622,6 +643,20 @@ html[data-theme='dark'][data-theme='dark'] {
 .field-type .field-description {
   font-size: 12px !important;
   color: var(--theme-elevation-400) !important;
+}
+
+/* ── 6c. Primary CTA Buttons ────────────────────────────────────── */
+
+.btn.btn--size-large {
+  background: var(--theme-success-500) !important;
+  color: #fff !important;
+  border: none !important;
+  font-weight: 600 !important;
+  transition: background 0.15s ease;
+}
+
+.btn.btn--size-large:hover {
+  background: var(--theme-success-600) !important;
 }
 
 

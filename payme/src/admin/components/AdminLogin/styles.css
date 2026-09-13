@@ -169,20 +169,6 @@ section.template-minimal:has(.admin-login) > .template-minimal__wrap {
   @apply relative z-10 flex flex-1 flex-col justify-center gap-5;
 }
 
-.admin-login__brand-logo {
-  @apply flex items-center gap-3;
-}
-
-.admin-login__brand-icon {
-  width: 36px;
-  height: 36px;
-}
-
-.admin-login__brand-name {
-  @apply text-lg font-bold tracking-tight;
-  color: white;
-}
-
 .admin-login__brand-heading {
   @apply text-2xl font-bold leading-tight m-0;
   color: white;

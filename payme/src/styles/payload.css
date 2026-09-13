@@ -4,9 +4,9 @@
  * - Utilities only, so we can use className="flex items-center ..." in admin components
  * - Dark mode mapped to Payload's data-theme="dark" attribute
  *
- * NOTE: Payload's root font-size is 13px (not 16px), so rem-based
- * Tailwind values (p-4 = 1rem = 13px, not 16px) render smaller.
- * Use px-based values or adjust accordingly.
+ * NOTE: Root font-size is overridden to 15px in custom.scss (Payload default is 13px).
+ * Rem-based Tailwind values (p-4 = 1rem = 15px) are slightly smaller than the
+ * browser default 16px. Use px-based values when exact sizing matters.
  */
 
 @layer theme, base, components, utilities;

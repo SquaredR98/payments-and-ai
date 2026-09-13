@@ -42,3 +42,10 @@ export function post<T>(url: string, body?: unknown): Promise<ApiResponse<T>> {
 export function get<T>(url: string): Promise<ApiResponse<T>> {
   return request<T>(url, { method: 'GET' })
 }
+
+export function patch<T>(url: string, body?: unknown): Promise<ApiResponse<T>> {
+  return request<T>(url, {
+    method: 'PATCH',
+    body: body != null ? JSON.stringify(body) : undefined,
+  })
+}

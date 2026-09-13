@@ -1,12 +1,13 @@
 import React from 'react'
+import './styles.css'
 
 export default function Logo() {
   return (
-    <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+    <div className="admin-logo">
       <img
         src="/logo.svg"
         alt="PayMe"
-        style={{ maxHeight: '60px', width: 'auto' }}
+        className="admin-logo__img"
       />
     </div>
   )
