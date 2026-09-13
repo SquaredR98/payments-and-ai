@@ -1,7 +1,7 @@
 # Progress Tracker
 
-> **Last Updated:** 2026-09-06
-> **Last Action:** Session 14 — Sidebar nav cleanup (collapse/expand buttons), commit admin auth views
+> **Last Updated:** 2026-09-13
+> **Last Action:** Session 15 — Settings pages, dashboard shell improvements, codebase cleanup, admin polish
 
 ---
 
@@ -35,7 +35,7 @@
 |---|---------------|-----|----------------|--------|
 | 01 | Project Setup & PayloadCMS Configuration | ✅ Approved | ✅ Complete | ✅ Done |
 | 01.5 | Theming, Layout System & Admin Shell Customization | ✅ Approved | ✅ Complete | ✅ Done |
-| 02 | Authentication & User Management | ✅ Approved | ⏳ Steps 1-8 done, Steps 9-11 pending | 🔧 In Progress |
+| 02 | Authentication & User Management | ✅ Approved | ✅ Complete (Steps 1-11) | ✅ Done |
 | 03 | Database Schema & Data Layer | ⬜ Not started | ⬜ Not started | ⬜ Pending |
 | 04 | Dashboard & Analytics | ⬜ Not started | ⬜ Not started | ⬜ Pending |
 | 05 | Invoice Management (CRUD) | ⬜ Not started | ⬜ Not started | ⬜ Pending |
@@ -118,10 +118,13 @@
 - ✅ AuthProvider (`src/providers/auth-provider.tsx`) — initialUser prop, login/logout/refresh
 - ✅ useAuth hook (`src/hooks/use-auth.ts`)
 
-**Steps 9-11: Settings Pages — NOT STARTED:**
-- ⬜ Step 9: User profile settings page
-- ⬜ Step 10: Business details section
-- ⬜ Step 11: Account security section (change password, change email)
+**Steps 9-11: Settings Pages (Session 15):**
+- ✅ Step 9: Profile settings — firstName, lastName, phone, email (disabled), PATCH /api/users/{id}
+- ✅ Step 10: Business settings — businessName, taxId, address fields (street, city, state, zip, country select)
+- ✅ Step 11: Security settings — change password (current + new + confirm), change email (new email + current password)
+- ✅ Settings page with horizontal tab navigation (Profile | Business | Security)
+- ✅ usePageHeader hook + PageHeaderContext for dynamic page titles in DashboardLayout header
+- ✅ API layer: PATCH client method, updateProfile(), changePassword() endpoints
 
 ---
 
@@ -156,6 +159,22 @@
 - ✅ Removed mobile close button from sidebar bottom
 - ✅ Cleaned up unused imports (Sun, Moon, Hamburger, useTheme from NavClient)
 
+**Dashboard Shell & Codebase Cleanup (Session 15):**
+- ✅ Sticky sidebar (lg:sticky lg:top-0 lg:h-screen)
+- ✅ Active nav link fix — exact match for Dashboard route
+- ✅ Coming Soon placeholders for invoices, links, payments subroutes
+- ✅ Deleted 12 unused UI components (avatar, badge, card, dialog, select, sheet, skeleton, switch, table, tabs, textarea, toast)
+- ✅ Deleted dead my-route endpoint
+- ✅ Replaced inline SVGs with Lucide icons across ListControls (6 SVGs), FilterBuilder (3 SVGs), QuickAccess (3 SVGs)
+- ✅ Created shared BrandIcon component, replaced duplicated logo SVGs in AdminLogin, AdminForgotPassword, AdminResetPassword
+- ✅ Extracted admin graphic (Icon.tsx, Logo.tsx) inline styles to colocated styles.css
+
+**Admin Polish (Session 15):**
+- ✅ Inter font antialiasing (-webkit-font-smoothing: antialiased) on admin body
+- ✅ Override --style-radius-s/m to 8px for consistent button border-radius
+- ✅ Brand blue CTA styling for all admin auth FormSubmit buttons (section 6c in custom.scss)
+- ✅ Removed duplicate BrandIcon from admin login brand panel (kept only on form column)
+
 ---
 
 ## Design Implementation Tracker
@@ -173,14 +192,11 @@ Feature tracking tables will be added when each project becomes active.
 
 ## Next Action
 
-Resume **Feature 02 Steps 9-11** (user profile settings, business details, account security pages).
+**Feature 02 is complete.** Next up: **Feature 03 — Database Schema & Data Layer** (Invoices, Payment Links, Payments collections).
 
-**Open questions to resolve before implementing:**
-
-1. **Design sizing:** Input height (42px vs 32px) and button height (46px vs 36px) from design audit (`payme/.claude/design-implementation.md`). Settings pages use these heavily. Resolve first or use current defaults?
-2. **Page structure:** Three separate pages under `/dashboard/settings/` or one page with sidebar nav tabs (Profile | Business | Security)?
-3. **Dashboard layout:** Current `DashboardLayout` is a basic shell — assess if it needs refinement before building settings pages inside it.
-4. **Codebase cleanup:** User flagged inline SVGs and component grouping issues. Audit and fix before building new pages so new code follows right patterns?
+**Remaining codebase cleanup (can be done alongside Feature 03):**
+- Folder restructure: 13 components not in folder/index.tsx pattern (theme-toggle, public-layout, dashboard-layout, settings components, AdminProvider, cell components, providers, contexts)
+- Extract CSS from inline Tailwind: 4 files with zero CSS (homepage page.tsx, public-layout.tsx, dashboard-layout.tsx, theme-toggle.tsx)
 
 ---
 
@@ -202,3 +218,4 @@ Resume **Feature 02 Steps 9-11** (user profile settings, business details, accou
 | 2026-09-04 | Session 12 | Custom admin auth views (AdminLogin, AdminForgotPassword, AdminResetPassword), deleted LoginBranding/LoginFooter. Design audit (token alignment + component sizing gaps) |
 | 2026-09-05 | Session 13 | Custom list view (CollectionListView, DataTable, ListControls, FilterBuilder, CustomSelect), UserEditView with tabbed layout, NameCell, SCSS cleanup |
 | 2026-09-06 | Session 14 | Sidebar nav cleanup: collapse/expand buttons, hide default NavToggler, remove theme toggle from sidebar, remove mobile close button. Committed all outstanding components. |
+| 2026-09-13 | Session 15 | Feature 02 Steps 9-11 complete (settings pages with horizontal tabs, usePageHeader hook, API layer). Dashboard shell: sticky sidebar, active link fix, Coming Soon pages. Codebase cleanup: deleted 12 unused UI components + dead route, replaced inline SVGs with Lucide/BrandIcon (12 replacements across 7 files), extracted admin graphic styles. Admin polish: font antialiasing, global 8px button radius, brand blue CTAs, removed duplicate logo from login panel. |
