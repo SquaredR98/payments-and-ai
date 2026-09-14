@@ -11,6 +11,11 @@ export const AuditLogs: CollectionConfig = {
     defaultColumns: ['action', 'entity', 'entityId', 'user', 'createdAt'],
     components: {
       views: {
+        edit: {
+          default: {
+            Component: '/admin/components/AuditLogEditView/index#AuditLogEditView',
+          },
+        },
         list: {
           Component: '/admin/components/CollectionListView/index#CollectionListView',
         },

@@ -1,0 +1,146 @@
+@reference "tailwindcss";
+
+/* ── AuditLogEditView — Read-Only Audit Log Record ──
+ *
+ * Single-column read-only layout. No form, no save button.
+ * Audit logs are append-only — cannot be edited or deleted.
+ */
+
+
+/* ── Layout ──────────────────────────────────────────────────────── */
+
+.audit-view {
+  @apply px-8 pt-4 pb-6;
+  max-width: 860px;
+}
+
+.audit-view__main {
+  @apply flex flex-col gap-4;
+}
+
+
+/* ── Header ──────────────────────────────────────────────────────── */
+
+.audit-view__header {
+  @apply flex items-center gap-4 mb-2;
+}
+
+.audit-view__header-icon {
+  @apply w-10 h-10 rounded-xl flex items-center justify-center shrink-0;
+  background: color-mix(in srgb, var(--theme-success-500) 10%, transparent);
+  color: var(--theme-success-500);
+}
+
+.audit-view__header-info {
+  @apply flex flex-col gap-0.5 flex-1 min-w-0;
+}
+
+.audit-view__title {
+  @apply text-base font-semibold m-0 truncate;
+  color: var(--theme-elevation-1000);
+}
+
+.audit-view__subtitle {
+  @apply text-xs;
+  color: var(--theme-elevation-500);
+}
+
+.audit-view__action-badge {
+  @apply inline-flex items-center text-[10px] font-semibold uppercase tracking-wider px-2.5 py-1 rounded-md shrink-0;
+  color: #fff;
+}
+
+
+/* ── Card ────────────────────────────────────────────────────────── */
+
+.audit-view__card {
+  @apply rounded-[10px] p-6;
+  border: 1px solid var(--theme-border-color);
+  background: var(--theme-elevation-0);
+}
+
+
+/* ── Section Titles ──────────────────────────────────────────────── */
+
+.audit-view__section-title {
+  @apply text-[11px] font-semibold uppercase tracking-wider m-0 mb-3;
+  color: var(--theme-success-500);
+}
+
+.audit-view__section-title--spaced {
+  @apply mt-6 pt-6;
+  border-top: 1px solid var(--theme-border-color);
+}
+
+
+/* ── Field Grid ──────────────────────────────────────────────────── */
+
+.audit-view__grid {
+  @apply grid grid-cols-2 gap-4;
+}
+
+.audit-view__grid--1col {
+  @apply grid-cols-1;
+}
+
+.audit-view__field {
+  @apply flex flex-col gap-1;
+}
+
+.audit-view__field-label {
+  @apply text-[11.5px] font-semibold;
+  color: var(--theme-elevation-500);
+}
+
+.audit-view__field-value {
+  @apply text-[13.5px];
+  color: var(--theme-elevation-900);
+}
+
+.audit-view__field-value--mono {
+  @apply font-mono text-[12.5px] break-all;
+}
+
+
+/* ── JSON Block ──────────────────────────────────────────────────── */
+
+.audit-view__json {
+  @apply font-mono text-[12px] p-4 rounded-lg overflow-x-auto m-0;
+  background: var(--theme-elevation-50);
+  color: var(--theme-elevation-800);
+  border: 1px solid var(--theme-elevation-100);
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+
+/* ── Read-Only Notice ────────────────────────────────────────────── */
+
+.audit-view__readonly-notice {
+  @apply text-[12px] text-center m-0 mt-2;
+  color: var(--theme-elevation-400);
+}
+
+
+/* ── Empty State (Create View Blocked) ───────────────────────────── */
+
+.audit-view__empty {
+  @apply flex flex-col items-center justify-center text-center py-20;
+}
+
+.audit-view__empty-icon {
+  @apply w-14 h-14 rounded-2xl flex items-center justify-center mb-4;
+  background: color-mix(in srgb, #f59e0b 10%, transparent);
+  color: #f59e0b;
+}
+
+.audit-view__empty-title {
+  @apply text-lg font-semibold m-0 mb-2;
+  color: var(--theme-elevation-800);
+}
+
+.audit-view__empty-desc {
+  @apply text-sm m-0;
+  color: var(--theme-elevation-500);
+  max-width: 380px;
+}

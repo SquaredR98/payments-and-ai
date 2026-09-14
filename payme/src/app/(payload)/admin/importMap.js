@@ -5,6 +5,9 @@ import { DocumentBridge as DocumentBridge_2266ce0c338ed3463b7b1e6c7a5d21ff } fro
 import { SidebarSave as SidebarSave_0b0ad74401e82694f5be54b01ea3f74a } from '../../../admin/components/SidebarSave/index'
 import { UserEditView as UserEditView_a082bcb5e38ca160a0b9c31465fa75ff } from '../../../admin/components/UserEditView/index'
 import { CollectionListView as CollectionListView_7fd618ab0cb3de016dc166bffd5afed9 } from '../../../admin/components/CollectionListView/index'
+import { InvoiceEditView as InvoiceEditView_c7c7085c87d73e5850bfc950a5c71f68 } from '../../../admin/components/InvoiceEditView/index'
+import { PaymentEditView as PaymentEditView_4f97148760e1bf6fc55b4b922dc27e58 } from '../../../admin/components/PaymentEditView/index'
+import { AuditLogEditView as AuditLogEditView_99059a8a6ccab6e9320ecdb1fff31c26 } from '../../../admin/components/AuditLogEditView/index'
 import { AdminNav as AdminNav_d9539ee8dbbebf4504e6b7067de38126 } from '../../../admin/components/Nav/index'
 import { default as default_48a75e37b0630d5b8c8066e180c0e6ef } from '../../../admin/graphics/Icon'
 import { default as default_88541c286955dbac4d90fb5ed606381c } from '../../../admin/graphics/Logo'
@@ -27,6 +30,9 @@ export const importMap = {
   "/admin/components/SidebarSave/index#SidebarSave": SidebarSave_0b0ad74401e82694f5be54b01ea3f74a,
   "/admin/components/UserEditView/index#UserEditView": UserEditView_a082bcb5e38ca160a0b9c31465fa75ff,
   "/admin/components/CollectionListView/index#CollectionListView": CollectionListView_7fd618ab0cb3de016dc166bffd5afed9,
+  "/admin/components/InvoiceEditView/index#InvoiceEditView": InvoiceEditView_c7c7085c87d73e5850bfc950a5c71f68,
+  "/admin/components/PaymentEditView/index#PaymentEditView": PaymentEditView_4f97148760e1bf6fc55b4b922dc27e58,
+  "/admin/components/AuditLogEditView/index#AuditLogEditView": AuditLogEditView_99059a8a6ccab6e9320ecdb1fff31c26,
   "/admin/components/Nav/index#AdminNav": AdminNav_d9539ee8dbbebf4504e6b7067de38126,
   "/admin/graphics/Icon#default": default_48a75e37b0630d5b8c8066e180c0e6ef,
   "/admin/graphics/Logo#default": default_88541c286955dbac4d90fb5ed606381c,

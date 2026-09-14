@@ -12,6 +12,11 @@ export const Payments: CollectionConfig = {
     defaultColumns: ['invoice', 'gateway', 'amount', 'status', 'processedAt'],
     components: {
       views: {
+        edit: {
+          default: {
+            Component: '/admin/components/PaymentEditView/index#PaymentEditView',
+          },
+        },
         list: {
           Component: '/admin/components/CollectionListView/index#CollectionListView',
         },

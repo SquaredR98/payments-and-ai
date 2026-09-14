@@ -19,7 +19,15 @@ export const Invoices: CollectionConfig = {
     useAsTitle: 'invoiceNumber',
     defaultColumns: ['invoiceNumber', 'client.name', 'total', 'status', 'dueDate'],
     components: {
+      edit: {
+        beforeDocumentControls: ['/admin/components/DocumentBridge/index#DocumentBridge'],
+      },
       views: {
+        edit: {
+          default: {
+            Component: '/admin/components/InvoiceEditView/index#InvoiceEditView',
+          },
+        },
         list: {
           Component: '/admin/components/CollectionListView/index#CollectionListView',
         },

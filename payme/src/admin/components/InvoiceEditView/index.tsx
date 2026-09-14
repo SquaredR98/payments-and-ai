@@ -1,5 +1,5 @@
 import type { AdminViewServerProps } from 'payload'
-import { UserEditViewClient } from './UserEditViewClient'
+import { InvoiceEditViewClient } from './InvoiceEditViewClient'
 import './styles.css'
 
 type EditViewProps = AdminViewServerProps & {
@@ -7,7 +7,7 @@ type EditViewProps = AdminViewServerProps & {
   formState: Record<string, any>
 }
 
-export function UserEditView(props: EditViewProps) {
+export function InvoiceEditView(props: EditViewProps) {
   const { doc, formState, initPageResult } = props
   const { collectionConfig, docID } = initPageResult
   const {
@@ -17,7 +17,7 @@ export function UserEditView(props: EditViewProps) {
   const isEditing = !!docID
 
   return (
-    <UserEditViewClient
+    <InvoiceEditViewClient
       doc={doc}
       docID={docID ?? null}
       formState={formState}
