@@ -1,7 +1,7 @@
 # Progress Tracker
 
 > **Last Updated:** 2026-09-14
-> **Last Action:** Session 16 — Feature 03: Database Schema & Data Layer (Invoices, Payments, AuditLogs collections)
+> **Last Action:** Session 17 — Custom edit views for Invoices, Payments, AuditLogs + customer journey doc
 
 ---
 
@@ -175,6 +175,29 @@
 - ✅ Brand blue CTA styling for all admin auth FormSubmit buttons (section 6c in custom.scss)
 - ✅ Removed duplicate BrandIcon from admin login brand panel (kept only on form column)
 
+**Custom Collection Edit Views (Session 17):**
+- ✅ InvoiceEditView — full edit view with Form/DocumentBridge, 3 tabs (Details, Financials, Payment), InvoiceSidebar (status badge, invoice number, total, payment link copy, owner, dates)
+- ✅ PaymentEditView — read-only, blocked create ("Payments Cannot Be Created Manually"), transaction details, payer info, gateway response JSON
+- ✅ AuditLogEditView — read-only, blocked create ("Audit Logs Cannot Be Created Manually"), event details, request context, previous/new data JSON
+- ✅ All 3 registered in collection configs with import map
+- ✅ Fixed TS type issues: Payload field component admin prop uses `as NumberFieldClient`/`DateFieldClient`/etc. for intersection type compatibility
+- ✅ Fixed UserEditView/InvoiceEditView `docID` type mismatch (`undefined` → `null` coalescing)
+
+---
+
+## Feature 03 — Database Schema & Data Layer (Complete)
+
+**Collections Built (Session 16):**
+- ✅ Invoices — tab layout (Details/Financials/Payment), compound unique index (owner + invoiceNumber), field indexes, sidebar fields
+- ✅ Payments — relationship to invoices, gateway/status fields, afterChange hook syncs invoice status
+- ✅ AuditLogs — action/entity/entityId fields, JSON data snapshots, fully locked (no create/update/delete)
+
+**Hooks (Session 16):**
+- ✅ setOwner, guardStatus, generateInvoiceNumber (resolveNextInvoiceNumber helper), calculateTotals, generatePaymentLink, preventHardDelete, logInvoiceChange, syncInvoiceStatus, logAuditEvent utility
+
+**Customer Journey Doc (Session 17):**
+- ✅ `learning-roadmap/project-1-payme/customer-journey.md` — all user types, journeys, flow diagrams, feature mapping
+
 ---
 
 ## Design Implementation Tracker
@@ -192,7 +215,7 @@ Feature tracking tables will be added when each project becomes active.
 
 ## Next Action
 
-**Feature 03 is complete.** Next up: **Feature 04 — Dashboard & Analytics**.
+**Feature 03 is complete. Custom edit views done.** Next up: **Feature 04 — Dashboard & Analytics**.
 
 **Remaining codebase cleanup (can be done alongside Feature 04):**
 - Folder restructure: 13 components not in folder/index.tsx pattern (theme-toggle, public-layout, dashboard-layout, settings components, AdminProvider, cell components, providers, contexts)
@@ -220,3 +243,4 @@ Feature tracking tables will be added when each project becomes active.
 | 2026-09-06 | Session 14 | Sidebar nav cleanup: collapse/expand buttons, hide default NavToggler, remove theme toggle from sidebar, remove mobile close button. Committed all outstanding components. |
 | 2026-09-13 | Session 15 | Feature 02 Steps 9-11 complete (settings pages with horizontal tabs, usePageHeader hook, API layer). Dashboard shell: sticky sidebar, active link fix, Coming Soon pages. Codebase cleanup: deleted 12 unused UI components + dead route, replaced inline SVGs with Lucide/BrandIcon (12 replacements across 7 files), extracted admin graphic styles. Admin polish: font antialiasing, global 8px button radius, brand blue CTAs, removed duplicate logo from login panel. |
 | 2026-09-14 | Session 16 | Feature 03 complete: Database Schema & Data Layer. Created feature doc. Built 3 collections (Invoices, Payments, AuditLogs) with full schema, hooks (generateInvoiceNumber, calculateTotals, generatePaymentLink, preventHardDelete, setOwner, guardStatus, syncInvoiceStatus, logInvoiceChange), access control (owner-scoped, admin override, read-only for payments/audit), audit logging utility (fire-and-forget logAuditEvent). Registered CollectionListView on all 3 new collections. Generated types. |
+| 2026-09-14 | Session 17 | Custom edit views for all 3 new collections. InvoiceEditView (full edit with 3 tabs: Details/Financials/Payment, sidebar with status badge/invoice number/total/payment link copy). PaymentEditView (read-only, blocked create, displays transaction details/payer info/gateway response JSON). AuditLogEditView (read-only, blocked create, displays event details/request context/data diff JSON). Customer journey documentation. Fixed TS type issues with Payload field component admin prop intersection types. Fixed UserEditView docID type mismatch. |
