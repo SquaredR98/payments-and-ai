@@ -17,21 +17,16 @@ function getRequestContext(req: { headers: Headers }) {
   }
 }
 
-export const generateInvoiceNumber: CollectionBeforeChangeHook = async ({
-  data,
-  operation,
-  req,
-}) => {
-  if (operation !== 'create') return data
-
-  const year = new Date().getFullYear()
-  const prefix = `INV-${year}-`
-
-  const { docs: existing } = await req.payload.find({
+async function resolveNextInvoiceNumber(
+  payload: typeof import('payload').default,
+  ownerId: number | string,
+  prefix: string,
+): Promise<string> {
+  const { docs: existing } = await payload.find({
     collection: 'invoices',
     where: {
       and: [
-        { owner: { equals: req.user?.id } },
+        { owner: { equals: ownerId } },
         { invoiceNumber: { like: `${prefix}%` } },
       ],
     },
@@ -50,8 +45,24 @@ export const generateInvoiceNumber: CollectionBeforeChangeHook = async ({
     }
   }
 
-  const padded = String(nextCounter).padStart(4, '0')
-  data.invoiceNumber = `${prefix}${padded}`
+  return `${prefix}${String(nextCounter).padStart(4, '0')}`
+}
+
+export const generateInvoiceNumber: CollectionBeforeChangeHook = async ({
+  data,
+  operation,
+  req,
+}) => {
+  if (operation !== 'create') return data
+
+  const year = new Date().getFullYear()
+  const prefix = `INV-${year}-`
+
+  data.invoiceNumber = await resolveNextInvoiceNumber(
+    req.payload,
+    req.user!.id,
+    prefix,
+  )
 
   return data
 }

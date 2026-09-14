@@ -220,26 +220,6 @@ export interface Invoice {
     amount?: number | null;
     id?: string | null;
   }[];
-  /**
-   * Auto-calculated: sum of all line item amounts
-   */
-  subtotal?: number | null;
-  taxRate?: number | null;
-  taxLabel?: string | null;
-  /**
-   * Auto-calculated from tax rate
-   */
-  taxAmount?: number | null;
-  discountType?: ('percentage' | 'fixed') | null;
-  discountValue?: number | null;
-  /**
-   * Auto-calculated from discount type and value
-   */
-  discountAmount?: number | null;
-  /**
-   * Auto-calculated: subtotal - discount + tax
-   */
-  total?: number | null;
   currency:
     | 'USD'
     | 'EUR'
@@ -268,13 +248,25 @@ export interface Invoice {
    */
   notes?: string | null;
   /**
-   * Invoice lifecycle status.
+   * Auto-calculated: sum of all line item amounts
    */
-  status: 'draft' | 'sent' | 'viewed' | 'paid' | 'overdue' | 'cancelled' | 'refunded';
+  subtotal?: number | null;
+  taxRate?: number | null;
+  taxLabel?: string | null;
   /**
-   * Auto-generated slug for the public payment page.
+   * Auto-calculated from tax rate
    */
-  paymentLink?: string | null;
+  taxAmount?: number | null;
+  discountType?: ('percentage' | 'fixed') | null;
+  discountValue?: number | null;
+  /**
+   * Auto-calculated from discount type and value
+   */
+  discountAmount?: number | null;
+  /**
+   * Auto-calculated: subtotal - discount + tax
+   */
+  total?: number | null;
   /**
    * Set automatically when payment is received.
    */
@@ -291,6 +283,14 @@ export interface Invoice {
    * PayPal order ID for reconciliation.
    */
   paypalOrderId?: string | null;
+  /**
+   * Invoice lifecycle status.
+   */
+  status: 'draft' | 'sent' | 'viewed' | 'paid' | 'overdue' | 'cancelled' | 'refunded';
+  /**
+   * Auto-generated slug for the public payment page.
+   */
+  paymentLink?: string | null;
   /**
    * Auto-generated: INV-YYYY-XXXX (per-user serialized).
    */
@@ -586,6 +586,10 @@ export interface InvoicesSelect<T extends boolean = true> {
         amount?: T;
         id?: T;
       };
+  currency?: T;
+  issueDate?: T;
+  dueDate?: T;
+  notes?: T;
   subtotal?: T;
   taxRate?: T;
   taxLabel?: T;
@@ -594,16 +598,12 @@ export interface InvoicesSelect<T extends boolean = true> {
   discountValue?: T;
   discountAmount?: T;
   total?: T;
-  currency?: T;
-  issueDate?: T;
-  dueDate?: T;
-  notes?: T;
-  status?: T;
-  paymentLink?: T;
   paidAt?: T;
   paidVia?: T;
   stripePaymentIntentId?: T;
   paypalOrderId?: T;
+  status?: T;
+  paymentLink?: T;
   invoiceNumber?: T;
   owner?: T;
   updatedAt?: T;
