@@ -69,6 +69,9 @@ export interface Config {
   collections: {
     users: User;
     media: Media;
+    invoices: Invoice;
+    payments: Payment;
+    'audit-logs': AuditLog;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -78,6 +81,9 @@ export interface Config {
   collectionsSelect: {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
+    invoices: InvoicesSelect<false> | InvoicesSelect<true>;
+    payments: PaymentsSelect<false> | PaymentsSelect<true>;
+    'audit-logs': AuditLogsSelect<false> | AuditLogsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -193,6 +199,227 @@ export interface Media {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "invoices".
+ */
+export interface Invoice {
+  id: number;
+  client: {
+    name: string;
+    email: string;
+    phone?: string | null;
+    address?: string | null;
+    taxId?: string | null;
+  };
+  lineItems: {
+    description: string;
+    quantity: number;
+    unitPrice: number;
+    /**
+     * Auto-calculated: quantity × unitPrice
+     */
+    amount?: number | null;
+    id?: string | null;
+  }[];
+  /**
+   * Auto-calculated: sum of all line item amounts
+   */
+  subtotal?: number | null;
+  taxRate?: number | null;
+  taxLabel?: string | null;
+  /**
+   * Auto-calculated from tax rate
+   */
+  taxAmount?: number | null;
+  discountType?: ('percentage' | 'fixed') | null;
+  discountValue?: number | null;
+  /**
+   * Auto-calculated from discount type and value
+   */
+  discountAmount?: number | null;
+  /**
+   * Auto-calculated: subtotal - discount + tax
+   */
+  total?: number | null;
+  currency:
+    | 'USD'
+    | 'EUR'
+    | 'GBP'
+    | 'INR'
+    | 'CAD'
+    | 'AUD'
+    | 'JPY'
+    | 'BRL'
+    | 'MXN'
+    | 'SGD'
+    | 'CHF'
+    | 'SEK'
+    | 'NOK'
+    | 'DKK'
+    | 'NZD'
+    | 'ZAR'
+    | 'HKD'
+    | 'KRW'
+    | 'CNY'
+    | 'PLN';
+  issueDate: string;
+  dueDate: string;
+  /**
+   * Appears at the bottom of the invoice.
+   */
+  notes?: string | null;
+  /**
+   * Invoice lifecycle status.
+   */
+  status: 'draft' | 'sent' | 'viewed' | 'paid' | 'overdue' | 'cancelled' | 'refunded';
+  /**
+   * Auto-generated slug for the public payment page.
+   */
+  paymentLink?: string | null;
+  /**
+   * Set automatically when payment is received.
+   */
+  paidAt?: string | null;
+  /**
+   * Payment gateway used.
+   */
+  paidVia?: ('stripe' | 'paypal') | null;
+  /**
+   * Stripe payment intent ID for reconciliation.
+   */
+  stripePaymentIntentId?: string | null;
+  /**
+   * PayPal order ID for reconciliation.
+   */
+  paypalOrderId?: string | null;
+  /**
+   * Auto-generated: INV-YYYY-XXXX (per-user serialized).
+   */
+  invoiceNumber?: string | null;
+  /**
+   * Auto-set to the user who created this invoice.
+   */
+  owner: number | User;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "payments".
+ */
+export interface Payment {
+  id: number;
+  /**
+   * The invoice this payment is for.
+   */
+  invoice: number | Invoice;
+  gateway: 'stripe' | 'paypal';
+  amount: number;
+  /**
+   * Matches the invoice currency.
+   */
+  currency: string;
+  /**
+   * Payment processing status.
+   */
+  status: 'pending' | 'succeeded' | 'failed' | 'refunded' | 'partially_refunded';
+  /**
+   * Stripe payment intent ID or PayPal order ID.
+   */
+  gatewayTransactionId: string;
+  payerEmail?: string | null;
+  payerName?: string | null;
+  /**
+   * Raw gateway response for debugging.
+   */
+  metadata?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  /**
+   * Unique key to prevent duplicate webhook processing.
+   */
+  idempotencyKey: string;
+  /**
+   * When the payment was processed by the gateway.
+   */
+  processedAt?: string | null;
+  /**
+   * When a refund was issued.
+   */
+  refundedAt?: string | null;
+  /**
+   * Partial or full refund amount.
+   */
+  refundAmount?: number | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "audit-logs".
+ */
+export interface AuditLog {
+  id: number;
+  action:
+    | 'invoice.created'
+    | 'invoice.updated'
+    | 'invoice.sent'
+    | 'invoice.paid'
+    | 'invoice.cancelled'
+    | 'payment.received'
+    | 'payment.failed'
+    | 'payment.refunded'
+    | 'user.login'
+    | 'user.logout'
+    | 'user.updated';
+  /**
+   * Collection name: invoice, payment, or user.
+   */
+  entity: string;
+  /**
+   * ID of the affected record.
+   */
+  entityId: string;
+  /**
+   * Who performed the action. Null for webhook/system events.
+   */
+  user?: (number | null) | User;
+  ipAddress?: string | null;
+  userAgent?: string | null;
+  /**
+   * Snapshot of data before the change.
+   */
+  previousData?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  /**
+   * Snapshot of data after the change.
+   */
+  newData?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -222,6 +449,18 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'media';
         value: number | Media;
+      } | null)
+    | ({
+        relationTo: 'invoices';
+        value: number | Invoice;
+      } | null)
+    | ({
+        relationTo: 'payments';
+        value: number | Payment;
+      } | null)
+    | ({
+        relationTo: 'audit-logs';
+        value: number | AuditLog;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -323,6 +562,89 @@ export interface MediaSelect<T extends boolean = true> {
   height?: T;
   focalX?: T;
   focalY?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "invoices_select".
+ */
+export interface InvoicesSelect<T extends boolean = true> {
+  client?:
+    | T
+    | {
+        name?: T;
+        email?: T;
+        phone?: T;
+        address?: T;
+        taxId?: T;
+      };
+  lineItems?:
+    | T
+    | {
+        description?: T;
+        quantity?: T;
+        unitPrice?: T;
+        amount?: T;
+        id?: T;
+      };
+  subtotal?: T;
+  taxRate?: T;
+  taxLabel?: T;
+  taxAmount?: T;
+  discountType?: T;
+  discountValue?: T;
+  discountAmount?: T;
+  total?: T;
+  currency?: T;
+  issueDate?: T;
+  dueDate?: T;
+  notes?: T;
+  status?: T;
+  paymentLink?: T;
+  paidAt?: T;
+  paidVia?: T;
+  stripePaymentIntentId?: T;
+  paypalOrderId?: T;
+  invoiceNumber?: T;
+  owner?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "payments_select".
+ */
+export interface PaymentsSelect<T extends boolean = true> {
+  invoice?: T;
+  gateway?: T;
+  amount?: T;
+  currency?: T;
+  status?: T;
+  gatewayTransactionId?: T;
+  payerEmail?: T;
+  payerName?: T;
+  metadata?: T;
+  idempotencyKey?: T;
+  processedAt?: T;
+  refundedAt?: T;
+  refundAmount?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "audit-logs_select".
+ */
+export interface AuditLogsSelect<T extends boolean = true> {
+  action?: T;
+  entity?: T;
+  entityId?: T;
+  user?: T;
+  ipAddress?: T;
+  userAgent?: T;
+  previousData?: T;
+  newData?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

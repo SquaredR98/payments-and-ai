@@ -1,6 +1,6 @@
 import React from 'react'
 import { formatAdminURL } from 'payload/shared'
-import { Users, Image, Plus } from 'lucide-react'
+import { Users, Image, Plus, FileText } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 
 import type { PayloadRequest } from 'payload'
@@ -15,6 +15,7 @@ type CollectionLink = {
 const collections: CollectionLink[] = [
   { slug: 'users', label: 'Users', icon: Users },
   { slug: 'media', label: 'Media', icon: Image },
+  { slug: 'invoices', label: 'Invoices', icon: FileText },
 ]
 
 export async function QuickAccess({ req }: { req: PayloadRequest }) {

@@ -1,7 +1,7 @@
 # Progress Tracker
 
-> **Last Updated:** 2026-09-13
-> **Last Action:** Session 15 — Settings pages, dashboard shell improvements, codebase cleanup, admin polish
+> **Last Updated:** 2026-09-14
+> **Last Action:** Session 16 — Feature 03: Database Schema & Data Layer (Invoices, Payments, AuditLogs collections)
 
 ---
 
@@ -9,7 +9,7 @@
 
 - **Active Project:** Project 1 — PayMe
 - **Current Phase:** Phase 3 — Implementation
-- **Current Feature:** Feature 02 — Steps 1-8 complete. Steps 9-11 (settings pages) pending.
+- **Current Feature:** Feature 03 — Complete. All 3 collections built with hooks, access control, audit logging.
 - **Blocked:** No
 
 ---
@@ -36,7 +36,7 @@
 | 01 | Project Setup & PayloadCMS Configuration | ✅ Approved | ✅ Complete | ✅ Done |
 | 01.5 | Theming, Layout System & Admin Shell Customization | ✅ Approved | ✅ Complete | ✅ Done |
 | 02 | Authentication & User Management | ✅ Approved | ✅ Complete (Steps 1-11) | ✅ Done |
-| 03 | Database Schema & Data Layer | ⬜ Not started | ⬜ Not started | ⬜ Pending |
+| 03 | Database Schema & Data Layer | ✅ Approved | ✅ Complete (Steps 1-9) | ✅ Done |
 | 04 | Dashboard & Analytics | ⬜ Not started | ⬜ Not started | ⬜ Pending |
 | 05 | Invoice Management (CRUD) | ⬜ Not started | ⬜ Not started | ⬜ Pending |
 | 06 | Payment Link Generation | ⬜ Not started | ⬜ Not started | ⬜ Pending |
@@ -192,9 +192,9 @@ Feature tracking tables will be added when each project becomes active.
 
 ## Next Action
 
-**Feature 02 is complete.** Next up: **Feature 03 — Database Schema & Data Layer** (Invoices, Payment Links, Payments collections).
+**Feature 03 is complete.** Next up: **Feature 04 — Dashboard & Analytics**.
 
-**Remaining codebase cleanup (can be done alongside Feature 03):**
+**Remaining codebase cleanup (can be done alongside Feature 04):**
 - Folder restructure: 13 components not in folder/index.tsx pattern (theme-toggle, public-layout, dashboard-layout, settings components, AdminProvider, cell components, providers, contexts)
 - Extract CSS from inline Tailwind: 4 files with zero CSS (homepage page.tsx, public-layout.tsx, dashboard-layout.tsx, theme-toggle.tsx)
 
@@ -219,3 +219,4 @@ Feature tracking tables will be added when each project becomes active.
 | 2026-09-05 | Session 13 | Custom list view (CollectionListView, DataTable, ListControls, FilterBuilder, CustomSelect), UserEditView with tabbed layout, NameCell, SCSS cleanup |
 | 2026-09-06 | Session 14 | Sidebar nav cleanup: collapse/expand buttons, hide default NavToggler, remove theme toggle from sidebar, remove mobile close button. Committed all outstanding components. |
 | 2026-09-13 | Session 15 | Feature 02 Steps 9-11 complete (settings pages with horizontal tabs, usePageHeader hook, API layer). Dashboard shell: sticky sidebar, active link fix, Coming Soon pages. Codebase cleanup: deleted 12 unused UI components + dead route, replaced inline SVGs with Lucide/BrandIcon (12 replacements across 7 files), extracted admin graphic styles. Admin polish: font antialiasing, global 8px button radius, brand blue CTAs, removed duplicate logo from login panel. |
+| 2026-09-14 | Session 16 | Feature 03 complete: Database Schema & Data Layer. Created feature doc. Built 3 collections (Invoices, Payments, AuditLogs) with full schema, hooks (generateInvoiceNumber, calculateTotals, generatePaymentLink, preventHardDelete, setOwner, guardStatus, syncInvoiceStatus, logInvoiceChange), access control (owner-scoped, admin override, read-only for payments/audit), audit logging utility (fire-and-forget logAuditEvent). Registered CollectionListView on all 3 new collections. Generated types. |
