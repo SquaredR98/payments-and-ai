@@ -4,10 +4,10 @@ import type { DateFieldClient, SelectFieldClient, TextFieldClient } from 'payloa
 import { TextField, SelectField, DateTimeField } from '@payloadcms/ui'
 
 type Props = {
-  collectionSlug: string
+  schemaPrefix: string
 }
 
-export function PaymentTab({ collectionSlug }: Props) {
+export function PaymentTab({ schemaPrefix }: Props) {
   return (
     <div className="invoice-edit__fields">
       <h3 className="invoice-edit__section-title">Payment Status</h3>
@@ -26,7 +26,7 @@ export function PaymentTab({ collectionSlug }: Props) {
             } as DateFieldClient
           }
           path="paidAt"
-          schemaPath={`${collectionSlug}.paidAt`}
+          schemaPath={`${schemaPrefix}.paidAt`}
         />
         <SelectField
           field={
@@ -42,7 +42,7 @@ export function PaymentTab({ collectionSlug }: Props) {
             } as SelectFieldClient
           }
           path="paidVia"
-          schemaPath={`${collectionSlug}.paidVia`}
+          schemaPath={`${schemaPrefix}.paidVia`}
         />
       </div>
 
@@ -62,7 +62,7 @@ export function PaymentTab({ collectionSlug }: Props) {
           } as TextFieldClient
         }
         path="stripePaymentIntentId"
-        schemaPath={`${collectionSlug}.stripePaymentIntentId`}
+        schemaPath={`${schemaPrefix}.stripePaymentIntentId`}
       />
       <TextField
         field={
@@ -77,7 +77,7 @@ export function PaymentTab({ collectionSlug }: Props) {
           } as TextFieldClient
         }
         path="paypalOrderId"
-        schemaPath={`${collectionSlug}.paypalOrderId`}
+        schemaPath={`${schemaPrefix}.paypalOrderId`}
       />
     </div>
   )

@@ -202,3 +202,166 @@
 .invoice-edit__save-btn:hover {
   background: var(--theme-success-600);
 }
+
+
+/* ── Collapsible Overrides (Array / Line Items) ────────────────────
+ *
+ * Re-skins Payload's .collapsible and .array-field inside the
+ * invoice edit view to match our design system.
+ */
+
+.invoice-edit__content .array-field {
+  gap: 8px;
+}
+
+.invoice-edit__content .array-field__header {
+  gap: 6px;
+}
+
+.invoice-edit__content .array-field__header-wrap {
+  @apply items-center;
+}
+
+.invoice-edit__content .array-field__header-actions {
+  @apply text-[12px] font-medium;
+  color: var(--theme-elevation-400);
+  gap: 4px;
+}
+
+.invoice-edit__content .array-field__header-action {
+  @apply text-[12px];
+  color: var(--theme-elevation-400);
+  transition: color 0.15s ease;
+}
+
+.invoice-edit__content .array-field__header-action:hover,
+.invoice-edit__content .array-field__header-action:focus-visible {
+  color: var(--theme-success-500);
+}
+
+.invoice-edit__content .array-field__add-row.btn {
+  @apply self-start text-[12.5px] font-medium;
+  --btn-color: var(--theme-success-500);
+  opacity: 0.8;
+  transition: opacity 0.15s ease;
+}
+
+.invoice-edit__content .array-field__add-row.btn:hover:not(:disabled) {
+  --btn-color: var(--theme-success-600);
+  opacity: 1;
+}
+
+
+/* ── Collapsible Row ───────────────────────────────────────────── */
+
+.invoice-edit__content .collapsible {
+  border-radius: 10px;
+}
+
+.invoice-edit__content .collapsible--style-default {
+  border: 1px solid var(--theme-border-color);
+  transition: border-color 0.15s ease;
+}
+
+.invoice-edit__content .collapsible--style-default:hover {
+  border-color: var(--theme-elevation-300);
+}
+
+
+/* ── Collapsible Header (toggle bar) ───────────────────────────── */
+
+.invoice-edit__content .collapsible__toggle-wrap {
+  @apply items-center;
+  padding: 8px 10px 8px 12px;
+  background: var(--theme-elevation-0);
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  line-height: 1.4;
+  gap: 4px;
+  transition: background 0.15s ease;
+}
+
+.invoice-edit__content .collapsible__toggle-wrap:not(.toggle-disabled):hover {
+  background: var(--theme-elevation-50);
+}
+
+.invoice-edit__content .collapsible--collapsed .collapsible__toggle-wrap {
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+
+/* ── Row Label ──────────────────────────────────────────────────── */
+
+.invoice-edit__content .collapsible .row-label {
+  @apply text-[13px] font-medium;
+  color: var(--theme-elevation-700);
+}
+
+
+/* ── Drag Handle ────────────────────────────────────────────────── */
+
+.invoice-edit__content .collapsible__drag {
+  opacity: 0.3;
+  transition: opacity 0.15s ease;
+}
+
+.invoice-edit__content .collapsible__toggle-wrap:hover .collapsible__drag {
+  opacity: 0.6;
+}
+
+
+/* ── Actions (kebab menu, chevron) ──────────────────────────────── */
+
+.invoice-edit__content .collapsible__actions-wrap {
+  gap: 2px;
+}
+
+.invoice-edit__content .collapsible__actions,
+.invoice-edit__content .collapsible__indicator {
+  width: 26px;
+  height: 26px;
+  border-radius: 6px;
+  color: var(--theme-elevation-400);
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.invoice-edit__content .collapsible__actions:hover {
+  background: var(--theme-elevation-100);
+  color: var(--theme-elevation-700);
+}
+
+.invoice-edit__content .collapsible__indicator:hover {
+  background: var(--theme-elevation-100);
+  color: var(--theme-elevation-700);
+}
+
+
+/* ── Collapsible Content (expanded body) ───────────────────────── */
+
+.invoice-edit__content .collapsible__content {
+  background: var(--theme-elevation-0);
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  padding: 16px;
+  border-top: 1px solid var(--theme-elevation-100);
+}
+
+
+/* ── Error variant ──────────────────────────────────────────────── */
+
+.invoice-edit__content .collapsible--style-error {
+  border-color: var(--theme-error-400);
+}
+
+.invoice-edit__content .collapsible--style-error > .collapsible__toggle-wrap {
+  background: color-mix(in srgb, var(--theme-error-100) 40%, var(--theme-elevation-0));
+}
+
+.invoice-edit__content .collapsible--style-error > .collapsible__toggle-wrap:hover {
+  background: color-mix(in srgb, var(--theme-error-100) 60%, var(--theme-elevation-0));
+}
+
+.invoice-edit__content .collapsible--style-error .row-label {
+  color: var(--theme-error-750);
+}

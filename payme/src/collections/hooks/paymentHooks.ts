@@ -6,6 +6,8 @@ export const syncInvoiceStatus: CollectionAfterChangeHook = async ({
   previousDoc,
   req,
 }) => {
+  if (req.context?.seed) return doc
+
   const statusChanged = doc.status !== previousDoc?.status
   if (!statusChanged) return doc
 
@@ -36,6 +38,7 @@ export const syncInvoiceStatus: CollectionAfterChangeHook = async ({
         }),
       },
       overrideAccess: true,
+      context: { skipGuardStatus: true },
     })
 
     logAuditEvent(req.payload, {
@@ -54,6 +57,7 @@ export const syncInvoiceStatus: CollectionAfterChangeHook = async ({
       id: invoiceId,
       data: { status: 'refunded' },
       overrideAccess: true,
+      context: { skipGuardStatus: true },
     })
 
     logAuditEvent(req.payload, {

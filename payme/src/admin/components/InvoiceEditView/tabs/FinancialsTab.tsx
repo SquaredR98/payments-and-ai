@@ -4,10 +4,10 @@ import type { NumberFieldClient, SelectFieldClient } from 'payload'
 import { NumberField, TextField, SelectField } from '@payloadcms/ui'
 
 type Props = {
-  collectionSlug: string
+  schemaPrefix: string
 }
 
-export function FinancialsTab({ collectionSlug }: Props) {
+export function FinancialsTab({ schemaPrefix }: Props) {
   return (
     <div className="invoice-edit__fields">
       <h3 className="invoice-edit__section-title">Totals</h3>
@@ -21,7 +21,7 @@ export function FinancialsTab({ collectionSlug }: Props) {
           } as NumberFieldClient
         }
         path="subtotal"
-        schemaPath={`${collectionSlug}.subtotal`}
+        schemaPath={`${schemaPrefix}.subtotal`}
       />
 
       <h3 className="invoice-edit__section-title invoice-edit__section-title--spaced">Tax</h3>
@@ -29,12 +29,12 @@ export function FinancialsTab({ collectionSlug }: Props) {
         <NumberField
           field={{ name: 'taxRate', label: 'Tax Rate (%)', type: 'number', min: 0, max: 100 }}
           path="taxRate"
-          schemaPath={`${collectionSlug}.taxRate`}
+          schemaPath={`${schemaPrefix}.taxRate`}
         />
         <TextField
           field={{ name: 'taxLabel', label: 'Tax Label', type: 'text' }}
           path="taxLabel"
-          schemaPath={`${collectionSlug}.taxLabel`}
+          schemaPath={`${schemaPrefix}.taxLabel`}
         />
         <NumberField
           field={
@@ -46,7 +46,7 @@ export function FinancialsTab({ collectionSlug }: Props) {
             } as NumberFieldClient
           }
           path="taxAmount"
-          schemaPath={`${collectionSlug}.taxAmount`}
+          schemaPath={`${schemaPrefix}.taxAmount`}
         />
       </div>
 
@@ -65,12 +65,12 @@ export function FinancialsTab({ collectionSlug }: Props) {
             } as SelectFieldClient
           }
           path="discountType"
-          schemaPath={`${collectionSlug}.discountType`}
+          schemaPath={`${schemaPrefix}.discountType`}
         />
         <NumberField
           field={{ name: 'discountValue', label: 'Discount Value', type: 'number', min: 0 }}
           path="discountValue"
-          schemaPath={`${collectionSlug}.discountValue`}
+          schemaPath={`${schemaPrefix}.discountValue`}
         />
         <NumberField
           field={
@@ -82,7 +82,7 @@ export function FinancialsTab({ collectionSlug }: Props) {
             } as NumberFieldClient
           }
           path="discountAmount"
-          schemaPath={`${collectionSlug}.discountAmount`}
+          schemaPath={`${schemaPrefix}.discountAmount`}
         />
       </div>
 
@@ -97,7 +97,7 @@ export function FinancialsTab({ collectionSlug }: Props) {
             } as NumberFieldClient
           }
           path="total"
-          schemaPath={`${collectionSlug}.total`}
+          schemaPath={`${schemaPrefix}.total`}
         />
       </div>
     </div>

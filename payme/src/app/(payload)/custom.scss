@@ -682,6 +682,65 @@ html[data-theme='dark'][data-theme='dark'] {
   background: var(--theme-elevation-50) !important;
 }
 
+/* ── Popup Content (portaled dropdown panels) ──────────────────── */
+
+.popup__content {
+  border: 1px solid var(--theme-border-color) !important;
+  border-radius: 10px !important;
+  padding: 6px !important;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08), 0 1px 4px rgba(0, 0, 0, 0.04) !important;
+  background: var(--theme-elevation-0) !important;
+}
+
+/* ── Popup Button List (array action menus) ────────────────────── */
+
+.popup-button-list {
+  gap: 2px;
+}
+
+.popup-button-list__button {
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  color: var(--theme-elevation-700) !important;
+  border-radius: 6px !important;
+  padding: 7px 10px !important;
+  transition: background 0.1s ease, color 0.1s ease;
+}
+
+.popup-button-list__button:hover,
+.popup-button-list__button:focus-visible,
+.popup-button-list__button:focus-within {
+  background: var(--theme-elevation-50) !important;
+  color: var(--theme-elevation-900) !important;
+}
+
+.popup-button-list__button svg {
+  width: 14px !important;
+  height: 14px !important;
+  color: var(--theme-elevation-400) !important;
+  transition: color 0.1s ease;
+}
+
+.popup-button-list__button:hover svg {
+  color: var(--theme-elevation-600) !important;
+}
+
+/* Remove action — red tint on hover */
+.array-actions__remove:hover,
+.array-actions__remove:focus-visible {
+  background: color-mix(in srgb, var(--theme-error-100) 50%, transparent) !important;
+  color: var(--theme-error-750) !important;
+}
+
+.array-actions__remove:hover svg {
+  color: var(--theme-error-500) !important;
+}
+
+/* Popup caret (arrow) */
+.popup__caret {
+  display: none !important;
+}
+
 
 /* =================================================================
  * 8. CHECKBOXES & RADIOS

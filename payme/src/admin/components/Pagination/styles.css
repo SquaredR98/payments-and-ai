@@ -1,0 +1,84 @@
+@reference "tailwindcss";
+
+/* ── Pagination ────────────────────────────────────────────────────
+ *
+ * Custom pagination bar for collection list views.
+ * Sits below the DataTable.
+ *
+ * Structure:
+ *   .pagination                     ← flex row (space-between)
+ *     .pagination__info             ← "Showing X–Y of Z"
+ *     .pagination__controls         ← page buttons
+ *       .pagination__btn            ← prev / next / page number
+ *       .pagination__ellipsis       ← "…" separator
+ */
+
+
+/* ── Container ─────────────────────────────────────────────────── */
+
+.pagination {
+  @apply flex items-center justify-between;
+  padding: 12px 4px;
+}
+
+
+/* ── Info text ─────────────────────────────────────────────────── */
+
+.pagination__info {
+  @apply text-[12.5px];
+  color: var(--theme-elevation-400);
+}
+
+
+/* ── Controls row ──────────────────────────────────────────────── */
+
+.pagination__controls {
+  @apply flex items-center gap-1;
+}
+
+
+/* ── Buttons (prev / next / page) ──────────────────────────────── */
+
+.pagination__btn {
+  @apply flex items-center justify-center text-[13px] font-medium rounded-md cursor-pointer;
+  min-width: 32px;
+  height: 32px;
+  padding: 0 8px;
+  background: none;
+  border: 1px solid transparent;
+  color: var(--theme-elevation-500);
+  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.pagination__btn:hover:not(:disabled):not(.pagination__btn--active) {
+  background: var(--theme-elevation-50);
+  border-color: var(--theme-border-color);
+  color: var(--theme-elevation-700);
+}
+
+.pagination__btn--active {
+  background: color-mix(in srgb, var(--theme-success-500) 10%, transparent);
+  border-color: var(--theme-success-500);
+  color: var(--theme-success-500);
+  cursor: default;
+}
+
+.pagination__btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.pagination__btn--nav {
+  @apply gap-1;
+  color: var(--theme-elevation-400);
+}
+
+
+/* ── Ellipsis ──────────────────────────────────────────────────── */
+
+.pagination__ellipsis {
+  @apply flex items-center justify-center text-[13px];
+  min-width: 32px;
+  height: 32px;
+  color: var(--theme-elevation-300);
+}

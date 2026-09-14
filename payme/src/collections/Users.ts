@@ -52,8 +52,8 @@ export const Users: CollectionConfig = {
           },
         },
         list: {
-          Component: '/admin/components/CollectionListView/index#CollectionListView'
-        }
+          Component: '/admin/components/CollectionListView/index#CollectionListView',
+        },
       },
     },
   },

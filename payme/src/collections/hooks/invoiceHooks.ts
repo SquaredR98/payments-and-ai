@@ -54,6 +54,7 @@ export const generateInvoiceNumber: CollectionBeforeChangeHook = async ({
   req,
 }) => {
   if (operation !== 'create') return data
+  if (req.context?.seed || data.invoiceNumber) return data
 
   const year = new Date().getFullYear()
   const prefix = `INV-${year}-`
@@ -114,6 +115,7 @@ export const generatePaymentLink: CollectionBeforeChangeHook = async ({
   operation,
 }) => {
   if (operation !== 'create') return data
+  if (data.paymentLink) return data
 
   const slug = crypto.randomBytes(9).toString('base64url')
   data.paymentLink = `pay_${slug}`
@@ -125,6 +127,7 @@ export const preventHardDelete: CollectionBeforeDeleteHook = async ({
   id,
   req,
 }) => {
+  if (req.context?.seed) return
   const doc = await req.payload.findByID({
     collection: 'invoices',
     id,
@@ -162,7 +165,7 @@ export const setOwner: CollectionBeforeChangeHook = async ({
   operation,
   req,
 }) => {
-  if (operation === 'create' && req.user) {
+  if (operation === 'create' && !data.owner && req.user) {
     data.owner = req.user.id
   }
 
@@ -175,6 +178,8 @@ export const logInvoiceChange: CollectionAfterChangeHook = async ({
   operation,
   req,
 }) => {
+  if (req.context?.seed) return doc
+
   const action = operation === 'create' ? 'invoice.created' : 'invoice.updated'
   const { ipAddress, userAgent } = getRequestContext(req)
 
@@ -198,8 +203,10 @@ export const guardStatus: CollectionBeforeChangeHook = async ({
   data,
   operation,
   originalDoc,
+  req,
 }) => {
   if (operation !== 'update') return data
+  if (req.context?.skipGuardStatus) return data
 
   if (originalDoc && NON_EDITABLE_STATUSES.includes(originalDoc.status)) {
     throw new APIError(

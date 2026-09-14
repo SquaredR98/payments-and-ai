@@ -1,5 +1,6 @@
 'use client'
 
+import type { ArrayFieldClient } from 'payload'
 import {
   TextField,
   EmailField,
@@ -10,10 +11,10 @@ import {
 } from '@payloadcms/ui'
 
 type Props = {
-  collectionSlug: string
+  schemaPrefix: string
 }
 
-export function DetailsTab({ collectionSlug }: Props) {
+export function DetailsTab({ schemaPrefix }: Props) {
   return (
     <div className="invoice-edit__fields">
       <h3 className="invoice-edit__section-title">Client Information</h3>
@@ -21,12 +22,12 @@ export function DetailsTab({ collectionSlug }: Props) {
         <TextField
           field={{ name: 'name', label: 'Client Name', required: true, type: 'text' }}
           path="client.name"
-          schemaPath={`${collectionSlug}.client.name`}
+          schemaPath={`${schemaPrefix}.client.name`}
         />
         <EmailField
           field={{ name: 'email', label: 'Client Email', required: true, type: 'email' }}
           path="client.email"
-          schemaPath={`${collectionSlug}.client.email`}
+          schemaPath={`${schemaPrefix}.client.email`}
         />
       </div>
 
@@ -34,19 +35,19 @@ export function DetailsTab({ collectionSlug }: Props) {
         <TextField
           field={{ name: 'phone', label: 'Phone', type: 'text' }}
           path="client.phone"
-          schemaPath={`${collectionSlug}.client.phone`}
+          schemaPath={`${schemaPrefix}.client.phone`}
         />
         <TextField
           field={{ name: 'taxId', label: 'Tax ID / GST / VAT', type: 'text' }}
           path="client.taxId"
-          schemaPath={`${collectionSlug}.client.taxId`}
+          schemaPath={`${schemaPrefix}.client.taxId`}
         />
       </div>
 
       <TextareaField
         field={{ name: 'address', label: 'Address', type: 'textarea' }}
         path="client.address"
-        schemaPath={`${collectionSlug}.client.address`}
+        schemaPath={`${schemaPrefix}.client.address`}
       />
 
       <h3 className="invoice-edit__section-title invoice-edit__section-title--spaced">Line Items</h3>
@@ -64,9 +65,9 @@ export function DetailsTab({ collectionSlug }: Props) {
             { name: 'unitPrice', type: 'number', required: true, min: 0.01, label: 'Unit Price' },
             { name: 'amount', type: 'number', label: 'Amount' },
           ],
-        }}
+        } as ArrayFieldClient}
         path="lineItems"
-        schemaPath={`${collectionSlug}.lineItems`}
+        schemaPath={`${schemaPrefix}.lineItems`}
       />
 
       <h3 className="invoice-edit__section-title invoice-edit__section-title--spaced">Invoice Settings</h3>
@@ -100,7 +101,7 @@ export function DetailsTab({ collectionSlug }: Props) {
           ],
         }}
         path="currency"
-        schemaPath={`${collectionSlug}.currency`}
+        schemaPath={`${schemaPrefix}.currency`}
       />
 
       <div className="invoice-edit__row">
@@ -112,7 +113,7 @@ export function DetailsTab({ collectionSlug }: Props) {
             required: true,
           }}
           path="issueDate"
-          schemaPath={`${collectionSlug}.issueDate`}
+          schemaPath={`${schemaPrefix}.issueDate`}
         />
         <DateTimeField
           field={{
@@ -122,14 +123,14 @@ export function DetailsTab({ collectionSlug }: Props) {
             required: true,
           }}
           path="dueDate"
-          schemaPath={`${collectionSlug}.dueDate`}
+          schemaPath={`${schemaPrefix}.dueDate`}
         />
       </div>
 
       <TextareaField
         field={{ name: 'notes', label: 'Notes', type: 'textarea' }}
         path="notes"
-        schemaPath={`${collectionSlug}.notes`}
+        schemaPath={`${schemaPrefix}.notes`}
       />
     </div>
   )
